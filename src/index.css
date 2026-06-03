@@ -1,0 +1,132 @@
+/* ── Google Fonts ────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ── Tailwind v4 ─────────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ── Design Tokens (matches indianic.com aesthetic) ─────────── */
+@theme {
+  /* ── Breakpoints (must be explicit in Tailwind v4) ────────── */
+  --breakpoint-sm:  640px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Fonts — single clean geometric sans-serif like indianic */
+  --font-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+  /* Brand palette — Professional Softtech */
+  --color-brand:        #1557FF;   /* vibrant electric blue — primary accent   */
+  --color-brand-dark:   #0A3DD6;   /* hover / pressed state                    */
+  --color-brand-light:  #EEF3FF;   /* tinted surface                           */
+
+  /* Neutrals — deep charcoal/black sections like indianic */
+  --color-ink:          #080808;   /* section background dark                  */
+  --color-ink-2:        #0f0f0f;   /* card background dark                     */
+  --color-ink-3:        #161616;   /* subtle raised surface dark               */
+  --color-border-dark:  rgba(255,255,255,0.07);
+
+  --color-heading:      #0a0a0a;   /* heading text on white                    */
+  --color-body:         #525252;   /* body text on white                       */
+  --color-muted:        #737373;   /* secondary text                           */
+  --color-border:       #e5e5e5;   /* border on white                          */
+  --color-surface:      #fafafa;   /* subtle card bg on white sections         */
+
+  /* Marquee animations */
+  --animate-marquee-left:  marquee-left  40s linear infinite;
+  --animate-marquee-right: marquee-right 40s linear infinite;
+  --animate-float-y:       float-y       4s ease-in-out infinite;
+
+  @keyframes marquee-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+  }
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #ffffff;
+    color: #525252;
+    overflow-x: hidden;
+  }
+
+  /* headings use same Inter but heavier — like indianic's typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    color: #0a0a0a;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+}
+
+/* ── Utilities ───────────────────────────────────────────────── */
+@layer utilities {
+
+  /* Text gradient — brand blue like indianic accent highlights */
+  .text-gradient {
+    background: linear-gradient(135deg, #1557FF 0%, #38BFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Accent button gradient */
+  .bg-gradient-accent {
+    background: linear-gradient(135deg, #1557FF 0%, #0A3DD6 100%);
+  }
+
+  /* Dot grid for hero subtle bg */
+  .bg-dot-grid-subtle {
+    background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Scrollbar hidden */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Section label — small all-caps overline like indianic uses everywhere */
+  .section-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #1557FF;
+  }
+
+  /* ── Navbar responsive helpers ─────────────────────────────── */
+  /* Fallback for any component still using className-based show/hide */
+  .nav-desktop { display: none !important; }
+  .nav-mobile  { display: flex !important; }
+
+  @media (min-width: 1024px) {
+    .nav-desktop { display: flex !important; }
+    .nav-mobile  { display: none !important; }
+  }
+}

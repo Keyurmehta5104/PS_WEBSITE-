@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.indianic.com)",
+      "WebFetch(domain:web.archive.org)",
+      "WebSearch"
+    ]
+  }
+}
