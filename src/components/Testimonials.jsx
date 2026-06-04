@@ -1,6 +1,5 @@
 /* Real testimonials from professionalsofttech.com */
 import { motion } from 'framer-motion';
-import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
   {
@@ -74,13 +73,13 @@ export default function Testimonials() {
               key={t.id}
               variants={{ hidden: { y: 24, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.55 } } }}
               whileHover={{ y: -4 }}
-              className="bg-white border border-[#e5e5e5] p-7 rounded-2xl shadow-sm flex flex-col justify-between hover:border-[#1557FF]/20 hover:shadow-lg hover:shadow-blue-50 transition-all duration-300 group relative"
+              className="bg-white border border-[#e5e5e5] p-7 rounded-2xl shadow-sm flex flex-col justify-between hover:border-[#FF8048]/20 hover:shadow-lg hover:shadow-blue-50 transition-all duration-300 group relative"
             >
-              <Quote className="absolute top-5 right-6 w-10 h-10 text-[#f0f0f0] group-hover:text-[#EEF3FF] transition-colors" />
+              <i className="fa-solid fa-quote-right absolute top-5 right-6 w-10 h-10 text-[#f0f0f0] group-hover:text-[#FFF1E9] transition-colors" />
 
               <div>
                 <div className="flex gap-1 mb-5">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
+                  {[...Array(5)].map((_, i) => <i key={i} className="fa-solid fa-star w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
                 </div>
                 <p className="text-[#525252] text-sm leading-relaxed italic">"{t.text}"</p>
               </div>

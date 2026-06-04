@@ -1,16 +1,15 @@
 /* Real recognitions from professionalsofttech.com */
 import { motion } from 'framer-motion';
-import { Trophy, Award, ShieldCheck, Cloud, Server, Star, CheckCircle } from 'lucide-react';
 
 const awards = [
-  { icon: Trophy,      name: 'Top Developer 2024',       body: 'Clutch',         year: '2024' },
-  { icon: Award,       name: 'Top Software Company',     body: 'GoodFirms',      year: '2024' },
-  { icon: Star,        name: 'Agency Profile Verified',  body: 'DesignRush',     year: '2024' },
-  { icon: CheckCircle, name: 'Top Rated Agency',         body: 'Upwork',         year: '2023' },
-  { icon: Cloud,       name: 'Google Partner',           body: 'Google',         year: '2024' },
-  { icon: Server,      name: 'AWS Select Partner',       body: 'Amazon',         year: '2023' },
-  { icon: ShieldCheck, name: 'ISO 9001:2015 Certified',  body: 'Quality Mgmt.',  year: '2023' },
-  { icon: Award,       name: 'Shopify Plus Partner',     body: 'Shopify',        year: '2024' },
+  { icon: 'fa-trophy',         name: 'Top Developer 2024',       body: 'Clutch',         year: '2024' },
+  { icon: 'fa-award',          name: 'Top Software Company',     body: 'GoodFirms',      year: '2024' },
+  { icon: 'fa-star',           name: 'Agency Profile Verified',  body: 'DesignRush',     year: '2024' },
+  { icon: 'fa-circle-check',   name: 'Top Rated Agency',         body: 'Upwork',         year: '2023' },
+  { icon: 'fa-cloud',          name: 'Google Partner',           body: 'Google',         year: '2024' },
+  { icon: 'fa-server',         name: 'AWS Select Partner',       body: 'Amazon',         year: '2023' },
+  { icon: 'fa-shield-halved',  name: 'ISO 9001:2015 Certified',  body: 'Quality Mgmt.',  year: '2023' },
+  { icon: 'fa-award',          name: 'Shopify Plus Partner',     body: 'Shopify',        year: '2024' },
 ];
 
 export default function Awards() {
@@ -42,16 +41,15 @@ export default function Awards() {
           className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4"
         >
           {awards.map(aw => {
-            const Icon = aw.icon;
             return (
               <motion.div
                 key={aw.name}
                 variants={{ hidden: { y: 16, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.5 } } }}
                 whileHover={{ y: -3 }}
-                className="bg-white border border-[#e5e5e5] p-5 rounded-2xl flex flex-col items-center text-center hover:border-[#1557FF]/30 hover:shadow-md hover:shadow-blue-50 transition-all duration-300 cursor-default"
+                className="bg-white border border-[#e5e5e5] p-5 rounded-2xl flex flex-col items-center text-center hover:border-[#FF8048]/30 hover:shadow-md hover:shadow-blue-50 transition-all duration-300 cursor-default"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#EEF3FF] text-[#1557FF] flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-[#FFF1E9] text-[#FF8048] flex items-center justify-center mb-4">
+                  <i className={`fa-solid ${aw.icon} w-5 h-5`} />
                 </div>
                 <h3 className="text-xs font-bold text-[#0a0a0a] mb-0.5 leading-snug">{aw.name}</h3>
                 <p className="text-[10px] text-[#737373] font-semibold mb-1">{aw.body}</p>

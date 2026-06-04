@@ -9,7 +9,7 @@ const tabs = [
       { name: 'Gemini',       dot: '#4285f4' }, { name: 'Llama',        dot: '#7c3aed' },
       { name: 'Mistral',      dot: '#ef4444' }, { name: 'TensorFlow',   dot: '#ff6f00' },
       { name: 'PyTorch',      dot: '#ee4c2c' }, { name: 'LangChain',    dot: '#1c7ed6' },
-      { name: 'LangGraph',    dot: '#1557FF' }, { name: 'Vertex AI',    dot: '#4285f4' },
+      { name: 'LangGraph',    dot: '#FF8048' }, { name: 'Vertex AI',    dot: '#4285f4' },
       { name: 'Pinecone',     dot: '#00b4d8' }, { name: 'Weaviate',     dot: '#00c4a1' },
       { name: 'Hugging Face', dot: '#fbbf24' }, { name: 'OpenCV',       dot: '#5c3317' },
       { name: 'n8n',          dot: '#ea4b71' }, { name: 'Cognitive AI', dot: '#0078d4' },
@@ -91,7 +91,7 @@ export default function TechStack() {
               onClick={() => setActive(t.id)}
               className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer border ${
                 active === t.id
-                  ? 'bg-[#0a0a0a] text-white border-transparent shadow-md'
+                  ? 'bg-[#FF8048] text-white border-transparent shadow-md'
                   : 'bg-white text-[#525252] border-[#e5e5e5] hover:border-[#d4d4d4] hover:text-[#0a0a0a]'
               }`}
             >
@@ -116,7 +116,7 @@ export default function TechStack() {
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.025 }}
-                className="flex items-center gap-2 px-5 py-2.5 bg-white border border-[#e5e5e5] rounded-full shadow-sm hover:border-[#1557FF]/30 hover:shadow-md transition-all duration-300 cursor-default"
+                className="flex items-center gap-2 px-5 py-2.5 bg-white border border-[#e5e5e5] rounded-full shadow-sm hover:border-[#FF8048]/30 hover:shadow-md transition-all duration-300 cursor-default"
               >
                 <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: t.dot }} />
                 <span className="font-semibold text-sm text-[#525252]">{t.name}</span>

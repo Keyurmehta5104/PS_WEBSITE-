@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
 
 const projects = [
   {
@@ -7,12 +6,12 @@ const projects = [
     title: 'NovaPay Corporate Portal',
     sub: 'Next-Gen Cross-Border Payment Gateway',
     tags: ['React', 'Node.js', 'AWS'],
-    topColor: '#1557FF',
+    topColor: '#FF8048',
     mockup: (
       <div className="w-full h-full bg-white rounded-xl p-5 flex flex-col gap-4 group-hover:scale-[1.02] transition-transform duration-500 shadow-sm border border-[#f0f0f0]">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-blue-100 text-[#1557FF] flex items-center justify-center text-[10px] font-bold">N</div>
+            <div className="w-6 h-6 rounded-full bg-blue-100 text-[#FF8048] flex items-center justify-center text-[10px] font-bold">N</div>
             <span className="text-xs font-bold text-[#0a0a0a]">NovaPay</span>
           </div>
           <span className="text-[10px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full border border-green-200 font-bold">Active</span>
@@ -21,7 +20,7 @@ const projects = [
           <div className="text-2xl font-extrabold text-[#0a0a0a] tracking-tight">$142,384.50</div></div>
         <div className="flex items-end gap-1 h-16">
           {[30,50,40,70,88,60,95].map((h, i) => (
-            <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i===6 ? 'linear-gradient(to top,#1557FF,#38BFFF)' : `rgba(21,87,255,${0.1+i*0.04})` }} />
+            <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i===6 ? 'linear-gradient(to top,#FF8048,#FFB066)' : `rgba(21,87,255,${0.1+i*0.04})` }} />
           ))}
         </div>
       </div>
@@ -141,11 +140,11 @@ export default function Work() {
                 <span className="text-[10px] font-black tracking-widest uppercase" style={{ color: proj.topColor }}>{proj.category}</span>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="text-base font-bold text-[#0a0a0a] group-hover:text-[#1557FF] transition-colors leading-snug">{proj.title}</h3>
+                    <h3 className="text-base font-bold text-[#0a0a0a] group-hover:text-[#FF8048] transition-colors leading-snug">{proj.title}</h3>
                     <p className="text-sm text-[#737373] mt-0.5">{proj.sub}</p>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-[#fafafa] border border-[#e5e5e5] flex items-center justify-center text-[#737373] group-hover:bg-[#1557FF] group-hover:text-white group-hover:border-transparent transition-all duration-300 flex-shrink-0">
-                    <ArrowUpRight className="w-4 h-4" />
+                  <div className="w-8 h-8 rounded-full bg-[#fafafa] border border-[#e5e5e5] flex items-center justify-center text-[#737373] group-hover:bg-[#FF8048] group-hover:text-white group-hover:border-transparent transition-all duration-300 flex-shrink-0">
+                    <i className="fa-solid fa-arrow-up-right w-4 h-4" />
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-1">
@@ -160,7 +159,7 @@ export default function Work() {
         </div>
 
         <div className="flex justify-center mt-12">
-          <a href="#contact" className="text-sm font-semibold text-[#1557FF] hover:text-[#0A3DD6] transition-colors flex items-center gap-1 group">
+          <a href="#contact" className="text-sm font-semibold text-[#FF8048] hover:text-[#F26A2E] transition-colors flex items-center gap-1 group">
             View all case studies <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
           </a>
         </div>

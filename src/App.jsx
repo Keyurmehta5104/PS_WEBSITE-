@@ -22,7 +22,7 @@ import Footer from './components/Footer';
 export default function App() {
   return (
     <ThemeProvider>
-    <div className="bg-white min-h-screen text-[#0f0f0f] relative antialiased scroll-smooth selection:bg-[#6c2bd9] selection:text-white">
+    <div className="bg-white min-h-screen text-[#0f0f0f] relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
       <Navbar />
       <Hero />
       <FeaturedScroll />

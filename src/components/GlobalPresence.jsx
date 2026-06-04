@@ -1,6 +1,5 @@
 /* Real office locations from professionalsofttech.com */
 import { motion } from 'framer-motion';
-import { MapPin } from 'lucide-react';
 
 const offices = [
   { city: 'Massachusetts',  country: 'USA',          role: 'Americas HQ',    detail: 'Enterprise Sales & Client Services', flag: '🇺🇸' },
@@ -11,15 +10,15 @@ const offices = [
 
 export default function GlobalPresence() {
   return (
-    <section className="py-20 bg-[#080808] border-b border-white/[0.06]">
+    <section className="py-20 bg-[#F7F8FA] border-b border-[#ececec]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         <div className="text-center mb-14">
-          <p className="section-label mb-4" style={{ color: '#1557FF' }}>GLOBAL PRESENCE</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-[-0.03em] leading-[1.07]">
+          <p className="section-label mb-4" style={{ color: '#FF8048' }}>GLOBAL PRESENCE</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#2b2b2b] tracking-[-0.03em] leading-[1.07]">
             Follow the sun. <span className="text-gradient">Never lose a day.</span>
           </h2>
-          <p className="text-[#525252] mt-4 text-sm md:text-base">
+          <p className="text-[#4D4D4D] mt-4 text-sm md:text-base">
             Offices across four time zones — your project always has someone awake and working.
           </p>
         </div>
@@ -35,19 +34,19 @@ export default function GlobalPresence() {
             <motion.div
               key={o.city}
               variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.55 } } }}
-              className="group bg-white/[0.03] border border-white/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:bg-[#050f2a] hover:border-[#1557FF]/30 transition-all duration-300 cursor-default"
+              className="group bg-white border border-[#ececec] rounded-2xl p-7 flex flex-col gap-4 shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)] hover:bg-[#FFF8F3] hover:border-[#FF8048]/40 transition-all duration-300 cursor-default"
             >
               <div className="flex items-start justify-between">
                 <span className="text-3xl">{o.flag}</span>
-                <MapPin className="w-4 h-4 text-white/20 group-hover:text-[#1557FF] transition-colors mt-0.5" />
+                <i className="fa-solid fa-location-dot w-4 h-4 text-[#8a8a8a] group-hover:text-[#FF8048] transition-colors mt-0.5" />
               </div>
               <div>
-                <h3 className="text-lg font-extrabold text-white tracking-tight">{o.city}</h3>
-                <span className="text-[10px] font-bold text-[#525252] uppercase tracking-widest">{o.country}</span>
+                <h3 className="text-lg font-extrabold text-[#2b2b2b] tracking-tight">{o.city}</h3>
+                <span className="text-[10px] font-bold text-[#8a8a8a] uppercase tracking-widest">{o.country}</span>
               </div>
-              <div className="border-t border-white/[0.06] pt-4">
-                <span className="text-[10px] font-black text-[#1557FF] uppercase tracking-widest block mb-1">{o.role}</span>
-                <span className="text-xs text-[#525252]">{o.detail}</span>
+              <div className="border-t border-[#ececec] pt-4">
+                <span className="text-[10px] font-black text-[#FF8048] uppercase tracking-widest block mb-1">{o.role}</span>
+                <span className="text-xs text-[#4D4D4D]">{o.detail}</span>
               </div>
             </motion.div>
           ))}

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   { q: 'Why choose Professional Softtech?',
@@ -37,11 +36,11 @@ function Item({ faq }) {
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-6 py-5 text-left group cursor-pointer"
       >
-        <span className="font-semibold text-[#0a0a0a] text-sm md:text-[15px] group-hover:text-[#1557FF] transition-colors leading-snug">
+        <span className="font-semibold text-[#0a0a0a] text-sm md:text-[15px] group-hover:text-[#FF8048] transition-colors leading-snug">
           {faq.q}
         </span>
-        <span className="w-7 h-7 rounded-full bg-[#fafafa] border border-[#e5e5e5] flex items-center justify-center flex-shrink-0 text-[#737373] group-hover:bg-[#1557FF] group-hover:text-white group-hover:border-transparent transition-all duration-300">
-          {open ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+        <span className="w-7 h-7 rounded-full bg-[#fafafa] border border-[#e5e5e5] flex items-center justify-center flex-shrink-0 text-[#737373] group-hover:bg-[#FF8048] group-hover:text-white group-hover:border-transparent transition-all duration-300">
+          {open ? <i className="fa-solid fa-minus w-3.5 h-3.5" /> : <i className="fa-solid fa-plus w-3.5 h-3.5" />}
         </span>
       </button>
       <AnimatePresence>
@@ -74,7 +73,7 @@ export default function FAQ() {
               Frequently asked questions.
             </h2>
             <p className="text-[#737373] text-sm leading-relaxed">Can't find your answer? Reach out directly.</p>
-            <a href="mailto:enquiry@professionalsofttech.com" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#1557FF] hover:text-[#0A3DD6] transition-colors">
+            <a href="mailto:enquiry@professionalsofttech.com" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF8048] hover:text-[#F26A2E] transition-colors">
               enquiry@professionalsofttech.com →
             </a>
           </div>

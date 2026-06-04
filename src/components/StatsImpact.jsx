@@ -24,33 +24,33 @@ function CountUp({ to, prefix = '', suffix = '' }) {
 }
 
 const stats = [
-  { to: '500',  suffix: '+',  label: 'Satisfied Clients',     sub: 'Across 17+ countries',          col: 'text-[#1557FF]'  },
-  { to: '1000', suffix: '+',  label: 'Projects Delivered',    sub: '100% delivery success',          col: 'text-[#38BFFF]'  },
-  { to: '30',   suffix: '+',  label: 'Expert Engineers',      sub: 'Under one roof',                 col: 'text-emerald-400' },
-  { to: '17',   suffix: '+',  label: 'Countries Served',      sub: 'Across four continents',         col: 'text-orange-400'  },
-  { to: '14',   suffix: '+',  label: 'Years of Excellence',   sub: 'Engineering since 2010',         col: 'text-pink-400'    },
-  { to: '95',   suffix: '%',  label: 'Client Retention',      sub: 'Clients who always come back',   col: 'text-violet-400'  },
-  { to: '92',   suffix: '%',  label: 'On-Time Delivery',      sub: 'Sprint after sprint',            col: 'text-cyan-400'    },
-  { to: '50',   prefix: '$', suffix: 'M+', label: 'Client Cost Savings', sub: 'Through smart engineering', col: 'text-amber-400' },
+  { to: '500',  suffix: '+',  label: 'Satisfied Clients',     sub: 'Across 17+ countries',          col: 'text-[#FF8048]'  },
+  { to: '1000', suffix: '+',  label: 'Projects Delivered',    sub: '100% delivery success',          col: 'text-[#2b2b2b]'  },
+  { to: '30',   suffix: '+',  label: 'Expert Engineers',      sub: 'Under one roof',                 col: 'text-[#FF8048]' },
+  { to: '17',   suffix: '+',  label: 'Countries Served',      sub: 'Across four continents',         col: 'text-[#2b2b2b]'  },
+  { to: '14',   suffix: '+',  label: 'Years of Excellence',   sub: 'Engineering since 2010',         col: 'text-[#FF8048]'    },
+  { to: '95',   suffix: '%',  label: 'Client Retention',      sub: 'Clients who always come back',   col: 'text-[#2b2b2b]'  },
+  { to: '92',   suffix: '%',  label: 'On-Time Delivery',      sub: 'Sprint after sprint',            col: 'text-[#FF8048]'    },
+  { to: '50',   prefix: '$', suffix: 'M+', label: 'Client Cost Savings', sub: 'Through smart engineering', col: 'text-[#2b2b2b]' },
 ];
 
 export default function StatsImpact() {
   return (
-    <section className="py-24 md:py-32 bg-[#080808] border-b border-white/[0.06]">
+    <section className="py-24 md:py-32 bg-[#ffffff] border-b border-[#ececec]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end mb-16">
           <div>
-            <p className="section-label mb-4" style={{ color: '#1557FF' }}>IMPACT AT SCALE</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-[-0.03em] leading-[1.07]">
+            <p className="section-label mb-4" style={{ color: '#FF8048' }}>IMPACT AT SCALE</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[#2b2b2b] tracking-[-0.03em] leading-[1.07]">
               Built for outcomes.<br />
               <span className="text-gradient">Proven at scale.</span>
             </h2>
           </div>
-          <p className="text-[#525252] text-base md:text-lg leading-relaxed max-w-lg">
+          <p className="text-[#4D4D4D] text-base md:text-lg leading-relaxed max-w-lg">
             Businesses we partner with see an average{' '}
-            <span className="text-white font-semibold">90% efficiency increase</span> in their
+            <span className="text-[#2b2b2b] font-semibold">90% efficiency increase</span> in their
             first year working with us.
           </p>
         </div>
@@ -67,13 +67,13 @@ export default function StatsImpact() {
             <motion.div
               key={s.label}
               variants={{ hidden: { y: 24, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.6 } } }}
-              className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-6 md:p-7 flex flex-col gap-2 hover:bg-white/[0.05] hover:border-white/[0.12] transition-all duration-300"
+              className="bg-white border border-[#ececec] rounded-2xl p-6 md:p-7 flex flex-col gap-2 shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)] hover:border-[#FF8048] transition-all duration-300"
             >
               <span className={`text-3xl md:text-4xl font-extrabold tracking-tight ${s.col}`}>
                 <CountUp to={s.to} prefix={s.prefix || ''} suffix={s.suffix} />
               </span>
-              <span className="text-white font-semibold text-sm">{s.label}</span>
-              <span className="text-[#525252] text-xs">{s.sub}</span>
+              <span className="text-[#2b2b2b] font-semibold text-sm">{s.label}</span>
+              <span className="text-[#8a8a8a] text-xs">{s.sub}</span>
             </motion.div>
           ))}
         </motion.div>

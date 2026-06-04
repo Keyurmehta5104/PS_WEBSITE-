@@ -1,6 +1,5 @@
 /* Real contact data from professionalsofttech.com */
 import { useState } from 'react';
-import { ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
 
 const links = {
   Services:   ['AI Development', 'Web Development', 'Mobile Apps', 'UI/UX Design', 'DevOps & Cloud', 'QA Testing', 'IoT & Edge'],
@@ -28,7 +27,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#080808] text-[#525252] border-t border-white/[0.06]">
+    <footer className="bg-[#FAFAFA] text-[#4D4D4D] border-t border-[#ececec]">
 
       {/* Main grid */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
@@ -37,13 +36,13 @@ export default function Footer() {
           {/* Brand col */}
           <div className="lg:col-span-4 flex flex-col gap-7">
             <a href="#" className="flex items-center gap-2.5 group w-fit">
-              <div className="w-9 h-9 rounded-xl bg-[#1557FF] flex items-center justify-center font-bold text-white text-sm shadow-lg shadow-blue-900/30 group-hover:scale-105 transition-transform duration-300">PS</div>
-              <span className="font-extrabold text-[17px] tracking-tight text-white">
+              <div className="w-9 h-9 rounded-xl bg-[#FF8048] flex items-center justify-center font-bold text-white text-sm shadow-lg shadow-orange-900/30 group-hover:scale-105 transition-transform duration-300">PS</div>
+              <span className="font-extrabold text-[17px] tracking-tight text-[#2b2b2b]">
                 Professional <span className="text-gradient">Softtech</span>
               </span>
             </a>
 
-            <p className="text-sm text-[#525252] leading-relaxed">
+            <p className="text-sm text-[#4D4D4D] leading-relaxed">
               Engineering digital excellence since 2010. We build cutting-edge AI-powered products that redefine business capabilities — across 17+ countries and 18+ industries.
             </p>
 
@@ -51,7 +50,7 @@ export default function Footer() {
             <div className="flex gap-3">
               {socials.map(s => (
                 <a key={s.label} href="#" aria-label={s.label}
-                  className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:border-white/20 hover:bg-white/[0.08] text-[#525252] hover:text-white flex items-center justify-center transition-all duration-300">
+                  className="w-9 h-9 rounded-xl bg-[#f1f1f1] border border-[#ececec] hover:border-transparent hover:bg-[#FF8048] text-[#4D4D4D] hover:text-white flex items-center justify-center transition-all duration-300">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill={s.fill ? 'currentColor' : 'none'} stroke={s.fill ? 'none' : 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d={s.path} />
                   </svg>
@@ -61,49 +60,49 @@ export default function Footer() {
 
             {/* Newsletter */}
             <form onSubmit={onSubscribe} className="flex flex-col gap-2">
-              <span className="text-xs font-bold text-white uppercase tracking-wider">Newsletter</span>
+              <span className="text-xs font-bold text-[#2b2b2b] uppercase tracking-wider">Newsletter</span>
               <div className="flex gap-2">
                 <input type="email" required placeholder="Your email address" value={email} onChange={e => setEmail(e.target.value)}
-                  className="bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-2.5 text-white placeholder-[#3a3a3a] focus:outline-none focus:border-[#1557FF] text-sm w-full transition-colors duration-300" />
-                <button type="submit" className="bg-[#1557FF] hover:bg-[#0A3DD6] text-white font-semibold text-xs px-4 rounded-xl transition-all duration-300 whitespace-nowrap cursor-pointer">
+                  className="bg-white border border-[#ececec] rounded-xl px-4 py-2.5 text-[#2b2b2b] placeholder-[#9a9a9a] focus:outline-none focus:border-[#FF8048] text-sm w-full transition-colors duration-300" />
+                <button type="submit" className="bg-[#FF8048] hover:bg-[#F26A2E] text-white font-semibold text-xs px-4 rounded-xl transition-all duration-300 whitespace-nowrap cursor-pointer">
                   Subscribe
                 </button>
               </div>
-              {subscribed && <span className="text-[11px] text-green-400 font-semibold">✓ Subscribed!</span>}
+              {subscribed && <span className="text-[11px] text-green-600 font-semibold">✓ Subscribed!</span>}
             </form>
           </div>
 
           {/* Link cols */}
           {Object.entries(links).map(([cat, items]) => (
             <div key={cat} className="lg:col-span-2 flex flex-col gap-4">
-              <span className="text-xs font-bold text-white uppercase tracking-wider">{cat}</span>
+              <span className="text-xs font-bold text-[#2b2b2b] uppercase tracking-wider">{cat}</span>
               {items.map(item => (
                 <a key={item} href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-sm text-[#525252] hover:text-white transition-colors duration-200">{item}</a>
+                  className="text-sm text-[#4D4D4D] hover:text-[#FF8048] transition-colors duration-200">{item}</a>
               ))}
             </div>
           ))}
 
           {/* Contact col */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <span className="text-xs font-bold text-white uppercase tracking-wider">Contact</span>
+            <span className="text-xs font-bold text-[#2b2b2b] uppercase tracking-wider">Contact</span>
             <div className="flex items-start gap-2">
-              <Mail className="w-3.5 h-3.5 text-[#3a3a3a] mt-0.5 flex-shrink-0" />
-              <a href="mailto:enquiry@professionalsofttech.com" className="text-xs text-[#525252] hover:text-white transition-colors leading-snug">
+              <i className="fa-solid fa-envelope w-3.5 h-3.5 text-[#8a8a8a] mt-0.5 flex-shrink-0" />
+              <a href="mailto:enquiry@professionalsofttech.com" className="text-xs text-[#4D4D4D] hover:text-[#FF8048] transition-colors leading-snug">
                 enquiry@<br />professionalsofttech.com
               </a>
             </div>
             <div className="flex items-start gap-2">
-              <Phone className="w-3.5 h-3.5 text-[#3a3a3a] mt-0.5 flex-shrink-0" />
-              <a href="tel:+14135294901" className="text-xs text-[#525252] hover:text-white transition-colors">+1 (413) 529-4901</a>
+              <i className="fa-solid fa-phone w-3.5 h-3.5 text-[#8a8a8a] mt-0.5 flex-shrink-0" />
+              <a href="tel:+14135294901" className="text-xs text-[#4D4D4D] hover:text-[#FF8048] transition-colors">+1 (413) 529-4901</a>
             </div>
             <div className="flex items-start gap-2">
-              <MapPin className="w-3.5 h-3.5 text-[#3a3a3a] mt-0.5 flex-shrink-0" />
-              <span className="text-xs text-[#525252] leading-snug">USA · Singapore · India</span>
+              <i className="fa-solid fa-location-dot w-3.5 h-3.5 text-[#8a8a8a] mt-0.5 flex-shrink-0" />
+              <span className="text-xs text-[#4D4D4D] leading-snug">USA · Singapore · India</span>
             </div>
             <div className="mt-2 flex flex-col gap-1.5">
               {certs.map(c => (
-                <span key={c} className="text-[10px] font-semibold text-[#3a3a3a] uppercase tracking-wide">✓ {c}</span>
+                <span key={c} className="text-[10px] font-semibold text-[#8a8a8a] uppercase tracking-wide">✓ {c}</span>
               ))}
             </div>
           </div>
@@ -112,18 +111,18 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/[0.06]">
+      <div className="border-t border-[#ececec]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#3a3a3a]">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#8a8a8a]">
             <span>© {new Date().getFullYear()} Professional Softtech. All rights reserved.</span>
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+            <a href="#" className="hover:text-[#FF8048] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#FF8048] transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-[#FF8048] transition-colors">Cookie Policy</a>
           </div>
           <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-9 h-9 rounded-full bg-white/[0.04] border border-white/[0.07] hover:bg-[#1557FF] hover:border-transparent text-[#525252] hover:text-white flex items-center justify-center transition-all duration-300 group cursor-pointer flex-shrink-0"
+            className="w-9 h-9 rounded-full bg-[#f1f1f1] border border-[#ececec] hover:bg-[#FF8048] hover:border-transparent text-[#4D4D4D] hover:text-white flex items-center justify-center transition-all duration-300 group cursor-pointer flex-shrink-0"
             aria-label="Scroll to top">
-            <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
+            <i className="fa-solid fa-arrow-up w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </div>
       </div>

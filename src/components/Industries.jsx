@@ -1,26 +1,24 @@
 import { motion } from 'framer-motion';
-import { Heart, Landmark, ShoppingBag, GraduationCap, Truck, Store, Scale, Plane, Factory, Home, Tv, Trophy, Shield, Car, Building, Users, Smartphone, Coffee } from 'lucide-react';
-import { ArrowRight } from 'lucide-react';
 
 const industries = [
-  { name: 'Healthcare',       icon: Heart },
-  { name: 'Finance',          icon: Landmark },
-  { name: 'E-Commerce',       icon: ShoppingBag },
-  { name: 'Education',        icon: GraduationCap },
-  { name: 'Logistics',        icon: Truck },
-  { name: 'Retail',           icon: Store },
-  { name: 'Legal',            icon: Scale },
-  { name: 'Travel',           icon: Plane },
-  { name: 'Manufacturing',    icon: Factory },
-  { name: 'Real Estate',      icon: Home },
-  { name: 'Media & OTT',      icon: Tv },
-  { name: 'Sports',           icon: Trophy },
-  { name: 'Insurance',        icon: Shield },
-  { name: 'Automotive',       icon: Car },
-  { name: 'Construction',     icon: Building },
-  { name: 'Social Networking',icon: Users },
-  { name: 'On Demand',        icon: Smartphone },
-  { name: 'Hospitality',      icon: Coffee },
+  { name: 'Healthcare',       icon: 'fa-heart-pulse' },
+  { name: 'Finance',          icon: 'fa-building-columns' },
+  { name: 'E-Commerce',       icon: 'fa-bag-shopping' },
+  { name: 'Education',        icon: 'fa-graduation-cap' },
+  { name: 'Logistics',        icon: 'fa-truck-fast' },
+  { name: 'Retail',           icon: 'fa-store' },
+  { name: 'Legal',            icon: 'fa-scale-balanced' },
+  { name: 'Travel',           icon: 'fa-plane' },
+  { name: 'Manufacturing',    icon: 'fa-industry' },
+  { name: 'Real Estate',      icon: 'fa-house' },
+  { name: 'Media & OTT',      icon: 'fa-tv' },
+  { name: 'Sports',           icon: 'fa-trophy' },
+  { name: 'Insurance',        icon: 'fa-shield-halved' },
+  { name: 'Automotive',       icon: 'fa-car' },
+  { name: 'Construction',     icon: 'fa-building' },
+  { name: 'Social Networking',icon: 'fa-users' },
+  { name: 'On Demand',        icon: 'fa-mobile-screen-button' },
+  { name: 'Hospitality',      icon: 'fa-mug-hot' },
 ];
 
 export default function Industries() {
@@ -50,25 +48,24 @@ export default function Industries() {
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"
         >
           {industries.map(ind => {
-            const Icon = ind.icon;
             return (
               <motion.div
                 key={ind.name}
                 variants={{ hidden: { y: 16, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.45 } } }}
-                className="group bg-white border border-[#e5e5e5] rounded-2xl p-4 flex items-center gap-3 cursor-pointer hover:border-[#1557FF]/30 hover:bg-[#f5f8ff] hover:shadow-sm transition-all duration-300 relative overflow-hidden"
+                className="group bg-white border border-[#e5e5e5] rounded-2xl p-4 flex items-center gap-3 cursor-pointer hover:border-[#FF8048]/30 hover:bg-[#f5f8ff] hover:shadow-sm transition-all duration-300 relative overflow-hidden"
               >
-                <Icon className="w-4 h-4 text-[#1557FF] flex-shrink-0" />
+                <i className={`fa-solid ${ind.icon} w-4 h-4 text-[#FF8048] flex-shrink-0`} />
                 <span className="text-xs font-semibold text-[#525252] group-hover:text-[#0a0a0a] leading-snug">{ind.name}</span>
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#1557FF] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF8048] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </motion.div>
             );
           })}
         </motion.div>
 
         <div className="flex justify-start mt-10">
-          <a href="#contact" className="text-sm font-semibold text-[#1557FF] hover:text-[#0A3DD6] transition-colors flex items-center gap-1 group">
+          <a href="#contact" className="text-sm font-semibold text-[#FF8048] hover:text-[#F26A2E] transition-colors flex items-center gap-1 group">
             See all industries
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <i className="fa-solid fa-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
 

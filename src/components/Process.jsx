@@ -61,13 +61,13 @@ export default function Process() {
               className="relative z-10 flex flex-col p-8 group"
             >
               {/* Number */}
-              <div className="w-14 h-14 rounded-2xl bg-white border-2 border-[#e5e5e5] flex items-center justify-center mb-8 group-hover:border-[#1557FF] group-hover:bg-[#1557FF] transition-all duration-300 shadow-sm">
-                <span className="font-extrabold text-lg text-[#1557FF] group-hover:text-white transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-white border-2 border-[#e5e5e5] flex items-center justify-center mb-8 group-hover:border-[#FF8048] group-hover:bg-[#FF8048] transition-all duration-300 shadow-sm">
+                <span className="font-extrabold text-lg text-[#FF8048] group-hover:text-white transition-colors">
                   {step.num}
                 </span>
               </div>
 
-              <h3 className="text-lg font-extrabold text-[#0a0a0a] mb-3 tracking-tight group-hover:text-[#1557FF] transition-colors">
+              <h3 className="text-lg font-extrabold text-[#0a0a0a] mb-3 tracking-tight group-hover:text-[#FF8048] transition-colors">
                 {step.title}
               </h3>
 
@@ -76,7 +76,7 @@ export default function Process() {
               <div className="flex flex-col gap-1.5">
                 {step.chips.map(c => (
                   <div key={c} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1557FF]/40 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF8048]/40 flex-shrink-0" />
                     <span className="text-[11px] font-semibold text-[#a3a3a3] uppercase tracking-wide">{c}</span>
                   </div>
                 ))}

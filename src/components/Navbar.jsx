@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
-import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import psLogo from '../assets/logo.png';
-import {
-  Menu, X, Moon, Sun, ArrowUpRight,
-  Globe, Smartphone, Palette, Cloud, Cpu, FileCheck2,
-  Heart, Landmark, ShoppingBag, GraduationCap, Truck, Store,
-  Scale, Plane, Factory, Home, Tv, Trophy, Shield, Car, Building, Wifi,
-  Users, Phone, Briefcase, Search, Zap, ClipboardCheck, CheckCircle,
-} from 'lucide-react';
+
+/* ── Font Awesome icon helper (drop-in for the old lucide API) ──── */
+function FaIcon({ icon, size = 16, color, style }) {
+  return (
+    <i
+      className={`fa-solid ${icon}`}
+      style={{ fontSize: size, color, lineHeight: 1, display: 'inline-block', ...style }}
+      aria-hidden="true"
+    />
+  );
+}
 
 /* ─── Nav link definitions ───────────────────────────────────────── */
 const NAV_ITEMS = [
@@ -53,7 +55,7 @@ function OrbitAnimation() {
           transform: 'translateY(-50%)',
           width: 8, height: 8,
           borderRadius: '50%',
-          background: '#FF5C1A',
+          background: '#FF8048',
           boxShadow: '0 0 6px rgba(255,92,26,0.6)',
         }} />
       </motion.div>
@@ -85,7 +87,7 @@ function OrbitAnimation() {
           transform: 'translateY(-50%)',
           width: 5, height: 5,
           borderRadius: '50%',
-          background: '#FF5C1A',
+          background: '#FF8048',
           opacity: 0.5,
         }} />
       </motion.div>
@@ -231,8 +233,8 @@ function WorkCardWrapper({ href, children, title, desc, titleColor = '#1a1a1a' }
 
       {/* Text */}
       <div style={{ padding: '12px 4px 4px' }}>
-        <p style={{ fontSize: 14, fontWeight: 700, color: hovered ? '#FF5C1A' : titleColor, margin: '0 0 3px', display: 'flex', alignItems: 'center', gap: 4, transition: 'color 0.2s' }}>
-          {title} <ArrowUpRight size={13} />
+        <p style={{ fontSize: 14, fontWeight: 700, color: hovered ? '#FF8048' : titleColor, margin: '0 0 3px', display: 'flex', alignItems: 'center', gap: 4, transition: 'color 0.2s' }}>
+          {title} <FaIcon icon="fa-arrow-up-right" size={12} />
         </p>
         <p style={{ fontSize: 12, color: '#888', margin: 0 }}>{desc}</p>
       </div>
@@ -325,54 +327,54 @@ const MENUS = {
   about: {
     type: 'about',
     items: [
-      { icon: Users,     name: 'Team',         desc: 'Ready to go an extra mile to deliver great software' },
-      { icon: Zap,       name: 'How We Work',  desc: 'Get to know how you can work with us' },
-      { icon: Phone,     name: 'Contact',      desc: 'Discuss your idea with our technology experts' },
-      { icon: Briefcase, name: 'Careers',      desc: 'Explore current openings and join the team' },
+      { icon: 'fa-users',         name: 'Team',         desc: 'Ready to go an extra mile to deliver great software' },
+      { icon: 'fa-bolt',          name: 'How We Work',  desc: 'Get to know how you can work with us' },
+      { icon: 'fa-phone',         name: 'Contact',      desc: 'Discuss your idea with our technology experts' },
+      { icon: 'fa-briefcase',     name: 'Careers',      desc: 'Explore current openings and join the team' },
     ],
   },
   focus: {
     cols: 2,
     type: 'focus',
     items: [
-      { icon: Zap,         name: 'Startup & MVP Builds',         desc: 'From idea to working product fast' },
-      { icon: Users,       name: 'Staff Augmentation',           desc: 'Extend your team with expert developers' },
-      { icon: Briefcase,   name: 'Long-Term Product Partnership', desc: 'We grow with your product, not just build it' },
-      { icon: FileCheck2,  name: 'Open Source Customization',    desc: 'Deep expertise in Laravel, WordPress, Shopify' },
-      { icon: Smartphone,  name: 'Cross-Platform Delivery',      desc: 'One team, web + mobile, delivered together' },
+      { icon: 'fa-rocket',           name: 'Startup & MVP Builds',         desc: 'From idea to working product fast' },
+      { icon: 'fa-users',            name: 'Staff Augmentation',           desc: 'Extend your team with expert developers' },
+      { icon: 'fa-handshake',        name: 'Long-Term Product Partnership', desc: 'We grow with your product, not just build it' },
+      { icon: 'fa-code-branch',      name: 'Open Source Customization',    desc: 'Deep expertise in Laravel, WordPress, Shopify' },
+      { icon: 'fa-mobile-screen-button', name: 'Cross-Platform Delivery',  desc: 'One team, web + mobile, delivered together' },
     ],
   },
   services: {
     cols: 2,
     items: [
-      { icon: Globe,       name: 'Web Development', desc: 'Modern, dynamic web applications' },
-      { icon: Smartphone,  name: 'Mobile Apps',     desc: 'High-performing iOS, Android, cross-platform' },
-      { icon: Cpu,         name: 'AI / ML',         desc: 'AI-led solutions, deeply domain-tuned' },
-      { icon: Palette,     name: 'UI/UX Design',    desc: 'Intuitive, user-centric design' },
-      { icon: Cloud,       name: 'DevOps',          desc: 'CI/CD, infrastructure, observability' },
-      { icon: FileCheck2,  name: 'QA & Testing',    desc: 'Automated and manual quality engineering' },
+      { icon: 'fa-globe',         name: 'Web Development', desc: 'Modern, dynamic web applications' },
+      { icon: 'fa-mobile-screen-button', name: 'Mobile Apps', desc: 'High-performing iOS, Android, cross-platform' },
+      { icon: 'fa-microchip',     name: 'AI / ML',         desc: 'AI-led solutions, deeply domain-tuned' },
+      { icon: 'fa-pen-ruler',     name: 'UI/UX Design',    desc: 'Intuitive, user-centric design' },
+      { icon: 'fa-cloud',         name: 'DevOps',          desc: 'CI/CD, infrastructure, observability' },
+      { icon: 'fa-flask-vial',    name: 'QA & Testing',    desc: 'Automated and manual quality engineering' },
     ],
     promo: { bg: '#FFF8EE', label: 'SHIP FASTER', title: 'Rapid POC', desc: 'Get a working prototype in 2–7 days.' },
   },
   industries: {
     cols: 4,
     items: [
-      { icon: Heart,       name: 'Healthcare' },
-      { icon: Scale,       name: 'Legal' },
-      { icon: Truck,       name: 'Logistics' },
-      { icon: Landmark,    name: 'Finance' },
-      { icon: GraduationCap, name: 'Education' },
-      { icon: Store,       name: 'Retail' },
-      { icon: Tv,          name: 'Media & OTT' },
-      { icon: Shield,      name: 'Insurance' },
-      { icon: Plane,       name: 'Travel' },
-      { icon: ShoppingBag, name: 'E-Commerce' },
-      { icon: Factory,     name: 'Manufacturing' },
-      { icon: Building,    name: 'Construction' },
-      { icon: Trophy,      name: 'Sports' },
-      { icon: Car,         name: 'Automotive' },
-      { icon: Home,        name: 'Real Estate' },
-      { icon: Wifi,        name: 'IT & Telecom' },
+      { icon: 'fa-heart-pulse',     name: 'Healthcare' },
+      { icon: 'fa-scale-balanced',  name: 'Legal' },
+      { icon: 'fa-truck-fast',      name: 'Logistics' },
+      { icon: 'fa-building-columns', name: 'Finance' },
+      { icon: 'fa-graduation-cap',  name: 'Education' },
+      { icon: 'fa-store',           name: 'Retail' },
+      { icon: 'fa-tv',              name: 'Media & OTT' },
+      { icon: 'fa-shield-halved',   name: 'Insurance' },
+      { icon: 'fa-plane',           name: 'Travel' },
+      { icon: 'fa-bag-shopping',    name: 'E-Commerce' },
+      { icon: 'fa-industry',        name: 'Manufacturing' },
+      { icon: 'fa-helmet-safety',   name: 'Construction' },
+      { icon: 'fa-trophy',          name: 'Sports' },
+      { icon: 'fa-car',             name: 'Automotive' },
+      { icon: 'fa-house',           name: 'Real Estate' },
+      { icon: 'fa-wifi',            name: 'IT & Telecom' },
     ],
     promo2: [
       { bg: '#FDE8F0', label: 'NAMES YOU ALREADY KNOW', title: 'Our Partners in Growth', desc: 'Deep domain expertise across every vertical.' },
@@ -383,16 +385,16 @@ const MENUS = {
     cols: 4,
     single: true,
     items: [
-      { icon: Search,        name: 'Discovery',         desc: 'In-depth research that shapes the right solution' },
-      { icon: Zap,           name: 'Project Execution', desc: 'Flexible, scalable, business-aligned delivery' },
-      { icon: Users,         name: 'Dedicated Teams',   desc: 'On-demand benches wired to your stack' },
-      { icon: ClipboardCheck,name: 'Project Review',    desc: 'Always improving what we ship' },
+      { icon: 'fa-magnifying-glass', name: 'Discovery',         desc: 'In-depth research that shapes the right solution' },
+      { icon: 'fa-gears',            name: 'Project Execution', desc: 'Flexible, scalable, business-aligned delivery' },
+      { icon: 'fa-users',            name: 'Dedicated Teams',   desc: 'On-demand benches wired to your stack' },
+      { icon: 'fa-clipboard-check',  name: 'Project Review',    desc: 'Always improving what we ship' },
     ],
   },
 };
 
 /* ─── Logo using actual PS brand image ───────────────────────────── */
-function PSLogo({ collapsed, darkMode }) {
+function PSLogo({ collapsed }) {
   return (
     <a
       href="#"
@@ -418,7 +420,7 @@ function PSLogo({ collapsed, darkMode }) {
         }}
       >
         <img
-          src={psLogo}
+          src="/ps-logo.png"
           alt="Professional Soft-Tech"
           style={{
             height: collapsed ? '34px' : '42px',
@@ -426,11 +428,7 @@ function PSLogo({ collapsed, darkMode }) {
             maxWidth: 'none',
             display: 'block',
             flexShrink: 0,
-            transition: 'height 0.3s ease, filter 0.3s ease',
-            /* Dark mode: add white glow to make dark text visible without changing the logo */
-            filter: darkMode
-              ? 'drop-shadow(0px 0px 2px rgba(255,255,255,0.9)) drop-shadow(0px 0px 8px rgba(255,255,255,0.5))'
-              : 'none',
+            transition: 'height 0.3s ease',
           }}
         />
       </div>
@@ -443,7 +441,7 @@ function DropdownCard({ menuKey, darkMode }) {
   const menu = MENUS[menuKey];
   if (!menu) return null;
 
-  const ORANGE = '#FF5C1A';
+  const ORANGE = '#FF8048';
   const D = darkMode;
 
   // Dark mode tokens
@@ -481,7 +479,7 @@ function DropdownCard({ menuKey, darkMode }) {
         <div>
           {/* 2×2 grid of links */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, marginBottom: 12 }}>
-            {menu.items.map(({ icon: Icon, name, desc }) => (
+            {menu.items.map(({ icon, name, desc }) => (
               <a
                 key={name}
                 href={name === 'Contact' ? '#contact' : '#about'}
@@ -489,7 +487,7 @@ function DropdownCard({ menuKey, darkMode }) {
                 onMouseEnter={e => e.currentTarget.style.background = hoverBg}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
-                <Icon size={18} color={ORANGE} strokeWidth={1.6} style={{ marginTop: 1, flexShrink: 0 }} />
+                <FaIcon icon={icon} size={17} color={ORANGE} style={{ marginTop: 2, flexShrink: 0, width: 20, textAlign: 'center' }} />
                 <div>
                   <p style={{ fontSize: 13.5, fontWeight: 700, color: titleClr, margin: 0 }}>{name}</p>
                   <p style={{ fontSize: 12, color: descClr, margin: '3px 0 0', lineHeight: 1.4 }}>{desc}</p>
@@ -523,13 +521,13 @@ function DropdownCard({ menuKey, darkMode }) {
       {(menu.cols === 4 && !menu.single) && (
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px 12px', marginBottom: menu.promo2 ? 20 : 0 }}>
-            {menu.items.map(({ icon: Icon, name }) => (
+            {menu.items.map(({ icon, name }) => (
               <a key={name} href="#industries"
                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 10px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
                 onMouseEnter={e => e.currentTarget.style.background = hoverBg}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
-                <Icon size={16} color={ORANGE} strokeWidth={1.6} />
+                <FaIcon icon={icon} size={15} color={ORANGE} style={{ width: 18, textAlign: 'center' }} />
                 <span style={{ fontSize: 13.5, fontWeight: 500, color: tagClr }}>{name}</span>
               </a>
             ))}
@@ -584,13 +582,13 @@ function DropdownCard({ menuKey, darkMode }) {
       {/* Methodology: single-row 4-col icons + desc */}
       {menu.single && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0 20px' }}>
-          {menu.items.map(({ icon: Icon, name, desc }) => (
+          {menu.items.map(({ icon, name, desc }) => (
             <a key={name} href="#process"
               style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '10px 8px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
               onMouseEnter={e => e.currentTarget.style.background = hoverBg}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
-              <Icon size={22} color={ORANGE} strokeWidth={1.5} />
+              <FaIcon icon={icon} size={20} color={ORANGE} />
               <div>
                 <p style={{ fontSize: 13.5, fontWeight: 700, color: titleClr, margin: 0 }}>{name}</p>
                 <p style={{ fontSize: 12, color: descClr, margin: '4px 0 0', lineHeight: 1.45 }}>{desc}</p>
@@ -608,13 +606,13 @@ function DropdownCard({ menuKey, darkMode }) {
             {menu.type === 'focus' ? (
               <>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
-                  {menu.items.slice(0, 4).map(({ icon: Icon, name, desc }) => (
+                  {menu.items.slice(0, 4).map(({ icon, name, desc }) => (
                     <a key={name} href="#"
                       style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '10px 12px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
                       onMouseEnter={e => e.currentTarget.style.background = hoverBg}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                      <Icon size={17} color={ORANGE} strokeWidth={1.6} style={{ marginTop: 2, flexShrink: 0 }} />
+                      <FaIcon icon={icon} size={16} color={ORANGE} style={{ marginTop: 2, flexShrink: 0, width: 19, textAlign: 'center' }} />
                       <div>
                         <p style={{ fontSize: 13.5, fontWeight: 700, color: titleClr, margin: 0 }}>{name}</p>
                         <p style={{ fontSize: 12, color: descClr, margin: '3px 0 0', lineHeight: 1.45 }}>{desc}</p>
@@ -623,14 +621,14 @@ function DropdownCard({ menuKey, darkMode }) {
                   ))}
                 </div>
                 {menu.items[4] && (() => {
-                  const { icon: Icon, name, desc } = menu.items[4];
+                  const { icon, name, desc } = menu.items[4];
                   return (
                     <a href="#"
                       style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '10px 12px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s', marginTop: 4 }}
                       onMouseEnter={e => e.currentTarget.style.background = hoverBg}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                      <Icon size={17} color={ORANGE} strokeWidth={1.6} style={{ marginTop: 2, flexShrink: 0 }} />
+                      <FaIcon icon={icon} size={16} color={ORANGE} style={{ marginTop: 2, flexShrink: 0, width: 19, textAlign: 'center' }} />
                       <div>
                         <p style={{ fontSize: 13.5, fontWeight: 700, color: titleClr, margin: 0 }}>{name}</p>
                         <p style={{ fontSize: 12, color: descClr, margin: '3px 0 0', lineHeight: 1.45 }}>{desc}</p>
@@ -642,13 +640,13 @@ function DropdownCard({ menuKey, darkMode }) {
             ) : (
               /* Services: standard 2-col 6-item grid */
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
-                {menu.items.map(({ icon: Icon, name, desc }) => (
+                {menu.items.map(({ icon, name, desc }) => (
                   <a key={name} href="#services"
                     style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '10px 12px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
                     onMouseEnter={e => e.currentTarget.style.background = '#FFF3EE'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
-                    <Icon size={17} color={ORANGE} strokeWidth={1.6} style={{ marginTop: 2, flexShrink: 0 }} />
+                    <FaIcon icon={icon} size={16} color={ORANGE} style={{ marginTop: 2, flexShrink: 0, width: 19, textAlign: 'center' }} />
                     <div>
                       <p style={{ fontSize: 13.5, fontWeight: 700, color: titleClr, margin: 0 }}>{name}</p>
                       <p style={{ fontSize: 12, color: descClr, margin: '3px 0 0', lineHeight: 1.45 }}>{desc}</p>
@@ -733,7 +731,7 @@ export default function Navbar() {
   const [scrolled,   setScrolled]   = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { dark: darkMode, setDark: setDarkMode } = useTheme();
+  const darkMode = false; // light theme only — dark mode removed
   const leaveTimer = useRef(null);
 
   useEffect(() => {
@@ -760,7 +758,7 @@ export default function Navbar() {
   /* ── Dynamic styles ── */
   const BG = darkMode
     ? scrolled ? 'rgba(10,10,10,0.96)' : '#0a0a0a'
-    : scrolled ? 'rgba(245,242,238,0.94)' : '#F5F2EE';
+    : scrolled ? 'rgba(255,255,255,0.92)' : '#F7F7F8';
   const SHADOW = scrolled
     ? darkMode ? '0 2px 24px rgba(0,0,0,0.5)' : '0 2px 24px rgba(0,0,0,0.07)'
     : 'none';
@@ -850,7 +848,7 @@ export default function Navbar() {
         }}>
 
           {/* ── Logo ── */}
-          <PSLogo collapsed={scrolled} darkMode={darkMode} />
+          <PSLogo collapsed={scrolled} />
 
           {/* ── Desktop nav links ── */}
           <div
@@ -880,9 +878,6 @@ export default function Navbar() {
 
           {/* ── Right actions ── */}
           <div className="hidden lg:flex items-center" style={{ gap: 12 }}>
-            {/* Dark mode toggle */}
-            <DarkToggle dark={darkMode} onToggle={() => setDarkMode(d => !d)} />
-
             {/* Contact CTA */}
             <motion.a
               href="#contact"
@@ -890,16 +885,16 @@ export default function Navbar() {
               whileTap={{ scale: 0.97 }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5,
-                background: '#FF5C1A', color: '#fff',
+                background: '#FF8048', color: '#fff',
                 fontSize: 14, fontWeight: 500,
                 padding: '10px 22px', borderRadius: 999,
                 textDecoration: 'none',
                 transition: 'background 0.2s',
               }}
-              onMouseEnter={e => e.currentTarget.style.background = '#e84f12'}
-              onMouseLeave={e => e.currentTarget.style.background = '#FF5C1A'}
+              onMouseEnter={e => e.currentTarget.style.background = '#F26A2E'}
+              onMouseLeave={e => e.currentTarget.style.background = '#FF8048'}
             >
-              Contact <ArrowUpRight size={14} />
+              Contact <FaIcon icon="fa-arrow-up-right" size={13} />
             </motion.a>
           </div>
 
@@ -907,18 +902,18 @@ export default function Navbar() {
           <div className="lg:hidden" style={{ alignItems: 'center', gap: 10 }}>
             <a href="#contact" style={{
               display: 'inline-flex', alignItems: 'center', gap: 4,
-              background: '#FF5C1A', color: '#fff',
+              background: '#FF8048', color: '#fff',
               fontSize: 13, fontWeight: 500,
               padding: '8px 16px', borderRadius: 999,
               textDecoration: 'none',
             }}>
-              Contact <ArrowUpRight size={13} />
+              Contact <FaIcon icon="fa-arrow-up-right" size={12} />
             </a>
             <button
               onClick={() => setMobileOpen(o => !o)}
               style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1a1a1a', padding: 4, display: 'flex' }}
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileOpen ? <FaIcon icon="fa-xmark" size={22} /> : <FaIcon icon="fa-bars" size={20} />}
             </button>
           </div>
         </div>
@@ -936,7 +931,7 @@ export default function Navbar() {
               position: 'fixed',
               top: HEIGHT,
               left: 0, right: 0, zIndex: 998,
-              background: darkMode ? '#0a0a0a' : '#F5F2EE',
+              background: '#ffffff',
               borderBottom: darkMode ? '1px solid rgba(255,255,255,0.07)' : '1px solid rgba(0,0,0,0.06)',
               overflowY: 'auto',
               maxHeight: '80vh',
@@ -978,8 +973,8 @@ export default function Navbar() {
 /* ─── NavLink atom ───────────────────────────────────────────────── */
 function NavLink({ label, menu, href, isActive, onEnter, onLeave, darkMode }) {
   const [hovered, setHovered] = useState(false);
-  const color  = (hovered || isActive) ? '#FF5C1A' : darkMode ? 'rgba(255,255,255,0.85)' : '#1a1a1a';
-  const ulLine = (hovered || isActive) ? '2px solid #FF5C1A' : '2px solid transparent';
+  const color  = (hovered || isActive) ? '#FF8048' : darkMode ? 'rgba(255,255,255,0.85)' : '#1a1a1a';
+  const ulLine = (hovered || isActive) ? '2px solid #FF8048' : '2px solid transparent';
 
   const baseStyle = {
     fontSize: 15, fontWeight: 400, color,
@@ -1011,25 +1006,3 @@ function NavLink({ label, menu, href, isActive, onEnter, onLeave, darkMode }) {
   );
 }
 
-/* ─── Dark mode toggle ───────────────────────────────────────────── */
-function DarkToggle({ dark, onToggle }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <button
-      onClick={onToggle}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        width: 36, height: 36, borderRadius: '50%',
-        border: `1px solid ${hovered ? '#FF5C1A' : '#ccc'}`,
-        background: 'transparent', cursor: 'pointer',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: hovered ? '#FF5C1A' : '#555',
-        transition: 'border-color 0.2s, color 0.2s',
-      }}
-      aria-label="Toggle dark mode"
-    >
-      {dark ? <Sun size={15} /> : <Moon size={15} />}
-    </button>
-  );
-}

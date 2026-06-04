@@ -1,7 +1,6 @@
 /* Real contact data from professionalsofttech.com */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 const projectTypes = ['Web Development', 'Mobile App', 'AI & Machine Learning', 'UI/UX Design', 'DevOps & Cloud', 'Other'];
 
@@ -25,7 +24,7 @@ export default function Contact() {
 
             {/* Left panel */}
             <div className="lg:col-span-5 bg-[#fafafa] p-8 md:p-12 lg:p-16 flex flex-col justify-between border-r border-[#e5e5e5] relative overflow-hidden">
-              <div className="absolute top-[15%] -left-[10%] w-52 h-52 bg-[#1557FF]/8 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-[15%] -left-[10%] w-52 h-52 bg-[#FF8048]/8 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10 flex flex-col gap-5">
                 <p className="section-label">START YOUR PROJECT</p>
@@ -40,10 +39,10 @@ export default function Contact() {
 
               <div className="relative z-10 flex flex-col gap-3 mt-10">
                 <a href="mailto:enquiry@professionalsofttech.com"
-                  className="text-[#1557FF] hover:text-[#0A3DD6] transition-colors font-semibold text-base flex items-center gap-2">
-                  enquiry@professionalsofttech.com <ArrowRight className="w-4 h-4" />
+                  className="text-[#FF8048] hover:text-[#F26A2E] transition-colors font-semibold text-base flex items-center gap-2">
+                  enquiry@professionalsofttech.com <i className="fa-solid fa-arrow-right w-4 h-4" />
                 </a>
-                <a href="tel:+14135294901" className="text-[#0a0a0a] font-semibold text-base hover:text-[#1557FF] transition-colors">
+                <a href="tel:+14135294901" className="text-[#0a0a0a] font-semibold text-base hover:text-[#FF8048] transition-colors">
                   +1 (413) 529-4901
                 </a>
                 <span className="text-[#a3a3a3] text-xs font-semibold">USA · Singapore · India — serving clients globally.</span>
@@ -64,7 +63,7 @@ export default function Contact() {
                           <button key={type} type="button" onClick={() => setForm({ ...form, projectType: type })}
                             className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-300 cursor-pointer ${
                               form.projectType === type
-                                ? 'bg-[#0a0a0a] text-white border-transparent shadow-sm'
+                                ? 'bg-[#FF8048] text-white border-transparent shadow-sm'
                                 : 'bg-white border-[#e5e5e5] text-[#737373] hover:border-[#d4d4d4] hover:text-[#0a0a0a]'
                             }`}
                           >{type}</button>
@@ -83,7 +82,7 @@ export default function Contact() {
                           <input id={f.id} type={f.type} required value={f.val}
                             onChange={e => setForm({ ...form, [f.key]: e.target.value })}
                             placeholder={f.ph}
-                            className="bg-[#fafafa] border border-[#e5e5e5] focus:border-[#1557FF]/50 rounded-xl px-4 py-3.5 text-[#0a0a0a] placeholder-[#d4d4d4] focus:outline-none transition-all duration-300 text-sm focus:bg-white focus:shadow-sm"
+                            className="bg-[#fafafa] border border-[#e5e5e5] focus:border-[#FF8048]/50 rounded-xl px-4 py-3.5 text-[#0a0a0a] placeholder-[#d4d4d4] focus:outline-none transition-all duration-300 text-sm focus:bg-white focus:shadow-sm"
                           />
                         </div>
                       ))}
@@ -95,7 +94,7 @@ export default function Contact() {
                       <textarea id="message" required rows="4" value={form.message}
                         onChange={e => setForm({ ...form, message: e.target.value })}
                         placeholder="Tell us about your project scope, technology needs, and timeline…"
-                        className="bg-[#fafafa] border border-[#e5e5e5] focus:border-[#1557FF]/50 rounded-xl px-4 py-3.5 text-[#0a0a0a] placeholder-[#d4d4d4] focus:outline-none transition-all duration-300 text-sm resize-none focus:bg-white focus:shadow-sm"
+                        className="bg-[#fafafa] border border-[#e5e5e5] focus:border-[#FF8048]/50 rounded-xl px-4 py-3.5 text-[#0a0a0a] placeholder-[#d4d4d4] focus:outline-none transition-all duration-300 text-sm resize-none focus:bg-white focus:shadow-sm"
                       />
                     </div>
 
@@ -103,7 +102,7 @@ export default function Contact() {
                     <motion.button
                       whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                       type="submit" disabled={loading}
-                      className="mt-1 w-full bg-[#0a0a0a] hover:bg-[#1557FF] text-white font-semibold py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50 cursor-pointer shadow-lg shadow-black/10 text-sm"
+                      className="mt-1 w-full bg-[#FF8048] hover:bg-[#F26A2E] text-white font-semibold py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50 cursor-pointer shadow-lg shadow-black/10 text-sm"
                     >
                       {loading ? 'Sending…' : 'Send Message ✈'}
                     </motion.button>
@@ -117,7 +116,7 @@ export default function Contact() {
                     transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                     className="flex flex-col items-center justify-center text-center py-14"
                   >
-                    <CheckCircle2 className="w-14 h-14 text-green-500 mb-5" />
+                    <i className="fa-solid fa-circle-check w-14 h-14 text-green-500 mb-5" />
                     <h4 className="text-2xl font-extrabold text-[#0a0a0a] mb-2 tracking-tight">Message Received!</h4>
                     <p className="text-[#737373] text-sm max-w-sm leading-relaxed mb-8">
                       Thank you for reaching out. A senior partner from Professional Softtech will contact you within 24 hours.

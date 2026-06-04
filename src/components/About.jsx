@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Rocket, Eye } from 'lucide-react';
 
 function StatCounter({ value, suffix = "" }) {
   const [count, setCount] = useState(0);
@@ -70,7 +69,7 @@ export default function About() {
             className="lg:col-span-7 flex flex-col gap-6"
           >
             <motion.div variants={itemVariants}>
-              <span className="text-xs font-black tracking-widest uppercase text-[#6c2bd9] mb-3 block">
+              <span className="text-xs font-black tracking-widest uppercase text-[#FF8048] mb-3 block">
                 ABOUT US
               </span>
               <h2 className="text-3xl md:text-5xl font-black font-display text-[#0f0f0f] tracking-tight leading-tight">
@@ -89,8 +88,8 @@ export default function About() {
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 mt-4">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-purple-50 rounded-2xl text-[#6c2bd9] border border-purple-100/50 flex-shrink-0">
-                  <Rocket className="w-5 h-5" />
+                <div className="p-3 bg-purple-50 rounded-2xl text-[#FF8048] border border-purple-100/50 flex-shrink-0">
+                  <i className="fa-solid fa-rocket w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 mb-1">Our Mission</h4>
@@ -99,7 +98,7 @@ export default function About() {
               </div>
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-blue-50 rounded-2xl text-blue-600 border border-blue-100/50 flex-shrink-0">
-                  <Eye className="w-5 h-5" />
+                  <i className="fa-solid fa-eye w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 mb-1">Our Vision</h4>
@@ -118,11 +117,11 @@ export default function About() {
             className="lg:col-span-5 flex flex-col gap-6 w-full"
           >
             {/* Stat Card 1 */}
-            <div className="p-8 rounded-2xl bg-white border border-gray-200 flex flex-col justify-center shadow-md shadow-purple-50/20 relative overflow-hidden group hover:border-[#6c2bd9]/20 transition-all duration-300">
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 flex flex-col justify-center shadow-md shadow-purple-50/20 relative overflow-hidden group hover:border-[#FF8048]/20 transition-all duration-300">
               <span className="text-4xl md:text-5xl font-black font-display text-gray-950 mb-2">
                 <StatCounter value="50" suffix="+" />
               </span>
-              <span className="text-sm font-bold uppercase tracking-wider text-[#6c2bd9] mb-1">PROJECTS DELIVERED</span>
+              <span className="text-sm font-bold uppercase tracking-wider text-[#FF8048] mb-1">PROJECTS DELIVERED</span>
               <span className="text-xs text-gray-400 font-medium">Across fintech, commerce, and diagnostics</span>
             </div>
 
