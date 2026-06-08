@@ -9,7 +9,7 @@ const cards = [
     stats: ['50+ agents live', '6mo avg payback', '15 countries'],
     tag: 'AI Focus',
     visual: (
-      <div className="mt-5 bg-[#F7F8FA] border border-[#ececec] rounded-xl p-4 flex flex-col gap-2">
+      <div className="mt-5 bg-[#F7F4EC] border border-[#ececec] rounded-xl p-4 flex flex-col gap-2">
         {['Analysing data stream…', 'Tool call: fetch_crm()', 'Action: send_report ✓'].map((l, i) => (
           <div key={i} className="flex items-center gap-2.5">
             <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${i === 2 ? 'bg-green-500' : 'bg-[#FF8048] animate-pulse'}`} />
@@ -27,7 +27,7 @@ const cards = [
     stats: ['99.99% uptime', '40% cost savings', '200+ deploys/mo'],
     tag: 'Infrastructure',
     visual: (
-      <div className="mt-5 bg-[#F7F8FA] border border-[#ececec] rounded-xl p-4 font-mono text-[11px] leading-relaxed">
+      <div className="mt-5 bg-[#F7F4EC] border border-[#ececec] rounded-xl p-4 font-mono text-[11px] leading-relaxed">
         <div className="text-[#4D4D4D]">$ aws deploy --env prod</div>
         <div className="text-green-600">→ health: 100%</div>
         <div className="text-green-600">→ latency: 12ms ✓</div>
@@ -59,7 +59,7 @@ const cards = [
     stats: ['$1B+ decisions', '200+ dashboards', 'Real-time'],
     tag: 'Analytics',
     visual: (
-      <div className="mt-5 bg-[#F7F8FA] border border-[#ececec] rounded-xl p-4 flex items-end gap-1 h-20">
+      <div className="mt-5 bg-[#F7F4EC] border border-[#ececec] rounded-xl p-4 flex items-end gap-1 h-20">
         {[35, 55, 42, 72, 88, 60, 95].map((h, i) => (
           <div key={i} className="flex-1 rounded-t"
             style={{ height: `${h}%`, background: i === 6 ? 'linear-gradient(to top,#FF8048,#FFB066)' : `rgba(255,128,72,${0.15 + i * 0.04})` }} />
@@ -75,7 +75,7 @@ const cards = [
     stats: ['10M+ daily hits', '98+ Lighthouse', '35+ integrations'],
     tag: 'Web Tech',
     visual: (
-      <div className="mt-5 bg-[#F7F8FA] border border-[#ececec] rounded-xl p-4 font-mono text-[11px] leading-relaxed">
+      <div className="mt-5 bg-[#F7F4EC] border border-[#ececec] rounded-xl p-4 font-mono text-[11px] leading-relaxed">
         <div className="text-[#4D4D4D]">const app = build('next');</div>
         <div className="text-[#4D4D4D]">app.deploy();</div>
         <div className="text-green-600">// → live ✓</div>
@@ -87,7 +87,7 @@ const cards = [
 
 export default function FeaturedScroll() {
   return (
-    <section className="py-20 bg-[#F7F8FA] border-b border-[#ececec] overflow-hidden">
+    <section className="py-20 bg-[#F7F4EC] border-b border-[#ececec] overflow-hidden">
 
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
@@ -135,7 +135,7 @@ export default function FeaturedScroll() {
             <div>
               <div className="border-t border-[#ececec] pt-4 mb-4 flex flex-wrap gap-2">
                 {card.stats.map(s => (
-                  <span key={s} className="text-[10px] font-semibold text-[#4D4D4D] bg-[#F7F8FA] border border-[#ececec] px-2.5 py-1 rounded-full">
+                  <span key={s} className="text-[10px] font-semibold text-[#4D4D4D] bg-[#F7F4EC] border border-[#ececec] px-2.5 py-1 rounded-full">
                     {s}
                   </span>
                 ))}

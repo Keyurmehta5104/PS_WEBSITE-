@@ -1,74 +1,86 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { SERVICES } from '../data/services';
 
-const services = [
-  { name: 'AI Web Application Development', desc: 'Scalable, intelligent web platforms that automate workflows and surface real-time insights.', tech: ['React', 'Next.js', 'LangChain'], icon: 'fa-globe' },
-  { name: 'AI Mobile App Development',      desc: 'iOS, Android, and cross-platform apps that adapt to user behaviour with on-device intelligence.', tech: ['Flutter', 'React Native', 'Swift'], icon: 'fa-mobile-screen-button' },
-  { name: 'AI Agents at Work',              desc: 'Autonomous agents that act like digital teammates — handling tasks, analysing data, making decisions.', tech: ['Agents', 'RAG', 'LangGraph'], icon: 'fa-microchip' },
-  { name: 'Custom AI Development',          desc: 'Bespoke ML models for predictive analytics, NLP, and computer vision tuned to your KPIs.', tech: ['PyTorch', 'TensorFlow', 'MLOps'], icon: 'fa-microchip' },
-  { name: 'UI/UX Consultancy',              desc: 'Human-centred design for AI-powered applications that users understand and trust instantly.', tech: ['Figma', 'Prototyping', 'Research'], icon: 'fa-palette' },
-  { name: 'DevOps & Cloud',                 desc: 'CI/CD, Kubernetes, and AWS/GCP/Azure engineering for production AI workloads at any scale.', tech: ['K8s', 'Terraform', 'AWS'], icon: 'fa-cloud' },
-  { name: 'QA & Automation',                desc: 'Automated and manual QA — including evaluation harnesses for AI models and production agents.', tech: ['Selenium', 'Appium', 'Cypress'], icon: 'fa-file-circle-check' },
-  { name: 'IoT & Edge AI',                  desc: 'Connected device ecosystems with on-device inference, edge computing, and intelligent automation.', tech: ['MQTT', 'Edge', 'Embedded'], icon: 'fa-wifi' },
-];
+const ORANGE = '#FF8048';
+const INK = '#1a1a1a';
+const BODY = '#6a6a6a';
+
+/* ── Single service card — icon-less, editorial style ───────────── */
+function ServiceCard({ svc, i }) {
+  const [h, setH] = useState(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ delay: (i % 4) * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      style={{ height: '100%' }}
+    >
+      <Link
+        to={`/services/${svc.slug}`}
+        onMouseEnter={() => setH(true)}
+        onMouseLeave={() => setH(false)}
+        style={{
+          display: 'flex', flexDirection: 'column', height: '100%', textDecoration: 'none',
+          background: '#fff', borderRadius: 16,
+          border: `1px solid ${h ? 'rgba(255,128,72,0.45)' : '#ececec'}`,
+          boxShadow: h ? '0 26px 52px -28px rgba(242,106,46,0.45)' : '0 14px 32px -28px rgba(20,20,30,0.3)',
+          padding: 'clamp(26px,2.4vw,34px) clamp(22px,2vw,30px)', minHeight: 300,
+          transform: h ? 'translateY(-5px)' : 'none',
+          transition: 'border-color .3s, box-shadow .3s, transform .3s',
+        }}
+      >
+        <h3 style={{ fontSize: 'clamp(20px,1.6vw,23px)', fontWeight: 700, color: INK, margin: '0 0 14px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+          {svc.name}
+        </h3>
+        <p style={{ fontSize: 15, color: BODY, lineHeight: 1.6, margin: '0 0 22px', flexGrow: 1 }}>
+          {svc.short}
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 24 }}>
+          {svc.tech.map(t => (
+            <span key={t} style={{
+              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+              fontSize: 11, fontWeight: 600, color: '#8a8a8a',
+              background: '#fff', border: '1px solid #e5e5e5', padding: '5px 11px', borderRadius: 7,
+            }}>{t}</span>
+          ))}
+        </div>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600, color: ORANGE }}>
+          View More
+          <i className="fa-solid fa-arrow-right" style={{ fontSize: 12, transform: h ? 'translateX(3px)' : 'none', transition: 'transform .3s' }} />
+        </span>
+      </Link>
+    </motion.div>
+  );
+}
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-32 bg-white border-b border-[#e5e5e5]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="services" style={{ background: '#F7F4EC', padding: 'clamp(70px,8vw,120px) 6%' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
-          <div>
-            <p className="section-label mb-4">OUR SERVICES</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0a] tracking-[-0.03em] leading-[1.07]">
-              Full-cycle software<br />engineering services.
+        {/* Header — editorial heading + supporting copy */}
+        <div className="services-head" style={{ display: 'grid', gridTemplateColumns: '1.4fr 0.9fr', gap: 48, alignItems: 'end', marginBottom: 'clamp(40px,5vw,66px)' }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
+            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: ORANGE, margin: '0 0 18px' }}>What We Ship</p>
+            <h2 style={{ fontSize: 'clamp(34px,5vw,68px)', fontWeight: 800, color: INK, lineHeight: 1.0, letterSpacing: '-0.035em', margin: 0 }}>
+              Web &amp; Mobile{' '}
+              <span style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontStyle: 'italic', fontWeight: 500, letterSpacing: '-0.01em' }}>Development</span>{' '}
+              Services.
             </h2>
-          </div>
-          <p className="text-[#525252] text-base leading-relaxed max-w-md">
-            From tech consulting and architecture to agile development,
-            DevOps, and production audits — we do it all under one roof.
-          </p>
+          </motion.div>
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            style={{ fontSize: 16, color: '#5a5a5a', lineHeight: 1.7, margin: 0 }}>
+            A <strong style={{ color: INK, fontWeight: 600 }}>full-service web and app development</strong> team building beautiful, efficiently coded products since 2010 — for clients across 17 countries.
+          </motion.p>
         </div>
 
         {/* Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
-        >
-          {services.map(svc => {
-            return (
-              <motion.div
-                key={svc.name}
-                variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.5 } } }}
-                className="group bg-white border border-[#e5e5e5] rounded-2xl p-6 flex flex-col gap-4 cursor-pointer hover:border-[#FF8048]/30 hover:shadow-lg hover:shadow-[#FF8048]/5 transition-all duration-300 relative overflow-hidden"
-              >
-                <div className="w-10 h-10 rounded-xl bg-[#FFF1E9] text-[#FF8048] flex items-center justify-center flex-shrink-0 group-hover:bg-[#FF8048] group-hover:text-white transition-all duration-300">
-                  <i className={`fa-solid ${svc.icon} w-4.5 h-4.5`} />
-                </div>
-                <div className="flex flex-col flex-grow gap-2">
-                  <h3 className="font-bold text-[#0a0a0a] text-[14px] leading-snug group-hover:text-[#FF8048] transition-colors">
-                    {svc.name}
-                  </h3>
-                  <p className="text-[#737373] text-xs leading-relaxed flex-grow">{svc.desc}</p>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {svc.tech.map(t => (
-                    <span key={t} className="text-[10px] font-semibold text-[#a3a3a3] bg-[#fafafa] border border-[#e5e5e5] px-2 py-0.5 rounded-full">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-1 text-xs font-semibold text-[#a3a3a3] group-hover:text-[#FF8048] transition-colors">
-                  View More <i className="fa-solid fa-arrow-right w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF8048] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </motion.div>
-            );
-          })}
-        </motion.div>
+        <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+          {SERVICES.map((svc, i) => <ServiceCard key={svc.slug} svc={svc} i={i} />)}
+        </div>
 
       </div>
     </section>

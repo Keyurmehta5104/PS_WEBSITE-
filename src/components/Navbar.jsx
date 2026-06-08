@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 /* ── Font Awesome icon helper (drop-in for the old lucide API) ──── */
 function FaIcon({ icon, size = 16, color, style }) {
@@ -359,22 +360,16 @@ const MENUS = {
   industries: {
     cols: 4,
     items: [
-      { icon: 'fa-heart-pulse',     name: 'Healthcare' },
-      { icon: 'fa-scale-balanced',  name: 'Legal' },
-      { icon: 'fa-truck-fast',      name: 'Logistics' },
-      { icon: 'fa-building-columns', name: 'Finance' },
-      { icon: 'fa-graduation-cap',  name: 'Education' },
-      { icon: 'fa-store',           name: 'Retail' },
-      { icon: 'fa-tv',              name: 'Media & OTT' },
-      { icon: 'fa-shield-halved',   name: 'Insurance' },
-      { icon: 'fa-plane',           name: 'Travel' },
-      { icon: 'fa-bag-shopping',    name: 'E-Commerce' },
-      { icon: 'fa-industry',        name: 'Manufacturing' },
-      { icon: 'fa-helmet-safety',   name: 'Construction' },
-      { icon: 'fa-trophy',          name: 'Sports' },
-      { icon: 'fa-car',             name: 'Automotive' },
-      { icon: 'fa-house',           name: 'Real Estate' },
-      { icon: 'fa-wifi',            name: 'IT & Telecom' },
+      { icon: 'fa-graduation-cap',  name: 'Education',          slug: 'education' },
+      { icon: 'fa-users-gear',      name: 'Human Resources',    slug: 'human-resources' },
+      { icon: 'fa-house',           name: 'Real Estate',        slug: 'real-estate' },
+      { icon: 'fa-bag-shopping',    name: 'E-Commerce',         slug: 'e-commerce' },
+      { icon: 'fa-heart-pulse',     name: 'Healthcare',         slug: 'healthcare' },
+      { icon: 'fa-share-nodes',     name: 'Social Networking',  slug: 'social-networking' },
+      { icon: 'fa-plane',           name: 'Travel & Hospitality', slug: 'travel-hospitality' },
+      { icon: 'fa-truck-fast',      name: 'Logistics',          slug: 'logistics' },
+      { icon: 'fa-rocket',          name: 'Startups',           slug: 'startups' },
+      { icon: 'fa-car',             name: 'Automobile',         slug: 'automobile' },
     ],
     promo2: [
       { bg: '#FDE8F0', label: 'NAMES YOU ALREADY KNOW', title: 'Our Partners in Growth', desc: 'Deep domain expertise across every vertical.' },
@@ -397,7 +392,7 @@ const MENUS = {
 function PSLogo({ collapsed }) {
   return (
     <a
-      href="#"
+      href="/"
       style={{
         display: 'flex', alignItems: 'center',
         textDecoration: 'none', flexShrink: 0,
@@ -482,7 +477,7 @@ function DropdownCard({ menuKey, darkMode }) {
             {menu.items.map(({ icon, name, desc }) => (
               <a
                 key={name}
-                href={name === 'Contact' ? '#contact' : '#about'}
+                href={name === 'Contact' ? '/#contact' : '/about'}
                 style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '12px 14px', borderRadius: 12, textDecoration: 'none', transition: 'background 0.15s' }}
                 onMouseEnter={e => e.currentTarget.style.background = hoverBg}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
@@ -521,8 +516,8 @@ function DropdownCard({ menuKey, darkMode }) {
       {(menu.cols === 4 && !menu.single) && (
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px 12px', marginBottom: menu.promo2 ? 20 : 0 }}>
-            {menu.items.map(({ icon, name }) => (
-              <a key={name} href="#industries"
+            {menu.items.map(({ icon, name, slug }) => (
+              <a key={name} href={slug ? `/industries/${slug}` : '/industries'}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 10px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
                 onMouseEnter={e => e.currentTarget.style.background = hoverBg}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
@@ -733,6 +728,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const darkMode = false; // light theme only — dark mode removed
   const leaveTimer = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -758,7 +754,7 @@ export default function Navbar() {
   /* ── Dynamic styles ── */
   const BG = darkMode
     ? scrolled ? 'rgba(10,10,10,0.96)' : '#0a0a0a'
-    : scrolled ? 'rgba(255,255,255,0.92)' : '#F7F7F8';
+    : scrolled ? 'rgba(255,255,255,0.92)' : '#F7F4EC';
   const SHADOW = scrolled
     ? darkMode ? '0 2px 24px rgba(0,0,0,0.5)' : '0 2px 24px rgba(0,0,0,0.07)'
     : 'none';
@@ -863,6 +859,12 @@ export default function Navbar() {
                 href={href}
                 isActive={activeMenu === menu}
                 darkMode={darkMode}
+                onClick={
+                  menu === 'about' ? () => { setActiveMenu(null); navigate('/about'); }
+                  : menu === 'services' ? () => { setActiveMenu(null); navigate('/services'); }
+                  : menu === 'industries' ? () => { setActiveMenu(null); navigate('/industries'); }
+                  : undefined
+                }
                 onEnter={() => {
                   clearTimeout(leaveTimer.current);
                   if (menu) setActiveMenu(menu);
@@ -957,7 +959,7 @@ export default function Navbar() {
                 </div>
               ))}
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', paddingTop: 20, display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {[['#work','Work'],['#about','About'],['#process','How We Work']].map(([href,lbl]) => (
+                {[['/#work','Work'],['/about','About'],['/#process','How We Work']].map(([href,lbl]) => (
                   <a key={lbl} href={href} onClick={() => setMobileOpen(false)}
                     style={{ fontSize: 15, fontWeight: 500, color: '#1a1a1a', textDecoration: 'none' }}>{lbl}</a>
                 ))}
@@ -971,7 +973,7 @@ export default function Navbar() {
 }
 
 /* ─── NavLink atom ───────────────────────────────────────────────── */
-function NavLink({ label, menu, href, isActive, onEnter, onLeave, darkMode }) {
+function NavLink({ label, menu, href, isActive, onEnter, onLeave, onClick, darkMode }) {
   const [hovered, setHovered] = useState(false);
   const color  = (hovered || isActive) ? '#FF8048' : darkMode ? 'rgba(255,255,255,0.85)' : '#1a1a1a';
   const ulLine = (hovered || isActive) ? '2px solid #FF8048' : '2px solid transparent';
@@ -989,6 +991,7 @@ function NavLink({ label, menu, href, isActive, onEnter, onLeave, darkMode }) {
   return menu ? (
     <button
       style={baseStyle}
+      onClick={onClick}
       onMouseEnter={() => { setHovered(true); onEnter(); }}
       onMouseLeave={() => { setHovered(false); onLeave(); }}
     >

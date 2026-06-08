@@ -17,7 +17,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-white">
+    <section id="contact" className="py-24 md:py-32 bg-[#F7F4EC]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="border border-[#e5e5e5] rounded-3xl overflow-hidden shadow-xl shadow-black/[0.04]">
           <div className="grid grid-cols-1 lg:grid-cols-12">

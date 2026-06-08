@@ -8,7 +8,7 @@ export default function ClientLogos() {
   const list = [...logos, ...logos, ...logos];
 
   return (
-    <section className="py-14 bg-white border-b border-[#ececec] overflow-hidden">
+    <section className="py-14 bg-[#F7F4EC] border-b border-[#ece7da] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10 text-center">
         <p className="text-[10px] font-semibold tracking-[0.15em] text-[#a3a3a3] uppercase">
           Trusted by the world's boldest brands &nbsp;·&nbsp; 14+ Years &nbsp;·&nbsp; 500+ Clients

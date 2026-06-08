@@ -7,7 +7,7 @@ const ORANGE_DARK = '#F26A2E';
 const ORANGE_GRADIENT = 'linear-gradient(100deg,#FF8048 0%,#FF6A2E 55%,#EB2F5B 120%)';
 const INK = '#272a33';
 const BODY = '#4D4D4D';
-const PAGE = '#F7F7F8';
+const PAGE = '#F7F4EC';
 
 /* ── Cycling headline word ──────────────────────────────────────── */
 const CYCLE_WORDS = ['Reality.', 'Products.', 'Platforms.', 'Businesses.', 'Solutions.'];
@@ -60,15 +60,24 @@ function LogoChip({ file, alt, onOrange = false }) {
 }
 
 /* ── Reusable arrow-circle for card corners ─────────────────────── */
-function ArrowCircle({ variant = 'outline' }) {
-  const styles = {
+/* Default: neutral circle + right arrow (→). Hover: circle turns orange
+   and the arrow tilts up to point up-right (↗). */
+function ArrowCircle({ variant = 'outline', hovered = false }) {
+  const base = {
     outline: { border: '1px solid #e3e3e3', background: '#fff', color: '#777' },
-    solid: { border: 'none', background: ORANGE, color: '#fff', boxShadow: '0 6px 14px rgba(255,128,72,0.45)' },
-    ghost: { border: '1px solid rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.2)', color: '#fff' },
-  }[variant];
+    ghost: { border: '1px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.18)', color: '#fff' },
+  }[variant] || { border: '1px solid #e3e3e3', background: '#fff', color: '#777' };
+
+  let styles = base;
+  if (hovered) {
+    styles = variant === 'ghost'
+      ? { border: 'none', background: '#fff', color: ORANGE_DARK, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }
+      : { border: 'none', background: ORANGE, color: '#fff', boxShadow: '0 6px 16px rgba(255,128,72,0.5)' };
+  }
   return (
-    <div style={{ width: 30, height: 30, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, ...styles }}>
-      <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 12 }} />
+    <div style={{ width: 30, height: 30, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s', ...styles }}>
+      <i className="fa-solid fa-arrow-right"
+        style={{ fontSize: 12, transition: 'transform 0.3s ease', transform: hovered ? 'rotate(-45deg)' : 'rotate(0deg)' }} />
     </div>
   );
 }
@@ -86,14 +95,21 @@ const cardTech = { display: 'block', fontSize: 11, color: '#9a9a9a', margin: 0, 
 
 /* ── Card 01: E-Commerce — FEATURED (orange) ────────────────────── */
 function Card01() {
+  const [hovered, setHovered] = useState(false);
   return (
-    <motion.div {...CARD_ENTER(0.30)}
+    <motion.a href="#services" {...CARD_ENTER(0.30)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        background: 'linear-gradient(145deg,#FF9A5E 0%,#FF8048 50%,#F26A2E 100%)',
+        textDecoration: 'none',
+        background: hovered
+          ? 'linear-gradient(145deg,#FFA672 0%,#FF8B54 50%,#F47436 100%)'
+          : 'linear-gradient(145deg,#FF9A5E 0%,#FF8048 50%,#F26A2E 100%)',
         borderRadius: 16, padding: '24px 26px', position: 'relative', overflow: 'hidden',
         cursor: 'pointer', height: '100%', width: '100%',
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-        boxShadow: '0 22px 46px -20px rgba(242,106,46,0.6)',
+        boxShadow: hovered ? '0 26px 52px -18px rgba(242,106,46,0.7)' : '0 22px 46px -20px rgba(242,106,46,0.6)',
+        transition: 'background 0.35s ease, box-shadow 0.35s ease',
       }}>
       <div style={{ position: 'absolute', top: -70, right: -50, width: 240, height: 240, borderRadius: '50%', background: 'rgba(255,255,255,0.16)', filter: 'blur(36px)' }} />
 
@@ -102,7 +118,7 @@ function Card01() {
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 10, fontWeight: 600, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', background: 'rgba(255,255,255,0.2)', padding: '5px 12px', borderRadius: 999 }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff' }} />01 · Featured
           </span>
-          <ArrowCircle variant="ghost" />
+          <ArrowCircle variant="ghost" hovered={hovered} />
         </div>
         <h3 style={{ fontSize: 'clamp(22px,1.9vw,28px)', fontWeight: 700, color: '#fff', margin: '0 0 8px', lineHeight: 1.1, letterSpacing: '-0.02em' }}>E-Commerce Platforms</h3>
         <span style={{ display: 'block', fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 1.55, maxWidth: 360, marginBottom: 16 }}>
@@ -123,24 +139,31 @@ function Card01() {
           </div>
         ))}
       </div>
-    </motion.div>
+    </motion.a>
   );
 }
 
 /* ── Light card shell ───────────────────────────────────────────── */
-function LogoCard({ delay, tag, title, tech, logos, accentArrow = false }) {
+function LogoCard({ delay, tag, title, tech, logos, href = '#' }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <motion.div {...CARD_ENTER(delay)}
+    <motion.a href={href} {...CARD_ENTER(delay)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        background: '#fff', borderRadius: 16, padding: '18px 20px',
-        border: '1px solid #ececec', cursor: 'pointer',
+        textDecoration: 'none',
+        background: hovered ? 'linear-gradient(150deg,#FFF6F0 0%,#FFEAD9 100%)' : '#fff',
+        borderRadius: 16, padding: '18px 20px',
+        border: `1px solid ${hovered ? 'rgba(255,128,72,0.45)' : '#ececec'}`, cursor: 'pointer',
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden',
-        height: '100%', width: '100%', boxShadow: '0 16px 36px -28px rgba(20,20,30,0.35)',
+        height: '100%', width: '100%',
+        boxShadow: hovered ? '0 22px 44px -22px rgba(242,106,46,0.4)' : '0 16px 36px -28px rgba(20,20,30,0.35)',
+        transition: 'background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
       }}>
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <span style={cardTag}>{tag}</span>
-          <ArrowCircle variant={accentArrow ? 'solid' : 'outline'} />
+          <span style={{ ...cardTag, color: hovered ? ORANGE_DARK : cardTag.color, transition: 'color 0.35s ease' }}>{tag}</span>
+          <ArrowCircle variant="outline" hovered={hovered} />
         </div>
         <h4 style={cardTitle}>{title}</h4>
       </div>
@@ -150,7 +173,7 @@ function LogoCard({ delay, tag, title, tech, logos, accentArrow = false }) {
       </div>
 
       <span style={cardTech}>{tech}</span>
-    </motion.div>
+    </motion.a>
   );
 }
 
@@ -216,7 +239,9 @@ export default function Hero() {
               The software partner to{' '}
               <strong style={{ color: INK, fontWeight: 600 }}>500+ enterprises</strong>{' '}
               across <strong style={{ color: INK, fontWeight: 600 }}>17+ countries</strong>{' '}
-              and every industry — since 2010. Today we ship{' '}
+              and every industry — since 2010.
+              <br />
+              Today we ship{' '}
               <span style={{ color: ORANGE_DARK, fontWeight: 600, whiteSpace: 'nowrap' }}>
                 {typedPhrase}
                 <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }}
@@ -259,42 +284,80 @@ export default function Hero() {
             }}>
             <div style={{ gridColumn: '1 / 3', gridRow: '1', display: 'flex' }}><Card01 /></div>
             <div style={{ gridColumn: '3', gridRow: '1', display: 'flex' }}>
-              <LogoCard delay={0.4} tag="02 · Mobile" title="Mobile Apps" tech="iOS · Android · Flutter" accentArrow
+              <LogoCard delay={0.4} href="#services" tag="02 · Mobile" title="Mobile Apps" tech="iOS · Android · Flutter"
                 logos={[{ file: 'apple.svg', alt: 'iOS' }, { file: 'android.svg', alt: 'Android' }, { file: 'flutter.svg', alt: 'Flutter' }]} />
             </div>
             <div style={{ gridColumn: '1', gridRow: '2', display: 'flex' }}>
-              <LogoCard delay={0.48} tag="03 · Web" title="Custom Web Dev" tech="Laravel · React · WordPress"
+              <LogoCard delay={0.48} href="#services" tag="03 · Web" title="Custom Web Dev" tech="Laravel · React · WordPress"
                 logos={[{ file: 'laravel.svg', alt: 'Laravel' }, { file: 'react.svg', alt: 'React' }, { file: 'wordpress.svg', alt: 'WordPress' }]} />
             </div>
             <div style={{ gridColumn: '2', gridRow: '2', display: 'flex' }}>
-              <LogoCard delay={0.56} tag="04 · Design" title="UI/UX Design" tech="Figma · Sketch · Framer"
+              <LogoCard delay={0.56} href="#services" tag="04 · Design" title="UI/UX Design" tech="Figma · Sketch · Framer"
                 logos={[{ file: 'figma.svg', alt: 'Figma' }, { file: 'sketch.svg', alt: 'Sketch' }, { file: 'framer.svg', alt: 'Framer' }]} />
             </div>
             <div style={{ gridColumn: '3', gridRow: '2', display: 'flex' }}>
-              <LogoCard delay={0.64} tag="05 · Teams" title="Dedicated Teams" tech="Next.js · Node · TypeScript"
+              <LogoCard delay={0.64} href="#services" tag="05 · Teams" title="Dedicated Teams" tech="Next.js · Node · TypeScript"
                 logos={[{ file: 'nextjs.svg', alt: 'Next.js' }, { file: 'nodejs.svg', alt: 'Node.js' }, { file: 'typescript.svg', alt: 'TypeScript' }]} />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Stats strip ── */}
-      <div style={{ borderTop: '1px solid #efefef', borderBottom: '1px solid #efefef', background: '#fff' }}>
-        <div style={{ maxWidth: 1500, margin: '0 auto', padding: '30px 4%', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }} className="hero-stats">
-          {[
-            { num: '500+', label: '01 / Projects Completed' },
-            { num: '15+', label: '02 / Years Active' },
-            { num: '30+', label: '03 / Expert Engineers' },
-            { num: '17+', label: '04 / Countries Served' },
-          ].map((s, i) => (
-            <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-              style={{ borderLeft: i > 0 ? '1px solid #eee' : 'none', paddingLeft: i > 0 ? 34 : 0 }}>
-              <p style={{ fontSize: 38, fontWeight: 800, color: INK, margin: 0, letterSpacing: '-0.03em' }}>{s.num}</p>
-              <p style={{ fontSize: 9.5, fontWeight: 600, color: '#a7a7a7', letterSpacing: '0.12em', textTransform: 'uppercase', margin: '5px 0 0' }}>{s.label}</p>
+      {/* ── Impact section ── */}
+      <ImpactSection />
+    </>
+  );
+}
+
+/* ── Impact: editorial headline + big-number list ───────────────── */
+const IMPACT_STATS = [
+  { num: '500+', label: 'Projects Delivered', note: 'Shipped to production', accent: false },
+  { num: '15+', label: 'Years of Work', note: 'Crafting software since 2010', accent: true },
+  { num: '30+', label: 'Experts Under One Roof', note: 'Developers, designers & PMs', accent: false },
+  { num: '17', label: 'Countries Served', note: 'Clients across the globe', accent: true },
+  { num: '18+', label: 'Industries', note: 'Deep vertical expertise', accent: false },
+  { num: '100%', label: 'Honest Pricing', note: 'No hidden charges, ever', accent: true },
+];
+
+function ImpactSection() {
+  return (
+    <section style={{ background: '#F7F4EC', borderTop: '1px solid #ececec', padding: 'clamp(64px,7vw,110px) 6%' }}>
+      <div className="impact-grid" style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
+
+        {/* Left — editorial headline */}
+        <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          style={{ position: 'sticky', top: 110 }}>
+          <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#9a9a9a', margin: '0 0 22px' }}>— Impact</p>
+          <h2 style={{ fontSize: 'clamp(40px,4.6vw,68px)', fontWeight: 800, color: INK, lineHeight: 1.02, letterSpacing: '-0.04em', margin: 0 }}>
+            Built to deliver.
+          </h2>
+          <h2 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontStyle: 'italic', fontWeight: 500, fontSize: 'clamp(40px,4.6vw,68px)', color: INK, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '2px 0 0' }}>
+            Trusted to last.
+          </h2>
+          <p style={{ fontSize: 16, color: BODY, lineHeight: 1.7, maxWidth: 380, margin: '28px 0 0' }}>
+            Since 2010 we've shipped <span style={{ color: ORANGE_DARK, fontWeight: 600 }}>500+ projects</span> for clients across 17 countries — on time, on budget, and built to scale.
+          </p>
+        </motion.div>
+
+        {/* Right — big-number list */}
+        <div>
+          {IMPACT_STATS.map((s, i) => (
+            <motion.div key={s.label}
+              initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }}
+              transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              style={{ padding: 'clamp(20px,2.4vw,30px) 0', borderTop: `1px solid ${i === 0 ? 'transparent' : s.accent ? 'rgba(242,106,46,0.55)' : 'rgba(20,20,30,0.12)'}` }}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
+                <div>
+                  <p style={{ fontSize: 'clamp(44px,5.2vw,76px)', fontWeight: 800, color: INK, margin: 0, lineHeight: 0.92, letterSpacing: '-0.04em' }}>{s.num}</p>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: '#9a9a9a', letterSpacing: '0.14em', textTransform: 'uppercase', margin: '14px 0 0' }}>{s.label}</p>
+                </div>
+                <p style={{ fontSize: 15, color: '#6a6a6a', margin: 0, textAlign: 'right', maxWidth: 240 }}>{s.note}</p>
+              </div>
             </motion.div>
           ))}
         </div>
+
       </div>
-    </>
+    </section>
   );
 }

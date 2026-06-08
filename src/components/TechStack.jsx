@@ -1,98 +1,86 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/* Real stack from professionalsofttech.com.
+   icon: "/logos/x.svg" → <img>, otherwise a Font Awesome class. */
+const ICON = {
+  // Front End
+  'React Js': '/logos/react.svg', 'Redux': 'fa-solid fa-layer-group', 'TypeScript': '/logos/typescript.svg',
+  'Vue.js': 'fa-brands fa-vuejs', 'Material UI': 'fa-solid fa-cube', 'HTML5': 'fa-brands fa-html5',
+  'Bootstrap': 'fa-brands fa-bootstrap', 'CSS3': 'fa-brands fa-css3-alt', 'jQuery': 'fa-solid fa-code', 'SASS': 'fa-brands fa-sass',
+  // Mobile
+  'Android': 'fa-brands fa-android', 'iOS': 'fa-brands fa-apple', 'React Native': 'fa-brands fa-react',
+  'Flutter': '/logos/flutter.svg', 'Swift': 'fa-brands fa-swift', 'Objective-C': 'fa-solid fa-code',
+  'Kotlin': 'fa-solid fa-mobile-screen-button', 'Java': 'fa-brands fa-java', 'Ionic': 'fa-solid fa-bolt',
+  // Backend
+  'Laravel': '/logos/laravel.svg', 'CodeIgniter': 'fa-solid fa-fire', 'YII': 'fa-solid fa-code',
+  'CakePHP': 'fa-solid fa-cake-candles', 'Node.js': '/logos/nodejs.svg',
+  // Database
+  'MariaDB': 'fa-solid fa-database', 'MySQL': 'fa-solid fa-database', 'MongoDB': 'fa-solid fa-leaf',
+  'Firebase': 'fa-solid fa-fire', 'PostgreSQL': 'fa-solid fa-database',
+  // CMS & E-Commerce
+  'WordPress': '/logos/wordpress.svg', 'WooCommerce': '/logos/woocommerce.svg', 'Shopify': '/logos/shopify.svg',
+  'Shopify Plus': '/logos/shopify.svg', 'Magento': 'fa-solid fa-cart-shopping', 'OpenCart': 'fa-solid fa-cart-shopping', 'PrestaShop': 'fa-solid fa-bag-shopping',
+  // Cloud & DevOps
+  'AWS': 'fa-brands fa-aws', 'Google Cloud': 'fa-brands fa-google', 'Jenkins': 'fa-brands fa-jenkins',
+  'DigitalOcean': 'fa-brands fa-digital-ocean', 'Heroku': 'fa-solid fa-server', 'Docker': 'fa-brands fa-docker',
+};
+const getIcon = (name) => ICON[name] || 'fa-solid fa-cube';
+
 const tabs = [
-  {
-    id: 'ai', label: 'AI Technologies',
-    techs: [
-      { name: 'OpenAI',       dot: '#10a37f' }, { name: 'Anthropic',    dot: '#d97706' },
-      { name: 'Gemini',       dot: '#4285f4' }, { name: 'Llama',        dot: '#7c3aed' },
-      { name: 'Mistral',      dot: '#ef4444' }, { name: 'TensorFlow',   dot: '#ff6f00' },
-      { name: 'PyTorch',      dot: '#ee4c2c' }, { name: 'LangChain',    dot: '#1c7ed6' },
-      { name: 'LangGraph',    dot: '#FF8048' }, { name: 'Vertex AI',    dot: '#4285f4' },
-      { name: 'Pinecone',     dot: '#00b4d8' }, { name: 'Weaviate',     dot: '#00c4a1' },
-      { name: 'Hugging Face', dot: '#fbbf24' }, { name: 'OpenCV',       dot: '#5c3317' },
-      { name: 'n8n',          dot: '#ea4b71' }, { name: 'Cognitive AI', dot: '#0078d4' },
-    ],
-  },
-  {
-    id: 'frontend', label: 'Front End',
-    techs: [
-      { name: 'React',        dot: '#61dafb' }, { name: 'Next.js',      dot: '#000000' },
-      { name: 'Vue.js',       dot: '#41b883' }, { name: 'TypeScript',   dot: '#3178c6' },
-      { name: 'Redux',        dot: '#764abc' }, { name: 'Tailwind CSS', dot: '#06b6d4' },
-      { name: 'GraphQL',      dot: '#e10098' }, { name: 'Material UI',  dot: '#007FFF' },
-      { name: 'SASS',         dot: '#cc6699' }, { name: 'Bootstrap',    dot: '#7952b3' },
-    ],
-  },
-  {
-    id: 'mobile', label: 'Mobile',
-    techs: [
-      { name: 'Flutter',      dot: '#54c5f8' }, { name: 'React Native', dot: '#61dafb' },
-      { name: 'Swift',        dot: '#f05138' }, { name: 'Kotlin',       dot: '#7f52ff' },
-      { name: 'iOS',          dot: '#555555' }, { name: 'Android',      dot: '#3DDC84' },
-      { name: 'Ionic',        dot: '#3880ff' }, { name: 'Dart',         dot: '#00b4ab' },
-    ],
-  },
-  {
-    id: 'backend', label: 'Backend',
-    techs: [
-      { name: 'Node.js',      dot: '#339933' }, { name: 'Python',       dot: '#3776ab' },
-      { name: 'Laravel',      dot: '#ff2d20' }, { name: 'Django',       dot: '#0c4b33' },
-      { name: 'FastAPI',      dot: '#009688' }, { name: 'PHP',          dot: '#8892BF' },
-      { name: 'Go',           dot: '#00add8' }, { name: '.NET',         dot: '#512bd4' },
-      { name: 'CodeIgniter',  dot: '#dd4814' }, { name: 'WordPress',    dot: '#21759b' },
-      { name: 'Shopify',      dot: '#95bf47' }, { name: 'WooCommerce',  dot: '#7f54b3' },
-    ],
-  },
-  {
-    id: 'database', label: 'Database',
-    techs: [
-      { name: 'PostgreSQL',   dot: '#336791' }, { name: 'MySQL',        dot: '#4479a1' },
-      { name: 'MongoDB',      dot: '#47a248' }, { name: 'Redis',        dot: '#dc382d' },
-      { name: 'Firebase',     dot: '#ffca28' }, { name: 'MariaDB',      dot: '#003545' },
-      { name: 'Supabase',     dot: '#3ecf8e' }, { name: 'DynamoDB',     dot: '#ff9900' },
-    ],
-  },
-  {
-    id: 'devops', label: 'Infra & DevOps',
-    techs: [
-      { name: 'AWS',          dot: '#ff9900' }, { name: 'Google Cloud', dot: '#4285f4' },
-      { name: 'DigitalOcean', dot: '#0080ff' }, { name: 'Heroku',       dot: '#430098' },
-      { name: 'Docker',       dot: '#2496ed' }, { name: 'Kubernetes',   dot: '#326ce5' },
-      { name: 'Jenkins',      dot: '#d24939' }, { name: 'GitHub',       dot: '#24292e' },
-      { name: 'Terraform',    dot: '#7b42bc' }, { name: 'Vercel',       dot: '#000000' },
-    ],
-  },
+  { id: 'frontend', label: 'Front End', techs: ['React Js', 'Redux', 'TypeScript', 'Vue.js', 'Material UI', 'HTML5', 'Bootstrap', 'CSS3', 'jQuery', 'SASS'] },
+  { id: 'mobile', label: 'Mobile', techs: ['Android', 'iOS', 'React Native', 'Flutter', 'Swift', 'Objective-C', 'Kotlin', 'Java', 'Ionic'] },
+  { id: 'backend', label: 'Backend', techs: ['Laravel', 'CodeIgniter', 'YII', 'CakePHP', 'Node.js'] },
+  { id: 'database', label: 'Database', techs: ['MariaDB', 'MySQL', 'MongoDB', 'Firebase', 'PostgreSQL'] },
+  { id: 'cms', label: 'CMS & E-Commerce', techs: ['WordPress', 'WooCommerce', 'Shopify', 'Shopify Plus', 'Magento', 'OpenCart', 'PrestaShop'] },
+  { id: 'devops', label: 'Infra & DevOps', techs: ['AWS', 'Google Cloud', 'Jenkins', 'DigitalOcean', 'Heroku', 'Docker'] },
 ];
 
+function TechTile({ name, i }) {
+  const icon = getIcon(name);
+  const isImg = icon.startsWith('/');
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: i * 0.025, duration: 0.4 }}
+      className="group flex flex-col items-center justify-center gap-3 bg-white border border-[#ece7da] rounded-2xl p-5 min-h-[120px] hover:border-[#FF8048]/45 hover:-translate-y-1 hover:shadow-[0_18px_36px_-24px_rgba(242,106,46,0.4)] transition-all duration-300"
+    >
+      <div className="h-9 flex items-center justify-center">
+        {isImg
+          ? <img src={icon} alt={name} className="w-8 h-8 object-contain" loading="lazy" />
+          : <i className={icon} style={{ fontSize: 28, color: '#1a1a1a' }} />}
+      </div>
+      <span className="font-mono text-xs font-semibold text-[#7a7a7a] text-center leading-tight">{name}</span>
+    </motion.div>
+  );
+}
+
 export default function TechStack() {
-  const [active, setActive] = useState('ai');
+  const [active, setActive] = useState('frontend');
   const current = tabs.find(t => t.id === active);
 
   return (
-    <section className="py-24 md:py-32 bg-white border-b border-[#e5e5e5]">
+    <section className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ece7da]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="section-label mb-4">TECHNOLOGY ECOSYSTEM</p>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0a] tracking-[-0.03em] leading-[1.07]">
-            The AI & engineering stack behind<br />
-            <span className="text-gradient">intelligent applications.</span>
+            The engineering stack behind<br />
+            <span className="text-gradient">every great product.</span>
           </h2>
         </div>
 
         {/* Tab bar */}
-        <div className="flex flex-wrap gap-2 justify-center mb-12">
+        <div className="flex flex-wrap gap-1.5 justify-center mb-12 mx-auto w-fit max-w-full bg-white border border-[#ece7da] rounded-full p-1.5">
           {tabs.map(t => (
             <button
               key={t.id}
               onClick={() => setActive(t.id)}
-              className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer border ${
-                active === t.id
-                  ? 'bg-[#FF8048] text-white border-transparent shadow-md'
-                  : 'bg-white text-[#525252] border-[#e5e5e5] hover:border-[#d4d4d4] hover:text-[#0a0a0a]'
+              className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap ${
+                active === t.id ? 'bg-[#FF8048] text-white shadow-md' : 'text-[#6a6a6a] hover:text-[#0a0a0a]'
               }`}
             >
               {t.label}
@@ -100,7 +88,7 @@ export default function TechStack() {
           ))}
         </div>
 
-        {/* Pills */}
+        {/* Tiles */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
@@ -108,20 +96,9 @@ export default function TechStack() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25 }}
-            className="flex flex-wrap gap-3 justify-center"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3"
           >
-            {current?.techs.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.025 }}
-                className="flex items-center gap-2 px-5 py-2.5 bg-white border border-[#e5e5e5] rounded-full shadow-sm hover:border-[#FF8048]/30 hover:shadow-md transition-all duration-300 cursor-default"
-              >
-                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: t.dot }} />
-                <span className="font-semibold text-sm text-[#525252]">{t.name}</span>
-              </motion.div>
-            ))}
+            {current?.techs.map((name, i) => <TechTile key={name} name={name} i={i} />)}
           </motion.div>
         </AnimatePresence>
 

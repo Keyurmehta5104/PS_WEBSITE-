@@ -14,7 +14,7 @@ const awards = [
 
 export default function Awards() {
   return (
-    <section id="awards" className="py-20 bg-white border-b border-[#e5e5e5]">
+    <section id="awards" className="py-20 bg-[#F7F4EC] border-b border-[#ece7da]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Header */}

@@ -8,7 +8,7 @@ const features = [
 
 export default function Guarantee() {
   return (
-    <section className="py-20 bg-white border-b border-[#e5e5e5]">
+    <section className="py-20 bg-[#F7F4EC] border-b border-[#ece7da]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="rounded-3xl p-10 md:p-16 overflow-hidden relative" style={{ background: 'linear-gradient(135deg,#FF8048 0%,#F26A2E 100%)' }}>
 

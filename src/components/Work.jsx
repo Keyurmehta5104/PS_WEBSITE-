@@ -1,167 +1,113 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-const projects = [
-  {
-    id: 1, category: 'ENTERPRISE · FINTECH',
-    title: 'NovaPay Corporate Portal',
-    sub: 'Next-Gen Cross-Border Payment Gateway',
-    tags: ['React', 'Node.js', 'AWS'],
-    topColor: '#FF8048',
-    mockup: (
-      <div className="w-full h-full bg-white rounded-xl p-5 flex flex-col gap-4 group-hover:scale-[1.02] transition-transform duration-500 shadow-sm border border-[#f0f0f0]">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-blue-100 text-[#FF8048] flex items-center justify-center text-[10px] font-bold">N</div>
-            <span className="text-xs font-bold text-[#0a0a0a]">NovaPay</span>
-          </div>
-          <span className="text-[10px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full border border-green-200 font-bold">Active</span>
-        </div>
-        <div><span className="text-[10px] uppercase tracking-wider text-[#a3a3a3] font-semibold">Total Revenue</span>
-          <div className="text-2xl font-extrabold text-[#0a0a0a] tracking-tight">$142,384.50</div></div>
-        <div className="flex items-end gap-1 h-16">
-          {[30,50,40,70,88,60,95].map((h, i) => (
-            <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i===6 ? 'linear-gradient(to top,#FF8048,#FFB066)' : `rgba(21,87,255,${0.1+i*0.04})` }} />
-          ))}
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 2, category: 'E-COMMERCE · MOBILE',
-    title: 'ShopVibe Retail Platform',
-    sub: 'High-Performance Headless Storefront',
-    tags: ['Flutter', 'Next.js', 'AWS'],
-    topColor: '#0ea5e9',
-    mockup: (
-      <div className="w-full h-full bg-white rounded-xl p-5 flex flex-col gap-3 group-hover:scale-[1.02] transition-transform duration-500 shadow-sm border border-[#f0f0f0]">
-        <div className="flex justify-between items-center border-b border-[#f0f0f0] pb-2">
-          <span className="text-xs font-bold text-[#0a0a0a]">ShopVibe Store</span>
-          <span className="text-xs text-blue-500 font-bold">🛒 3 items</span>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          {[{e:'👟',p:'$129',c:'blue'},{e:'🎧',p:'$249',c:'cyan'}].map((p,i)=>(
-            <div key={i} className="bg-[#fafafa] rounded-lg p-2 border border-[#e5e5e5]">
-              <div className="w-full h-9 rounded-md bg-blue-50 flex items-center justify-center text-base mb-1.5">{p.e}</div>
-              <span className={`text-[9px] font-bold text-${p.c}-600`}>{p.p}.00</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 3, category: 'HEALTHCARE · AI/ML',
-    title: 'PulseAI Diagnostics',
-    sub: 'AI Vitals Dashboard & ML Monitor',
-    tags: ['Python', 'React', 'TensorFlow'],
-    topColor: '#10b981',
-    mockup: (
-      <div className="w-full h-full bg-white rounded-xl p-5 flex flex-col gap-3 group-hover:scale-[1.02] transition-transform duration-500 shadow-sm border border-[#f0f0f0]">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-xs font-bold text-[#0a0a0a]">PulseAI Vitals</span>
-          </div>
-          <span className="text-[9px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold border border-emerald-200">Normal</span>
-        </div>
-        <div className="flex items-center gap-3 bg-[#fafafa] p-2.5 rounded-lg border border-[#e5e5e5]">
-          <div><span className="text-[9px] text-[#a3a3a3] font-bold uppercase">Rate</span>
-            <div className="text-lg font-extrabold text-[#0a0a0a]">72 BPM</div></div>
-          <svg className="w-24 h-7 text-emerald-500" viewBox="0 0 100 30" fill="none">
-            <path d="M0 15H20L25 5L30 25L35 15H55L60 0L65 30L70 15H100" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-        <div className="flex justify-between text-[9px] text-[#a3a3a3] font-medium">
-          <span>Patient ID: #9204</span><span>Precision: 98.4%</span>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 4, category: 'LOGISTICS · AI',
-    title: 'TrackFlow Logistics AI',
-    sub: 'Intelligent Route Optimisation Engine',
-    tags: ['Python', 'Node.js', 'GCP'],
-    topColor: '#f59e0b',
-    mockup: (
-      <div className="w-full h-full bg-white rounded-xl p-5 flex flex-col gap-3 group-hover:scale-[1.02] transition-transform duration-500 shadow-sm border border-[#f0f0f0]">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold text-[#0a0a0a]">TrackFlow</span>
-          <span className="text-[9px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-bold border border-amber-200">12 Active Routes</span>
-        </div>
-        <div className="flex flex-col gap-2">
-          {['Route A → Delhi: 98% OTD','Route B → Mumbai: 94% OTD','Route C → Pune: 99% OTD'].map((r,i)=>(
-            <div key={i} className="flex items-center gap-2 bg-[#fafafa] p-2 rounded-lg border border-[#e5e5e5]">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-              <span className="text-[10px] font-semibold text-[#525252]">{r}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
-  },
+const serif = { fontFamily: 'Georgia, "Times New Roman", serif', fontStyle: 'italic', fontWeight: 500 };
+
+/* Real projects from professionalsofttech.com/portfolio.
+   Drop a screenshot in /public/work/<file>.jpg and set `image` to show it
+   instead of the coloured cover — e.g. image: '/work/culture-whisper.jpg'. */
+const CASES = [
+  { name: 'Culture Whisper', cat: 'Media & Arts', type: 'Web Platform', icon: 'fa-masks-theater', image: '',
+    desc: 'A members’ platform for discovering arts & culture events, with personalised recommendations.',
+    tech: ['Yii', 'Backbone.js', 'MySQL', 'Redis'], grad: ['#8B5CF6', '#6D28D9'] },
+  { name: 'MoneyAnswers', cat: 'Finance · E-Commerce', type: 'E-Commerce Platform', icon: 'fa-sack-dollar', image: '',
+    desc: 'A content-driven e-commerce platform with a secure Stripe checkout experience.',
+    tech: ['xCart', 'Stripe', 'MySQL'], grad: ['#10B981', '#047857'] },
+  { name: 'Plasticity Brain Centers', cat: 'Healthcare', type: 'Website', icon: 'fa-brain', image: '',
+    desc: 'A patient-facing website for a neurological rehabilitation clinic and its programs.',
+    tech: ['WordPress', 'MySQL', 'jQuery'], grad: ['#0EA5A4', '#0F766E'] },
+  { name: 'Echo', cat: 'On-Demand', type: 'Mobile App', icon: 'fa-comment-dots', image: '',
+    desc: 'A cross-platform mobile app with in-app payments and real-time messaging.',
+    tech: ['React Native', 'PayPal', 'Twilio'], grad: ['#FF9A5E', '#F26A2E'] },
+  { name: 'Udrivers', cat: 'Logistics', type: 'Mobile App', icon: 'fa-car-side', image: '',
+    desc: 'A driver & rider mobile app with live maps, tracking, and dispatch.',
+    tech: ['React Native', 'Google Maps', 'Twilio'], grad: ['#3B82F6', '#1D4ED8'] },
+  { name: 'KTPH', cat: 'Healthcare', type: 'Web Portal', icon: 'fa-hospital', image: '',
+    desc: 'A hospital web portal with secure Google authentication for staff and patients.',
+    tech: ['CodeIgniter', 'MySQL', 'Google Auth'], grad: ['#F97316', '#EA580C'] },
 ];
+
+function CaseCard({ c, i }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ delay: (i % 3) * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="h-full"
+    >
+      <div className="group h-full flex flex-col bg-white border border-[#ece7da] rounded-2xl overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(242,106,46,0.5)] transition-all duration-300 cursor-pointer">
+        {/* cover */}
+        <div className="relative h-44 md:h-48 overflow-hidden" style={{ background: `linear-gradient(140deg, ${c.grad[0]}, ${c.grad[1]})` }}>
+          {c.image ? (
+            <>
+              {/* real screenshot */}
+              <img src={c.image} alt={c.name} loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-[800ms] ease-out" />
+              {/* dark gradient so text stays readable */}
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 35%, transparent 55%, rgba(0,0,0,0.65) 100%)' }} />
+            </>
+          ) : (
+            <>
+              {/* dotted texture */}
+              <div className="absolute inset-0 opacity-20 group-hover:scale-110 transition-transform duration-700" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px)', backgroundSize: '15px 15px' }} />
+              {/* giant watermark icon */}
+              <i className={`fa-solid ${c.icon}`} style={{ position: 'absolute', right: 14, bottom: -6, fontSize: 104, color: 'rgba(255,255,255,0.22)' }} />
+            </>
+          )}
+          {/* shine sweep on hover */}
+          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[900ms] ease-out" style={{ background: 'linear-gradient(100deg, transparent 35%, rgba(255,255,255,0.3) 50%, transparent 65%)' }} />
+          {/* badges */}
+          <span className="absolute top-4 left-4 text-[10px] font-bold uppercase tracking-wider text-white bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">{c.cat}</span>
+          <span className="absolute top-4 right-4 text-[10px] font-semibold text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">{c.type}</span>
+          {/* name */}
+          <h3 className="absolute left-5 bottom-4 right-5 text-white font-extrabold text-xl md:text-2xl tracking-[-0.02em] leading-tight drop-shadow-md">{c.name}</h3>
+        </div>
+        {/* body */}
+        <div className="p-6 flex flex-col flex-grow">
+          <p className="text-[#737373] text-sm leading-relaxed flex-grow">{c.desc}</p>
+          <div className="flex flex-wrap gap-1.5 my-4">
+            {c.tech.map(t => (
+              <span key={t} className="font-mono text-[10px] font-semibold text-[#8a8a8a] bg-[#faf7f0] border border-[#ece7da] px-2 py-0.5 rounded-md">{t}</span>
+            ))}
+          </div>
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF8048] group-hover:text-[#F26A2E] transition-colors">
+            View case study <i className="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform" style={{ fontSize: 12 }} />
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Work() {
   return (
-    <section id="work" className="py-24 md:py-32 bg-[#fafafa] border-b border-[#e5e5e5]">
+    <section id="work" className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ece7da]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
           <div>
-            <p className="section-label mb-4">CASE STUDIES</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0a] tracking-[-0.03em] leading-[1.07]">
-              AI in the Wild —<br />
-              <span className="text-gradient">Real Outcomes.</span>
+            <p className="section-label mb-4" style={{ color: '#FF8048' }}>CASE STUDIES</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0a] tracking-[-0.035em] leading-[1.04]">
+              Real clients,<br /><span style={{ ...serif, color: '#FF8048' }}>real products.</span>
             </h2>
           </div>
-          <p className="text-[#525252] max-w-md text-base leading-relaxed">
-            From automated logistics to AI-native fintech — explore how we ship production-grade solutions that move the metrics.
+          <p className="text-[#5a5a5a] max-w-md leading-relaxed">
+            From healthcare portals to on-demand apps and e-commerce platforms — a look at what we've shipped for clients across 17 countries.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((proj, idx) => (
-            <motion.div
-              key={proj.id}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: idx * 0.07 }}
-              className="bg-white rounded-2xl border border-[#e5e5e5] overflow-hidden flex flex-col group cursor-pointer hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-300"
-              style={{ borderTop: `3px solid ${proj.topColor}` }}
-            >
-              <div className="w-full aspect-[16/9] bg-[#fafafa] p-6 flex items-center justify-center border-b border-[#e5e5e5]">
-                {proj.mockup}
-              </div>
-              <div className="p-6 flex flex-col gap-2.5">
-                <span className="text-[10px] font-black tracking-widest uppercase" style={{ color: proj.topColor }}>{proj.category}</span>
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-base font-bold text-[#0a0a0a] group-hover:text-[#FF8048] transition-colors leading-snug">{proj.title}</h3>
-                    <p className="text-sm text-[#737373] mt-0.5">{proj.sub}</p>
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-[#fafafa] border border-[#e5e5e5] flex items-center justify-center text-[#737373] group-hover:bg-[#FF8048] group-hover:text-white group-hover:border-transparent transition-all duration-300 flex-shrink-0">
-                    <i className="fa-solid fa-arrow-up-right w-4 h-4" />
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {proj.tags.map(t => (
-                    <span key={t} className="text-xs font-semibold bg-[#fafafa] border border-[#e5e5e5] px-3 py-1 rounded-full text-[#737373]">{t}</span>
-                  ))}
-                </div>
-                <span className="text-[10px] font-black uppercase tracking-widest mt-1" style={{ color: proj.topColor }}>CASE STUDY →</span>
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {CASES.map((c, i) => <CaseCard key={c.name} c={c} i={i} />)}
         </div>
 
-        <div className="flex justify-center mt-12">
-          <a href="#contact" className="text-sm font-semibold text-[#FF8048] hover:text-[#F26A2E] transition-colors flex items-center gap-1 group">
-            View all case studies <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
-          </a>
+        {/* CTA */}
+        <div className="text-center mt-14">
+          <Link to="/#contact" className="inline-flex items-center gap-2 bg-[#0a0a0a] text-white text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-[#FF8048] transition-colors duration-300">
+            Start your project <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 12 }} />
+          </Link>
         </div>
 
       </div>

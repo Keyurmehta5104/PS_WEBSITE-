@@ -62,7 +62,7 @@ function Item({ faq }) {
 
 export default function FAQ() {
   return (
-    <section className="py-24 md:py-32 bg-[#fafafa] border-b border-[#e5e5e5]">
+    <section className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ece7da]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
 

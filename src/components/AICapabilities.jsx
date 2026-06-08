@@ -17,7 +17,7 @@ const caps = [
 
 export default function AICapabilities() {
   return (
-    <section className="py-24 md:py-32 bg-[#F7F8FA] border-b border-[#ececec]">
+    <section className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ececec]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Header */}
