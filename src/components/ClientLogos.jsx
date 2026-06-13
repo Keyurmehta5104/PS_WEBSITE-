@@ -36,8 +36,9 @@ export default function ClientLogos() {
       </div>
 
       {/* Single marquee row */}
-      <div className="flex w-full overflow-hidden select-none">
-        <div className="flex gap-20 items-center whitespace-nowrap animate-marquee-left hover:[animation-play-state:paused]">
+      <div className="w-full overflow-hidden select-none">
+        <div className="animate-marquee-left hover:[animation-play-state:paused]"
+          style={{ display: 'flex', gap: '5rem', alignItems: 'center', width: 'max-content' }}>
           {list.map(({ file, name }, i) => (
             <img
               key={i}
