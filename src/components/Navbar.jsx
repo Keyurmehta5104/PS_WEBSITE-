@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 /* ── Font Awesome icon helper (drop-in for the old lucide API) ──── */
 function FaIcon({ icon, size = 16, color, style }) {
@@ -389,42 +390,56 @@ const MENUS = {
 };
 
 /* ─── Logo using actual PS brand image ───────────────────────────── */
-function PSLogo({ collapsed }) {
+function PSLogo({ collapsed, darkMode }) {
+  const imgH = collapsed ? 34 : 42;
+
+  /* In dark mode: clip the PNG to show only the colorful icon (~40px),
+     then render white HTML text beside it — no filter, no colour shift. */
+  if (darkMode) {
+    return (
+      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 9, textDecoration: 'none', flexShrink: 0 }}>
+        {/* Icon only — clip the logo PNG to the icon portion */}
+        <div style={{ width: imgH, height: imgH, overflow: 'hidden', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+          <img
+            src="/ps-logo.png"
+            alt="Professional Soft-Tech icon"
+            style={{ height: imgH, width: 'auto', maxWidth: 'none', display: 'block', flexShrink: 0 }}
+          />
+        </div>
+
+        {/* White HTML text — hidden when collapsed (pill nav already small) */}
+        {!collapsed && (
+          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+            <span style={{
+              fontFamily: 'var(--font-sans, Poppins, sans-serif)',
+              fontSize: 13.5, fontWeight: 800, color: '#ffffff',
+              letterSpacing: '0.06em', textTransform: 'uppercase',
+            }}>Professional<sup style={{ fontSize: 7, verticalAlign: 'super', fontWeight: 600, opacity: 0.7 }}>®</sup></span>
+            <span style={{
+              fontFamily: 'var(--font-sans, Poppins, sans-serif)',
+              fontSize: 13.5, fontWeight: 800, color: '#ffffff',
+              letterSpacing: '0.06em', textTransform: 'uppercase',
+            }}>Soft-Tech</span>
+          </div>
+        )}
+      </a>
+    );
+  }
+
+  /* Light mode: original image, full width clip behaviour */
   return (
-    <a
-      href="/"
-      style={{
+    <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+      <div style={{
+        overflow: 'hidden',
+        maxWidth: collapsed ? '36px' : '260px',
+        height: imgH,
+        transition: 'max-width 0.4s cubic-bezier(0.16,1,0.3,1), height 0.3s ease',
         display: 'flex', alignItems: 'center',
-        textDecoration: 'none', flexShrink: 0,
-        gap: 0,
-      }}
-    >
-      {/*
-        Strategy: show the full logo image always, but clip its container width.
-        The PS logo has the icon on the LEFT — so clipping to ~36px shows only the icon.
-        maxWidth animates smoothly from full → icon-only on scroll.
-      */}
-      <div
-        style={{
-          overflow: 'hidden',
-          maxWidth: collapsed ? '36px' : '260px',
-          height: collapsed ? '34px' : '42px',
-          transition: 'max-width 0.4s cubic-bezier(0.16,1,0.3,1), height 0.3s ease',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      }}>
         <img
           src="/ps-logo.png"
           alt="Professional Soft-Tech"
-          style={{
-            height: collapsed ? '34px' : '42px',
-            width: 'auto',
-            maxWidth: 'none',
-            display: 'block',
-            flexShrink: 0,
-            transition: 'height 0.3s ease',
-          }}
+          style={{ height: imgH, width: 'auto', maxWidth: 'none', display: 'block', flexShrink: 0, transition: 'height 0.3s ease' }}
         />
       </div>
     </a>
@@ -721,12 +736,46 @@ function DropdownCard({ menuKey, darkMode }) {
   );
 }
 
+/* ─── Theme toggle button (reused in both navbars) ──────────────── */
+function ThemeToggle({ darkMode, onToggle, size = 36 }) {
+  return (
+    <motion.button
+      onClick={onToggle}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.92 }}
+      title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label="Toggle dark mode"
+      style={{
+        width: size, height: size, borderRadius: '50%', flexShrink: 0,
+        border: darkMode ? '1px solid rgba(255,255,255,0.18)' : '1px solid rgba(0,0,0,0.11)',
+        background: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.04)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'pointer', color: darkMode ? '#f0ede6' : '#1a1a1a',
+        transition: 'background 0.25s, border-color 0.25s, color 0.25s',
+      }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.i
+          key={darkMode ? 'sun' : 'moon'}
+          initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
+          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+          exit={{ opacity: 0, rotate: 30, scale: 0.7 }}
+          transition={{ duration: 0.18 }}
+          className={darkMode ? 'fa-solid fa-sun' : 'fa-regular fa-moon'}
+          style={{ fontSize: 14 }}
+          aria-hidden="true"
+        />
+      </AnimatePresence>
+    </motion.button>
+  );
+}
+
 /* ─── Main Navbar ────────────────────────────────────────────────── */
 export default function Navbar() {
   const [scrolled,   setScrolled]   = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const darkMode = false; // light theme only — dark mode removed
+  const { dark: darkMode, toggle } = useTheme();
   const leaveTimer = useRef(null);
   const navigate = useNavigate();
 
@@ -751,17 +800,8 @@ export default function Navbar() {
     leaveTimer.current = setTimeout(() => setActiveMenu(null), 180);
   };
 
-  /* ── Dynamic styles ── */
-  const BG = darkMode
-    ? scrolled ? 'rgba(10,10,10,0.96)' : '#0a0a0a'
-    : scrolled ? 'rgba(255,255,255,0.92)' : '#F7F4EC';
-  const SHADOW = scrolled
-    ? darkMode ? '0 2px 24px rgba(0,0,0,0.5)' : '0 2px 24px rgba(0,0,0,0.07)'
-    : 'none';
-  const BORDER = scrolled
-    ? darkMode ? '1px solid rgba(255,255,255,0.07)' : '1px solid rgba(0,0,0,0.07)'
-    : '1px solid transparent';
-  const HEIGHT = scrolled ? 58 : 70;
+  const HEIGHT = 70;
+  const dropdownTop = scrolled ? 74 : HEIGHT + 6;
   const linkClr = darkMode ? 'rgba(255,255,255,0.8)' : '#1a1a1a';
 
   return (
@@ -802,7 +842,7 @@ export default function Navbar() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              paddingTop: HEIGHT + 6,
+              paddingTop: dropdownTop,
             }}
           >
             {/* This inner div is the only interactive zone */}
@@ -821,105 +861,199 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* ── Navbar ── */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0,
-        zIndex: 1000,
-        background: BG,
-        boxShadow: SHADOW,
-        borderBottom: BORDER,
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-        transition: 'box-shadow 0.35s ease, border-color 0.35s ease, height 0.35s ease',
-      }}>
-        <div style={{
-          maxWidth: '100%',
-          margin: '0 auto',
-          padding: '0 5%',
-          height: HEIGHT,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          transition: 'height 0.3s ease',
-        }}>
-
-          {/* ── Logo ── */}
-          <PSLogo collapsed={scrolled} />
-
-          {/* ── Desktop nav links ── */}
-          <div
-            className="hidden lg:flex items-center"
-            style={{ gap: 36, height: '100%' }}
+      {/* ── Full-width navbar — only shown when at top of page ── */}
+      <AnimatePresence>
+        {!scrolled && (
+          <motion.nav
+            key="full-nav"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            style={{
+              position: 'fixed', top: 0, left: 0, right: 0,
+              zIndex: 1000,
+              background: darkMode ? '#0a0a0a' : '#F7F4EC',
+              transition: 'background 0.3s ease',
+            }}
           >
-            {NAV_ITEMS.map(({ label, menu, href }) => (
-              <NavLink
-                key={label}
-                label={label}
-                menu={menu}
-                href={href}
-                isActive={activeMenu === menu}
-                darkMode={darkMode}
-                onClick={
-                  menu === 'about' ? () => { setActiveMenu(null); navigate('/about'); }
-                  : menu === 'services' ? () => { setActiveMenu(null); navigate('/services'); }
-                  : menu === 'industries' ? () => { setActiveMenu(null); navigate('/industries'); }
-                  : undefined
-                }
-                onEnter={() => {
-                  clearTimeout(leaveTimer.current);
-                  if (menu) setActiveMenu(menu);
-                  else setActiveMenu(null);
-                }}
-                onLeave={() => {
-                  if (!menu) return;
-                  leaveTimer.current = setTimeout(() => setActiveMenu(null), 200);
-                }}
-              />
-            ))}
-          </div>
-
-          {/* ── Right actions ── */}
-          <div className="hidden lg:flex items-center" style={{ gap: 12 }}>
-            {/* Contact CTA */}
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 5,
-                background: '#FF8048', color: '#fff',
-                fontSize: 14, fontWeight: 500,
-                padding: '10px 22px', borderRadius: 999,
-                textDecoration: 'none',
-                transition: 'background 0.2s',
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = '#F26A2E'}
-              onMouseLeave={e => e.currentTarget.style.background = '#FF8048'}
-            >
-              Contact <FaIcon icon="fa-arrow-up-right" size={13} />
-            </motion.a>
-          </div>
-
-          {/* ── Mobile right ── */}
-          <div className="lg:hidden" style={{ alignItems: 'center', gap: 10 }}>
-            <a href="#contact" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 4,
-              background: '#FF8048', color: '#fff',
-              fontSize: 13, fontWeight: 500,
-              padding: '8px 16px', borderRadius: 999,
-              textDecoration: 'none',
+            <div style={{
+              maxWidth: '100%',
+              margin: '0 auto',
+              padding: '0 5%',
+              height: HEIGHT,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
             }}>
-              Contact <FaIcon icon="fa-arrow-up-right" size={12} />
-            </a>
-            <button
-              onClick={() => setMobileOpen(o => !o)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1a1a1a', padding: 4, display: 'flex' }}
+
+              {/* ── Logo ── */}
+              <PSLogo collapsed={false} darkMode={darkMode} />
+
+              {/* ── Desktop nav links ── */}
+              <div
+                className="hidden lg:flex items-center"
+                style={{ gap: 36, height: '100%' }}
+              >
+                {NAV_ITEMS.map(({ label, menu, href }) => (
+                  <NavLink
+                    key={label}
+                    label={label}
+                    menu={menu}
+                    href={href}
+                    isActive={activeMenu === menu}
+                    darkMode={darkMode}
+                    onClick={
+                      menu === 'about' ? () => { setActiveMenu(null); navigate('/about'); }
+                      : menu === 'services' ? () => { setActiveMenu(null); navigate('/services'); }
+                      : menu === 'industries' ? () => { setActiveMenu(null); navigate('/industries'); }
+                      : undefined
+                    }
+                    onEnter={() => {
+                      clearTimeout(leaveTimer.current);
+                      if (menu) setActiveMenu(menu);
+                      else setActiveMenu(null);
+                    }}
+                    onLeave={() => {
+                      if (!menu) return;
+                      leaveTimer.current = setTimeout(() => setActiveMenu(null), 200);
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* ── Right actions ── */}
+              <div className="hidden lg:flex items-center" style={{ gap: 10 }}>
+                <ThemeToggle darkMode={darkMode} onToggle={toggle} size={38} />
+                <motion.a
+                  href="#contact"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 5,
+                    background: '#FF8048', color: '#fff',
+                    fontSize: 14, fontWeight: 500,
+                    padding: '10px 22px', borderRadius: 999,
+                    textDecoration: 'none',
+                    transition: 'background 0.2s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#F26A2E'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#FF8048'}
+                >
+                  Contact <FaIcon icon="fa-arrow-up-right" size={13} />
+                </motion.a>
+              </div>
+
+              {/* ── Mobile right ── */}
+              <div className="lg:hidden" style={{ alignItems: 'center', gap: 10 }}>
+                <a href="#contact" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  background: '#FF8048', color: '#fff',
+                  fontSize: 13, fontWeight: 500,
+                  padding: '8px 16px', borderRadius: 999,
+                  textDecoration: 'none',
+                }}>
+                  Contact <FaIcon icon="fa-arrow-up-right" size={12} />
+                </a>
+                <button
+                  onClick={() => setMobileOpen(o => !o)}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1a1a1a', padding: 4, display: 'flex' }}
+                >
+                  {mobileOpen ? <FaIcon icon="fa-xmark" size={22} /> : <FaIcon icon="fa-bars" size={20} />}
+                </button>
+              </div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* ── Floating pill navbar — appears when user scrolls ── */}
+      <AnimatePresence>
+        {scrolled && (
+          <div
+            key="pill-wrapper"
+            style={{
+              position: 'fixed',
+              top: 14,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              zIndex: 1000,
+            }}
+          >
+            <motion.nav
+              initial={{ opacity: 0, y: -16, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                background: darkMode ? 'rgba(18,17,15,0.88)' : 'rgba(242,240,234,0.88)',
+                backdropFilter: 'blur(28px)',
+                WebkitBackdropFilter: 'blur(28px)',
+                borderRadius: 999,
+                boxShadow: darkMode ? '0 4px 32px rgba(0,0,0,0.5)' : '0 4px 32px rgba(0,0,0,0.11), 0 1px 0 rgba(255,255,255,0.7) inset',
+                border: darkMode ? '1px solid rgba(255,255,255,0.09)' : '1px solid rgba(0,0,0,0.09)',
+                height: 54,
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0 8px 0 10px',
+                gap: 0,
+                whiteSpace: 'nowrap',
+              }}
             >
-              {mobileOpen ? <FaIcon icon="fa-xmark" size={22} /> : <FaIcon icon="fa-bars" size={20} />}
-            </button>
+              {/* Logo icon only */}
+              <PSLogo collapsed={true} darkMode={darkMode} />
+
+              {/* Thin divider */}
+              <div style={{ width: 1, height: 20, background: 'rgba(0,0,0,0.12)', margin: '0 16px 0 12px', flexShrink: 0 }} />
+
+              {/* Nav links */}
+              <div className="hidden lg:flex items-center" style={{ gap: 26 }}>
+                {NAV_ITEMS.map(({ label, menu, href }) => (
+                  <NavLink
+                    key={label}
+                    label={label}
+                    menu={menu}
+                    href={href}
+                    isActive={activeMenu === menu}
+                    darkMode={darkMode}
+                    onClick={
+                      menu === 'about' ? () => { setActiveMenu(null); navigate('/about'); }
+                      : menu === 'services' ? () => { setActiveMenu(null); navigate('/services'); }
+                      : menu === 'industries' ? () => { setActiveMenu(null); navigate('/industries'); }
+                      : undefined
+                    }
+                    onEnter={() => { clearTimeout(leaveTimer.current); if (menu) setActiveMenu(menu); else setActiveMenu(null); }}
+                    onLeave={() => { if (!menu) return; leaveTimer.current = setTimeout(() => setActiveMenu(null), 200); }}
+                  />
+                ))}
+              </div>
+
+              {/* Right: dark-mode toggle + Contact */}
+              <div className="hidden lg:flex items-center" style={{ gap: 8, marginLeft: 22 }}>
+                <ThemeToggle darkMode={darkMode} onToggle={toggle} size={34} />
+
+                <motion.a
+                  href="#contact"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 5,
+                    background: '#FF8048', color: '#fff',
+                    fontSize: 13.5, fontWeight: 500,
+                    padding: '9px 20px', borderRadius: 999,
+                    textDecoration: 'none',
+                    transition: 'background 0.2s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#F26A2E'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#FF8048'}
+                >
+                  Contact <FaIcon icon="fa-arrow-up-right" size={12} />
+                </motion.a>
+              </div>
+            </motion.nav>
           </div>
-        </div>
-      </nav>
+        )}
+      </AnimatePresence>
 
       {/* ── Mobile drawer ── */}
       <AnimatePresence>

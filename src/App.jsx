@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import { ThemeProvider } from './context/ThemeContext';
+import { useEffect, useState } from 'react';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import Hero, { ImpactSection } from './components/Hero';
 import ClientLogos from './components/ClientLogos';
 import Services from './components/Services';
 import TechStack from './components/TechStack';
@@ -20,6 +20,20 @@ import ServiceDetail from './pages/ServiceDetail';
 import WhatWeDo from './pages/WhatWeDo';
 import IndustriesPage from './pages/Industries';
 import IndustryDetail from './pages/IndustryDetail';
+
+/* Thin gradient progress bar that tracks scroll depth */
+function ScrollProgress() {
+  const [pct, setPct] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      setPct(scrollHeight <= clientHeight ? 0 : (scrollTop / (scrollHeight - clientHeight)) * 100);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return <div className="scroll-progress" style={{ width: `${pct}%`, transition: 'width 0.1s linear' }} />;
+}
 
 /* Scrolls to #hash targets after route/hash changes (e.g. /#services).
    Re-snaps for a short window because the home page mounts heavy sections
@@ -56,8 +70,9 @@ function Home() {
   return (
     <>
       <Hero />
-      <Services />
       <ClientLogos />
+      <ImpactSection />
+      <Services />
       <TechStack />
       <Process />
       <Work />
@@ -71,12 +86,14 @@ function Home() {
   );
 }
 
-export default function App() {
+function AppInner() {
+  const { dark } = useTheme();
   return (
-    <ThemeProvider>
     <BrowserRouter>
     <ScrollToHash />
-    <div className="bg-[#F7F4EC] min-h-screen text-[#0f0f0f] relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
+    <ScrollProgress />
+    <div style={{ background: dark ? '#111110' : '#F7F4EC', minHeight: '100vh', color: dark ? '#e8e4dc' : '#0f0f0f', transition: 'background 0.3s, color 0.3s' }}
+      className="relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -89,6 +106,13 @@ export default function App() {
       <Footer />
     </div>
     </BrowserRouter>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
     </ThemeProvider>
   );
 }

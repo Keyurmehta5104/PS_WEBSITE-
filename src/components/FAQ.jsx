@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme, t } from '../context/ThemeContext';
 
 const faqs = [
   { q: 'Why choose Professional Softtech?',
@@ -28,20 +29,44 @@ const faqs = [
     a: 'Fill out the contact form or email enquiry@professionalsofttech.com or call +1 (413) 529-4901. We respond within 4 hours. A senior partner will schedule a scoping call and your project can begin within a week.' },
 ];
 
-function Item({ faq }) {
+function Item({ faq, i }) {
   const [open, setOpen] = useState(false);
+  const { dark } = useTheme();
+  const C = t(dark);
   return (
-    <div className="border-b border-[#e5e5e5] last:border-b-0">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.45, delay: (i % 6) * 0.05, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        borderBottom: `1px solid ${C.borderLight}`,
+        borderLeft: open ? '3px solid #FF8048' : '3px solid transparent',
+        paddingLeft: open ? 14 : 0,
+        transition: 'border-left-color 0.25s, padding-left 0.25s, border-bottom-color 0.3s',
+      }}
+    >
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-6 py-5 text-left group cursor-pointer"
       >
-        <span className="font-semibold text-[#0a0a0a] text-sm md:text-[15px] group-hover:text-[#FF8048] transition-colors leading-snug">
+        <span style={{ fontWeight: 600, color: open ? '#FF8048' : C.heading, fontSize: 15, transition: 'color 0.25s', lineHeight: 1.35 }}
+          className="group-hover:text-[#FF8048] transition-colors leading-snug">
           {faq.q}
         </span>
-        <span className="w-7 h-7 rounded-full bg-[#fafafa] border border-[#e5e5e5] flex items-center justify-center flex-shrink-0 text-[#737373] group-hover:bg-[#FF8048] group-hover:text-white group-hover:border-transparent transition-all duration-300">
-          {open ? <i className="fa-solid fa-minus w-3.5 h-3.5" /> : <i className="fa-solid fa-plus w-3.5 h-3.5" />}
-        </span>
+        <motion.span
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
+          style={{
+            background: open ? '#FF8048' : '#fafafa',
+            border: open ? '1.5px solid transparent' : '1.5px solid #e5e5e5',
+            color: open ? '#fff' : '#737373',
+            boxShadow: open ? '0 6px 16px -8px rgba(242,106,46,0.5)' : 'none',
+          }}
+        >
+          <i className="fa-solid fa-plus" style={{ fontSize: 11 }} />
+        </motion.span>
       </button>
       <AnimatePresence>
         {open && (
@@ -49,38 +74,46 @@ function Item({ faq }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-[#737373] text-sm leading-relaxed max-w-3xl">{faq.a}</p>
+            <p style={{ color: C.body }} className="pb-5 text-sm leading-relaxed max-w-3xl">{faq.a}</p>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
 export default function FAQ() {
+  const { dark } = useTheme();
+  const C = t(dark);
   return (
-    <section className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ece7da]">
+    <section style={{ background: C.bg, borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }} className="py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
 
           {/* Left sticky */}
-          <div className="lg:col-span-4 lg:sticky lg:top-28 h-fit">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 lg:sticky lg:top-28 h-fit"
+          >
             <p className="section-label mb-4">FAQ</p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0a0a0a] tracking-[-0.03em] leading-[1.07] mb-5">
+            <h2 style={{ color: C.heading }} className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.07] mb-5">
               Frequently asked questions.
             </h2>
-            <p className="text-[#737373] text-sm leading-relaxed">Can't find your answer? Reach out directly.</p>
+            <p style={{ color: C.body }} className="text-sm leading-relaxed">Can't find your answer? Reach out directly.</p>
             <a href="mailto:enquiry@professionalsofttech.com" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF8048] hover:text-[#F26A2E] transition-colors">
               enquiry@professionalsofttech.com →
             </a>
-          </div>
+          </motion.div>
 
           {/* Right accordion */}
           <div className="lg:col-span-8">
-            {faqs.map((f, i) => <Item key={i} faq={f} />)}
+            {faqs.map((f, i) => <Item key={i} faq={f} i={i} />)}
           </div>
 
         </div>

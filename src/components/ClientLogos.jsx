@@ -1,28 +1,50 @@
-/* Real clients from professionalsofttech.com */
+import { useTheme, t } from '../context/ThemeContext';
+
 const logos = [
-  'volkswagen', 'ebay', 'rakuten', 'toyota', 'trendmicro', 'qantas',
-  'bestBuy', 'saksfifthavenue', 'motul', 'scootAirlines', 'madbid', 'socialfix',
+  { file: 'volkswagen',    name: 'Volkswagen' },
+  { file: 'ebay',          name: 'eBay' },
+  { file: 'rakuten',       name: 'Rakuten' },
+  { file: 'toyota',        name: 'Toyota' },
+  { file: 'trendmicro',    name: 'Trend Micro' },
+  { file: 'qantas',        name: 'Qantas' },
+  { file: 'bestBuy',       name: 'Best Buy' },
+  { file: 'saksfifthavenue', name: 'Saks Fifth Avenue' },
+  { file: 'motul',         name: 'Motul' },
+  { file: 'scootAirlines', name: 'Scoot' },
+  { file: 'madbid',        name: 'Madbid' },
+  { file: 'socialfix',     name: 'Socialfix' },
 ];
 
 export default function ClientLogos() {
+  const { dark } = useTheme();
+  const C = t(dark);
   const list = [...logos, ...logos, ...logos];
 
   return (
-    <section className="py-14 bg-[#F7F4EC] border-b border-[#ece7da] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10 text-center">
-        <p className="text-[10px] font-semibold tracking-[0.15em] text-[#a3a3a3] uppercase">
-          Trusted by the world's boldest brands &nbsp;·&nbsp; 14+ Years &nbsp;·&nbsp; 500+ Clients
+    <section
+      style={{ background: C.bg, borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }}
+      className="py-10 overflow-hidden"
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between px-6 md:px-10 lg:px-16 mb-10">
+        <p className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: C.muted }}>
+          — Trusted by the world's boldest brands
+        </p>
+        <p className="text-[11px] font-medium" style={{ color: C.muted }}>
+          14+ years &nbsp;·&nbsp; 500+ clients
         </p>
       </div>
 
+      {/* Single marquee row */}
       <div className="flex w-full overflow-hidden select-none">
-        <div className="flex gap-14 items-center whitespace-nowrap animate-marquee-left hover:[animation-play-state:paused]">
-          {list.map((name, i) => (
+        <div className="flex gap-20 items-center whitespace-nowrap animate-marquee-left hover:[animation-play-state:paused]">
+          {list.map(({ file, name }, i) => (
             <img
-              key={`${name}-${i}`}
-              src={`/clients/${name}.png`}
+              key={i}
+              src={`/clients/${file}.png`}
               alt={name}
-              className="flex-shrink-0 h-7 md:h-8 w-auto object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+              className="flex-shrink-0 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+              style={{ height: 'clamp(3rem, 5vw, 5rem)' }}
             />
           ))}
         </div>

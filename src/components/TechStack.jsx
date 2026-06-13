@@ -1,102 +1,168 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme, t } from '../context/ThemeContext';
 
-/* Real stack from professionalsofttech.com.
-   icon: "/logos/x.svg" → <img>, otherwise a Font Awesome class. */
+const CDN = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
+
+// Each entry is either a devicon CDN path, a local /logos/ path, or a { fa, color } for Font Awesome fallback
 const ICON = {
-  // Front End
-  'React Js': '/logos/react.svg', 'Redux': 'fa-solid fa-layer-group', 'TypeScript': '/logos/typescript.svg',
-  'Vue.js': 'fa-brands fa-vuejs', 'Material UI': 'fa-solid fa-cube', 'HTML5': 'fa-brands fa-html5',
-  'Bootstrap': 'fa-brands fa-bootstrap', 'CSS3': 'fa-brands fa-css3-alt', 'jQuery': 'fa-solid fa-code', 'SASS': 'fa-brands fa-sass',
   // Mobile
-  'Android': 'fa-brands fa-android', 'iOS': 'fa-brands fa-apple', 'React Native': 'fa-brands fa-react',
-  'Flutter': '/logos/flutter.svg', 'Swift': 'fa-brands fa-swift', 'Objective-C': 'fa-solid fa-code',
-  'Kotlin': 'fa-solid fa-mobile-screen-button', 'Java': 'fa-brands fa-java', 'Ionic': 'fa-solid fa-bolt',
-  // Backend
-  'Laravel': '/logos/laravel.svg', 'CodeIgniter': 'fa-solid fa-fire', 'YII': 'fa-solid fa-code',
-  'CakePHP': 'fa-solid fa-cake-candles', 'Node.js': '/logos/nodejs.svg',
+  'Android':     `${CDN}/android/android-plain.svg`,
+  'iOS':         `${CDN}/apple/apple-original.svg`,
+  'React Native':`${CDN}/react/react-original.svg`,
+  'Flutter':     `${CDN}/flutter/flutter-original.svg`,
+  'Swift':       `${CDN}/swift/swift-original.svg`,
+  'Objective-C': `${CDN}/objectivec/objectivec-plain.svg`,
+  'Kotlin':      `${CDN}/kotlin/kotlin-original.svg`,
+  'Java':        `${CDN}/java/java-original.svg`,
+  'Ionic':       `${CDN}/ionic/ionic-original.svg`,
+  // Front End
+  'React Js':    `${CDN}/react/react-original.svg`,
+  'Redux':       `${CDN}/redux/redux-original.svg`,
+  'TypeScript':  `${CDN}/typescript/typescript-original.svg`,
+  'Vue.js':      `${CDN}/vuejs/vuejs-original.svg`,
+  'Material UI': `${CDN}/materialui/materialui-original.svg`,
+  'HTML5':       `${CDN}/html5/html5-original.svg`,
+  'Bootstrap':   `${CDN}/bootstrap/bootstrap-original.svg`,
+  'CSS3':        `${CDN}/css3/css3-original.svg`,
+  'jQuery':      `${CDN}/jquery/jquery-original.svg`,
+  'SASS':        `${CDN}/sass/sass-original.svg`,
+  // Back End
+  'Laravel':     `${CDN}/laravel/laravel-original.svg`,
+  'CodeIgniter': `${CDN}/codeigniter/codeigniter-plain.svg`,
+  'YII':         `${CDN}/yii/yii-original.svg`,
+  'CakePHP':     `${CDN}/cakephp/cakephp-original.svg`,
+  'Node.js':     `${CDN}/nodejs/nodejs-original.svg`,
   // Database
-  'MariaDB': 'fa-solid fa-database', 'MySQL': 'fa-solid fa-database', 'MongoDB': 'fa-solid fa-leaf',
-  'Firebase': 'fa-solid fa-fire', 'PostgreSQL': 'fa-solid fa-database',
+  'MariaDB':     `${CDN}/mariadb/mariadb-original.svg`,
+  'MySQL':       `${CDN}/mysql/mysql-original.svg`,
+  'MongoDB':     `${CDN}/mongodb/mongodb-original.svg`,
+  'Firebase':    `${CDN}/firebase/firebase-plain.svg`,
+  'PostgreSQL':  `${CDN}/postgresql/postgresql-original.svg`,
   // CMS & E-Commerce
-  'WordPress': '/logos/wordpress.svg', 'WooCommerce': '/logos/woocommerce.svg', 'Shopify': '/logos/shopify.svg',
-  'Shopify Plus': '/logos/shopify.svg', 'Magento': 'fa-solid fa-cart-shopping', 'OpenCart': 'fa-solid fa-cart-shopping', 'PrestaShop': 'fa-solid fa-bag-shopping',
+  'WordPress':   `${CDN}/wordpress/wordpress-plain.svg`,
+  'WooCommerce': '/logos/woocommerce.svg',
+  'Shopify':     '/logos/shopify.svg',
+  'Shopify Plus':'/logos/shopify.svg',
+  'Magento':     `${CDN}/magento/magento-original.svg`,
+  'OpenCart':    { fa: 'fa-solid fa-cart-shopping', color: '#23AEFF' },
+  'PrestaShop':  { fa: 'fa-solid fa-bag-shopping',  color: '#DF0067' },
   // Cloud & DevOps
-  'AWS': 'fa-brands fa-aws', 'Google Cloud': 'fa-brands fa-google', 'Jenkins': 'fa-brands fa-jenkins',
-  'DigitalOcean': 'fa-brands fa-digital-ocean', 'Heroku': 'fa-solid fa-server', 'Docker': 'fa-brands fa-docker',
+  'AWS':         `${CDN}/amazonwebservices/amazonwebservices-original-wordmark.svg`,
+  'Google Cloud':`${CDN}/googlecloud/googlecloud-original.svg`,
+  'Jenkins':     `${CDN}/jenkins/jenkins-original.svg`,
+  'DigitalOcean':`${CDN}/digitalocean/digitalocean-original.svg`,
+  'Heroku':      `${CDN}/heroku/heroku-original.svg`,
+  'Docker':      `${CDN}/docker/docker-original.svg`,
 };
-const getIcon = (name) => ICON[name] || 'fa-solid fa-cube';
 
 const tabs = [
-  { id: 'frontend', label: 'Front End', techs: ['React Js', 'Redux', 'TypeScript', 'Vue.js', 'Material UI', 'HTML5', 'Bootstrap', 'CSS3', 'jQuery', 'SASS'] },
-  { id: 'mobile', label: 'Mobile', techs: ['Android', 'iOS', 'React Native', 'Flutter', 'Swift', 'Objective-C', 'Kotlin', 'Java', 'Ionic'] },
-  { id: 'backend', label: 'Backend', techs: ['Laravel', 'CodeIgniter', 'YII', 'CakePHP', 'Node.js'] },
-  { id: 'database', label: 'Database', techs: ['MariaDB', 'MySQL', 'MongoDB', 'Firebase', 'PostgreSQL'] },
-  { id: 'cms', label: 'CMS & E-Commerce', techs: ['WordPress', 'WooCommerce', 'Shopify', 'Shopify Plus', 'Magento', 'OpenCart', 'PrestaShop'] },
-  { id: 'devops', label: 'Infra & DevOps', techs: ['AWS', 'Google Cloud', 'Jenkins', 'DigitalOcean', 'Heroku', 'Docker'] },
+  { id: 'mobile',    label: 'Mobile',           techs: ['Android','iOS','React Native','Flutter','Swift','Objective-C','Kotlin','Java','Ionic'] },
+  { id: 'frontend',  label: 'Front End',        techs: ['React Js','Redux','TypeScript','Vue.js','Material UI','HTML5','Bootstrap','CSS3','jQuery','SASS'] },
+  { id: 'backend',   label: 'Back End',          techs: ['Laravel','CodeIgniter','YII','CakePHP','Node.js'] },
+  { id: 'database',  label: 'Database',         techs: ['MariaDB','MySQL','MongoDB','Firebase','PostgreSQL'] },
+  { id: 'cms',       label: 'CMS & E-Commerce', techs: ['WordPress','WooCommerce','Shopify','Shopify Plus','Magento','OpenCart','PrestaShop'] },
+  { id: 'devops',    label: 'Infra & DevOps',   techs: ['AWS','Google Cloud','Jenkins','DigitalOcean','Heroku','Docker'] },
 ];
 
 function TechTile({ name, i }) {
-  const icon = getIcon(name);
-  const isImg = icon.startsWith('/');
+  const icon = ICON[name] || { fa: 'fa-solid fa-cube', color: '#888' };
+  const isImg = typeof icon === 'string';
+  const { dark } = useTheme();
+  const C = t(dark);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: i * 0.025, duration: 0.4 }}
-      className="group flex flex-col items-center justify-center gap-3 bg-white border border-[#ece7da] rounded-2xl p-5 min-h-[120px] hover:border-[#FF8048]/45 hover:-translate-y-1 hover:shadow-[0_18px_36px_-24px_rgba(242,106,46,0.4)] transition-all duration-300"
+      transition={{ delay: i * 0.025, duration: 0.35 }}
+      whileHover={{ y: -4, boxShadow: '0 16px 32px -12px rgba(242,106,46,0.28), 0 0 0 1.5px rgba(255,128,72,0.22)' }}
+      style={{
+        background: dark ? '#1d1c1a' : '#ece9e1',
+        borderColor: dark ? '#2d2b28' : 'transparent',
+        transition: 'background 0.3s, border-color 0.3s',
+      }}
+      className="group flex flex-col items-center justify-center gap-3 border rounded-2xl p-5 aspect-square hover:border-[#FF8048]/30 transition-all duration-300 cursor-default"
     >
-      <div className="h-9 flex items-center justify-center">
+      <div className="flex items-center justify-center w-10 h-10">
         {isImg
-          ? <img src={icon} alt={name} className="w-8 h-8 object-contain" loading="lazy" />
-          : <i className={icon} style={{ fontSize: 28, color: '#1a1a1a' }} />}
+          ? <img src={icon} alt={name} className="w-9 h-9 object-contain" loading="lazy" />
+          : <i className={icon.fa} style={{ fontSize: 30, color: icon.color }} />}
       </div>
-      <span className="font-mono text-xs font-semibold text-[#7a7a7a] text-center leading-tight">{name}</span>
+      <span style={{ color: dark ? '#9a9690' : '#555' }} className="text-[11px] font-medium text-center leading-tight group-hover:text-[#FF8048] transition-colors duration-300">{name}</span>
     </motion.div>
   );
 }
 
 export default function TechStack() {
-  const [active, setActive] = useState('frontend');
-  const current = tabs.find(t => t.id === active);
+  const [active, setActive] = useState('mobile');
+  const { dark } = useTheme();
+  const C = t(dark);
+  const current = tabs.find(tab => tab.id === active);
 
   return (
-    <section className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ece7da]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section style={{ background: C.bg, borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }} className="py-24 md:py-32">
+      <div className="w-full px-6 md:px-10 lg:px-16">
 
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="section-label mb-4">TECHNOLOGY ECOSYSTEM</p>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0a] tracking-[-0.03em] leading-[1.07]">
-            The engineering stack behind<br />
-            <span className="text-gradient">every great product.</span>
+        {/* Section label */}
+        <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: C.body }}>
+          — Technology
+        </p>
+
+        {/* Heading */}
+        <div className="mb-12">
+          <h2
+            className="font-extrabold leading-[1.05] tracking-[-0.03em]"
+            style={{ color: C.heading, fontSize: 'clamp(2.4rem, 5vw, 4rem)' }}
+          >
+            The engineering stack
           </h2>
+          <p
+            className="leading-[1.1] tracking-[-0.01em]"
+            style={{
+              color: C.heading,
+              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontStyle: 'italic',
+              fontWeight: 400,
+            }}
+          >
+            behind every great product.
+          </p>
         </div>
 
         {/* Tab bar */}
-        <div className="flex flex-wrap gap-1.5 justify-center mb-12 mx-auto w-fit max-w-full bg-white border border-[#ece7da] rounded-full p-1.5">
-          {tabs.map(t => (
+        <div className="flex flex-wrap gap-2 mb-10">
+          {tabs.map(tab => (
             <button
-              key={t.id}
-              onClick={() => setActive(t.id)}
-              className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap ${
-                active === t.id ? 'bg-[#FF8048] text-white shadow-md' : 'text-[#6a6a6a] hover:text-[#0a0a0a]'
+              key={tab.id}
+              onClick={() => setActive(tab.id)}
+              style={
+                active === tab.id
+                  ? { background: '#FF8048', color: '#fff' }
+                  : { background: 'transparent', color: C.body }
+              }
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                active !== tab.id ? 'hover:text-[#0a0a0a] dark:hover:text-white' : ''
               }`}
             >
-              {t.label}
+              {tab.label}
             </button>
           ))}
         </div>
+
+        {/* Divider */}
+        <div style={{ borderColor: C.border }} className="border-t mb-10" />
 
         {/* Tiles */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3"
           >
             {current?.techs.map((name, i) => <TechTile key={name} name={name} i={i} />)}
           </motion.div>
