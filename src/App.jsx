@@ -9,7 +9,6 @@ import TechStack from './components/TechStack';
 import Process from './components/Process';
 import Work from './components/Work';
 import Industries from './components/Industries';
-import Awards from './components/Awards';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
@@ -79,7 +78,6 @@ function Home() {
       <FAQ />
       <GlobalPresence />
       <Industries />
-      <Awards />
       <Testimonials />
       <Contact />
     </>

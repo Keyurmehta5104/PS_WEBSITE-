@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme, t } from '../context/ThemeContext';
 
 /* ── Brand tokens ───────────────────────────────────────────────── */
@@ -93,97 +94,108 @@ function ArrowCircle({ variant = 'outline', hovered = false, dark = false }) {
   );
 }
 
-const CARD_ENTER = (delay) => ({
-  initial: { opacity: 0, y: 22 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  whileHover: { y: -5 },
-});
-
 /* ── Card 01: E-Commerce — FEATURED (orange, dark-agnostic) ─────── */
 function Card01() {
   const [hovered, setHovered] = useState(false);
   return (
-    <motion.a href="#services" {...CARD_ENTER(0.30)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        textDecoration: 'none',
-        background: hovered
-          ? 'linear-gradient(145deg,#FFA672 0%,#FF8B54 50%,#F47436 100%)'
-          : 'linear-gradient(145deg,#FF9A5E 0%,#FF8048 50%,#F26A2E 100%)',
-        borderRadius: 16, padding: '24px 26px', position: 'relative', overflow: 'hidden',
-        cursor: 'pointer', height: '100%', width: '100%',
-        display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-        boxShadow: hovered ? '0 26px 52px -18px rgba(242,106,46,0.7)' : '0 22px 46px -20px rgba(242,106,46,0.6)',
-        transition: 'background 0.35s ease, box-shadow 0.35s ease',
-      }}>
-      <div style={{ position: 'absolute', top: -70, right: -50, width: 240, height: 240, borderRadius: '50%', background: 'rgba(255,255,255,0.16)', filter: 'blur(36px)' }} />
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 10, fontWeight: 600, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', background: 'rgba(255,255,255,0.2)', padding: '5px 12px', borderRadius: 999 }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff' }} />01 · Featured
-          </span>
-          <ArrowCircle variant="ghost" hovered={hovered} />
-        </div>
-        <h3 style={{ fontSize: 'clamp(22px,1.9vw,28px)', fontWeight: 700, color: '#fff', margin: '0 0 8px', lineHeight: 1.1, letterSpacing: '-0.02em' }}>E-Commerce Platforms</h3>
-        <span style={{ display: 'block', fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 1.55, maxWidth: 360, marginBottom: 16 }}>
-          From Shopify to Adobe Commerce — high-conversion, scalable storefronts that ship outcomes.
-        </span>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <LogoChip file="shopify.svg" alt="Shopify" onOrange />
-          <LogoChip file="woocommerce.svg" alt="WooCommerce" onOrange />
-          <LogoChip file="bigcommerce.svg" alt="BigCommerce" onOrange />
-        </div>
-      </div>
-      <div style={{ display: 'flex', gap: 30, marginTop: 18, position: 'relative', zIndex: 1 }}>
-        {[['120+', 'Stores Built'], ['Shopify', 'Partner'], ['Adobe', 'Commerce']].map(([v, l]) => (
-          <div key={l}>
-            <span style={{ display: 'block', fontSize: 21, fontWeight: 700, color: '#fff' }}>{v}</span>
-            <span style={{ display: 'block', fontSize: 9.5, fontWeight: 600, color: 'rgba(255,255,255,0.75)', margin: '3px 0 0', letterSpacing: '0.09em', textTransform: 'uppercase' }}>{l}</span>
+    <motion.div
+      initial={{ opacity: 0, y: 22 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.30, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      style={{ height: '100%', width: '100%' }}
+    >
+      <Link
+        to="/services/e-commerce"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          textDecoration: 'none',
+          background: hovered
+            ? 'linear-gradient(145deg,#FFA672 0%,#FF8B54 50%,#F47436 100%)'
+            : 'linear-gradient(145deg,#FF9A5E 0%,#FF8048 50%,#F26A2E 100%)',
+          borderRadius: 16, padding: '24px 26px', position: 'relative', overflow: 'hidden',
+          cursor: 'pointer', height: '100%', width: '100%',
+          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          boxShadow: hovered ? '0 26px 52px -18px rgba(242,106,46,0.7)' : '0 22px 46px -20px rgba(242,106,46,0.6)',
+          transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
+          transition: 'background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease',
+        }}>
+        <div style={{ position: 'absolute', top: -70, right: -50, width: 240, height: 240, borderRadius: '50%', background: 'rgba(255,255,255,0.16)', filter: 'blur(36px)' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 10, fontWeight: 600, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', background: 'rgba(255,255,255,0.2)', padding: '5px 12px', borderRadius: 999 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff' }} />01 · Featured
+            </span>
+            <ArrowCircle variant="ghost" hovered={hovered} />
           </div>
-        ))}
-      </div>
-    </motion.a>
+          <h3 style={{ fontSize: 'clamp(22px,1.9vw,28px)', fontWeight: 700, color: '#fff', margin: '0 0 8px', lineHeight: 1.1, letterSpacing: '-0.02em' }}>E-Commerce Platforms</h3>
+          <span style={{ display: 'block', fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 1.55, maxWidth: 360, marginBottom: 16 }}>
+            From Shopify to Adobe Commerce — high-conversion, scalable storefronts that ship outcomes.
+          </span>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <LogoChip file="shopify.svg" alt="Shopify" onOrange />
+            <LogoChip file="woocommerce.svg" alt="WooCommerce" onOrange />
+            <LogoChip file="bigcommerce.svg" alt="BigCommerce" onOrange />
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 30, marginTop: 18, position: 'relative', zIndex: 1 }}>
+          {[['120+', 'Stores Built'], ['Shopify', 'Partner'], ['Adobe', 'Commerce']].map(([v, l]) => (
+            <div key={l}>
+              <span style={{ display: 'block', fontSize: 21, fontWeight: 700, color: '#fff' }}>{v}</span>
+              <span style={{ display: 'block', fontSize: 9.5, fontWeight: 600, color: 'rgba(255,255,255,0.75)', margin: '3px 0 0', letterSpacing: '0.09em', textTransform: 'uppercase' }}>{l}</span>
+            </div>
+          ))}
+        </div>
+      </Link>
+    </motion.div>
   );
 }
 
 /* ── Light/dark-aware card shell ────────────────────────────────── */
-function LogoCard({ delay, tag, title, tech, logos, href = '#' }) {
+function LogoCard({ delay, tag, title, tech, logos, to = '/' }) {
   const [hovered, setHovered] = useState(false);
   const { dark } = useTheme();
   const C = t(dark);
   return (
-    <motion.a href={href} {...CARD_ENTER(delay)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        textDecoration: 'none',
-        background: hovered
-          ? (dark ? 'linear-gradient(150deg,#2a2420 0%,#241e18 100%)' : 'linear-gradient(150deg,#FFF6F0 0%,#FFEAD9 100%)')
-          : C.bgCard,
-        borderRadius: 16, padding: '18px 20px',
-        border: `1px solid ${hovered ? 'rgba(255,128,72,0.45)' : C.border}`,
-        cursor: 'pointer',
-        display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden',
-        height: '100%', width: '100%',
-        boxShadow: hovered
-          ? '0 22px 44px -22px rgba(242,106,46,0.4)'
-          : dark ? '0 4px 24px -12px rgba(0,0,0,0.5)' : '0 16px 36px -28px rgba(20,20,30,0.35)',
-        transition: 'background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
-      }}>
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <span style={{ fontSize: 9.5, fontWeight: 600, letterSpacing: '0.13em', color: hovered ? ORANGE_DARK : C.muted, textTransform: 'uppercase', transition: 'color 0.35s ease' }}>{tag}</span>
-          <ArrowCircle variant="outline" hovered={hovered} dark={dark} />
+    <motion.div
+      initial={{ opacity: 0, y: 22 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      style={{ height: '100%', width: '100%' }}
+    >
+      <Link
+        to={to}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          textDecoration: 'none',
+          background: hovered
+            ? (dark ? 'linear-gradient(150deg,#2a2420 0%,#241e18 100%)' : 'linear-gradient(150deg,#FFF6F0 0%,#FFEAD9 100%)')
+            : C.bgCard,
+          borderRadius: 16, padding: '18px 20px',
+          border: `1px solid ${hovered ? 'rgba(255,128,72,0.45)' : C.border}`,
+          cursor: 'pointer',
+          display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden',
+          height: '100%', width: '100%',
+          boxShadow: hovered
+            ? '0 22px 44px -22px rgba(242,106,46,0.4)'
+            : dark ? '0 4px 24px -12px rgba(0,0,0,0.5)' : '0 16px 36px -28px rgba(20,20,30,0.35)',
+          transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
+          transition: 'background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease',
+        }}>
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <span style={{ fontSize: 9.5, fontWeight: 600, letterSpacing: '0.13em', color: hovered ? ORANGE_DARK : C.muted, textTransform: 'uppercase', transition: 'color 0.35s ease' }}>{tag}</span>
+            <ArrowCircle variant="outline" hovered={hovered} dark={dark} />
+          </div>
+          <h4 style={{ fontSize: 20, fontWeight: 700, color: C.heading, margin: '0 0 2px', lineHeight: 1.15, letterSpacing: '-0.01em' }}>{title}</h4>
         </div>
-        <h4 style={{ fontSize: 20, fontWeight: 700, color: C.heading, margin: '0 0 2px', lineHeight: 1.15, letterSpacing: '-0.01em' }}>{title}</h4>
-      </div>
-      <div style={{ display: 'flex', gap: 10, margin: '14px 0' }}>
-        {logos.map((lg) => <LogoChip key={lg.file} file={lg.file} alt={lg.alt} />)}
-      </div>
-      <span style={{ display: 'block', fontSize: 11, color: C.body, margin: 0, fontWeight: 500, letterSpacing: '0.01em' }}>{tech}</span>
-    </motion.a>
+        <div style={{ display: 'flex', gap: 10, margin: '14px 0' }}>
+          {logos.map((lg) => <LogoChip key={lg.file} file={lg.file} alt={lg.alt} />)}
+        </div>
+        <span style={{ display: 'block', fontSize: 11, color: C.body, margin: 0, fontWeight: 500, letterSpacing: '0.01em' }}>{tech}</span>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -249,7 +261,7 @@ export default function Hero() {
         }}>
 
           {/* ── LEFT ── */}
-          <div className="hero-left" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div className="hero-left" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
 
             {/* Badge */}
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05, duration: 0.6 }}
@@ -262,8 +274,8 @@ export default function Hero() {
 
             {/* Headline */}
             <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-              <h1 style={{ fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.035em', color: C.heading, margin: 0, whiteSpace: 'nowrap' }}>Turning</h1>
-              <h1 style={{ fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.035em', color: C.heading, margin: '2px 0 0', whiteSpace: 'nowrap' }}>Ideas into</h1>
+              <h1 style={{ fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.035em', color: C.heading, margin: 0 }}>Turning</h1>
+              <h1 style={{ fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.035em', color: C.heading, margin: '2px 0 0' }}>Ideas into</h1>
               <div style={{ height: 'clamp(46px,5.3vw,84px)', overflow: 'hidden', marginTop: 2 }}>
                 <AnimatePresence mode="wait">
                   <motion.h1 key={wordIdx}
@@ -271,7 +283,7 @@ export default function Hero() {
                     transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     style={{
                       fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.035em',
-                      margin: 0, whiteSpace: 'nowrap', width: 'fit-content', paddingBottom: 4,
+                      margin: 0, paddingBottom: 4,
                       background: ORANGE_GRADIENT, WebkitBackgroundClip: 'text', backgroundClip: 'text',
                       WebkitTextFillColor: 'transparent', color: 'transparent',
                     }}>{CYCLE_WORDS[wordIdx]}</motion.h1>
@@ -328,35 +340,28 @@ export default function Hero() {
             style={{
               display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gridTemplateRows: '1.1fr 1fr', gap: 13,
               height: 'min(72vh, 560px)', minHeight: 430, alignSelf: 'center',
+              minWidth: 0, width: '100%',
             }}>
             <div style={{ gridColumn: '1 / 3', gridRow: '1', display: 'flex' }}><Card01 /></div>
             <div style={{ gridColumn: '3', gridRow: '1', display: 'flex' }}>
-              <LogoCard delay={0.4} href="#services" tag="02 · Mobile" title="Mobile Apps" tech="iOS · Android · Flutter"
+              <LogoCard delay={0.4} to="/services/mobile-app-development" tag="02 · Mobile" title="Mobile Apps" tech="iOS · Android · Flutter"
                 logos={[{ file: 'apple.svg', alt: 'iOS' }, { file: 'android.svg', alt: 'Android' }, { file: 'flutter.svg', alt: 'Flutter' }]} />
             </div>
             <div style={{ gridColumn: '1', gridRow: '2', display: 'flex' }}>
-              <LogoCard delay={0.48} href="#services" tag="03 · Web" title="Custom Web Dev" tech="Laravel · React · WordPress"
+              <LogoCard delay={0.48} to="/services/web-development" tag="03 · Web" title="Custom Web Dev" tech="Laravel · React · WordPress"
                 logos={[{ file: 'laravel.svg', alt: 'Laravel' }, { file: 'react.svg', alt: 'React' }, { file: 'wordpress.svg', alt: 'WordPress' }]} />
             </div>
             <div style={{ gridColumn: '2', gridRow: '2', display: 'flex' }}>
-              <LogoCard delay={0.56} href="#services" tag="04 · Design" title="UI/UX Design" tech="Figma · Sketch · Framer"
+              <LogoCard delay={0.56} to="/services/ui-ux-design" tag="04 · Design" title="UI/UX Design" tech="Figma · Sketch · Framer"
                 logos={[{ file: 'figma.svg', alt: 'Figma' }, { file: 'sketch.svg', alt: 'Sketch' }, { file: 'framer.svg', alt: 'Framer' }]} />
             </div>
             <div style={{ gridColumn: '3', gridRow: '2', display: 'flex' }}>
-              <LogoCard delay={0.64} href="#services" tag="05 · Teams" title="Dedicated Teams" tech="Next.js · Node · TypeScript"
+              <LogoCard delay={0.64} to="/services/enterprise-software" tag="05 · Teams" title="Dedicated Teams" tech="Next.js · Node · TypeScript"
                 logos={[{ file: 'nextjs.svg', alt: 'Next.js' }, { file: 'nodejs.svg', alt: 'Node.js' }, { file: 'typescript.svg', alt: 'TypeScript' }]} />
             </div>
           </motion.div>
         </div>
 
-        {/* ── Scroll cue ── */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }}
-          style={{ position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, zIndex: 2 }}
-        >
-          <span style={{ fontSize: 9.5, fontWeight: 600, letterSpacing: '0.18em', color: C.muted, textTransform: 'uppercase' }}>Scroll</span>
-          <div style={{ width: 1.5, height: 32, background: 'linear-gradient(to bottom, #FF8048, transparent)', animation: 'scroll-cue-bounce 1.8s ease-in-out infinite' }} />
-        </motion.div>
       </section>
 
     </>

@@ -1,144 +1,603 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { SERVICES, getService } from '../data/services';
+import { useEffect, useRef, useState } from 'react';
+import { SERVICES } from '../data/services';
+import { useTheme, t } from '../context/ThemeContext';
 
-/* ── Brand tokens ───────────────────────────────────────────────── */
 const ORANGE = '#FF8048';
 const ORANGE_DARK = '#F26A2E';
-const ORANGE_GRADIENT = 'linear-gradient(100deg,#FF8048 0%,#FF6A2E 55%,#EB2F5B 120%)';
-const INK = '#272a33';
-const BODY = '#4D4D4D';
-const PAGE = '#F7F4EC';
 
-const rise = (delay = 0) => ({
-  initial: { opacity: 0, y: 26 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-});
-
-const sectionLabel = {
-  fontSize: 11, fontWeight: 700, letterSpacing: '0.18em',
-  textTransform: 'uppercase', color: ORANGE, margin: '0 0 14px',
+/* ─────────────────────────────────────────────────────────────────────
+   AI-FOCUSED CONTENT — per service slug
+   Replaces generic service data with AI-native copy
+───────────────────────────────────────────────────────────────────── */
+const AI_CONTENT = {
+  'web-development': {
+    hero: 'AI-Powered Web Development',
+    sub: 'Websites that learn, adapt, and convert — built with AI at every layer of the stack.',
+    features: [
+      { icon: 'fa-brain', title: 'AI-Driven CMS & Content Engine', desc: 'GPT-powered workflows auto-generate, optimize, and publish content — cutting production time by 70% while maintaining brand voice.' },
+      { icon: 'fa-chart-line', title: 'Predictive E-Commerce AI', desc: 'Recommendation engines and intelligent checkout flows that reduce cart abandonment by up to 35% and increase average order value.' },
+      { icon: 'fa-user-check', title: 'Hyper-Personalized UX', desc: 'Real-time personalization that adapts your entire website to each visitor\'s behavior, location, device, and purchase intent.' },
+      { icon: 'fa-magnifying-glass-chart', title: 'AI SEO & Core Web Vitals', desc: 'Automated on-page SEO, AI-generated meta content, and performance optimization that ranks faster and stays ranked.' },
+    ],
+    capabilities: ['GPT Content Generation', 'Behavioral Personalization', 'Predictive Analytics', 'AI SEO Automation', 'Smart A/B Testing', 'Chatbot Integration'],
+    stat: { num: '3×', label: 'faster time-to-launch with AI-assisted development and automated testing' },
+    badge: 'AI-Native Web Stack',
+  },
+  'mobile-app-development': {
+    hero: 'AI-Powered Mobile App Development',
+    sub: 'Intelligent apps that learn user behavior, predict needs, and deliver experiences users can\'t put down.',
+    features: [
+      { icon: 'fa-brain', title: 'On-Device ML & AI Features', desc: 'Recommendation engines, image recognition, and on-device ML models that run fast — even without internet connectivity.' },
+      { icon: 'fa-wand-magic-sparkles', title: 'Adaptive UX Personalization', desc: 'Apps that learn each user\'s patterns and surface the right content, features, and offers at exactly the right moment.' },
+      { icon: 'fa-microphone', title: 'Voice & NLP Integration', desc: 'Natural language interfaces, voice commands, and conversational AI built natively into your iOS and Android app.' },
+      { icon: 'fa-bell', title: 'Predictive Push & Retention AI', desc: 'ML-driven push notification timing and churn prediction models that keep users engaged for the long term.' },
+    ],
+    capabilities: ['On-Device ML', 'Voice Recognition', 'NLP Chatbots', 'Behavior Prediction', 'Smart Notifications', 'AI Image Processing'],
+    stat: { num: '40%', label: 'higher user engagement with AI-personalized in-app experiences' },
+    badge: 'AI Mobile Native',
+  },
+  'ui-ux-design': {
+    hero: 'AI-Enhanced UI/UX Design',
+    sub: 'Data-driven design powered by behavioral AI — every pixel proven by data, not guesswork.',
+    features: [
+      { icon: 'fa-eye', title: 'AI Behavioral UX Research', desc: 'Heatmaps, session recordings, and AI analysis of user patterns replace assumptions with proven design decisions.' },
+      { icon: 'fa-palette', title: 'Generative Design Systems', desc: 'AI-assisted design systems that maintain brand consistency across every component, screen, and breakpoint automatically.' },
+      { icon: 'fa-chart-line', title: 'Conversion-Optimized Layouts', desc: 'Designs informed by AI analysis of thousands of high-performing interfaces in your industry — built to convert.' },
+      { icon: 'fa-rotate', title: 'Continuous AI A/B Testing', desc: 'Automated multivariate testing that continuously evolves your UI toward higher conversions without manual effort.' },
+    ],
+    capabilities: ['Behavioral Heatmaps', 'Generative Design', 'AI Prototyping', 'Conversion AI', 'Accessibility AI', 'Auto A/B Testing'],
+    stat: { num: '25%', label: 'average conversion lift from AI-informed UX redesigns' },
+    badge: 'Data-Driven Design',
+  },
+  'email-template-development': {
+    hero: 'AI-Personalized Email Template Development',
+    sub: 'Dynamic email templates powered by AI — personalized at scale, delivered perfectly every time.',
+    features: [
+      { icon: 'fa-wand-magic-sparkles', title: 'AI Content Personalization', desc: 'Subject lines, body copy, and CTAs dynamically generated by AI for each recipient segment — at massive scale.' },
+      { icon: 'fa-clock', title: 'Predictive Send-Time Optimization', desc: 'ML models that determine the optimal send time per subscriber to maximize open rates and click-throughs.' },
+      { icon: 'fa-mobile-screen', title: 'Adaptive Responsive Templates', desc: 'AI-tested layouts that automatically reflow and optimize for every device, email client, and screen size.' },
+      { icon: 'fa-shield-halved', title: 'Deliverability Intelligence', desc: 'AI monitoring of spam scores, bounce rates, and sender reputation keeps your emails landing in inboxes — not spam.' },
+    ],
+    capabilities: ['AI Copywriting', 'Send-Time ML', 'Smart Segmentation', 'Deliverability AI', 'Dynamic Content Blocks', 'Predictive Analytics'],
+    stat: { num: '50%', label: 'average increase in open rates with AI-personalized subject lines' },
+    badge: 'AI Email Intelligence',
+  },
+  'e-commerce': {
+    hero: 'AI-Powered E-Commerce Development',
+    sub: 'Intelligent storefronts that recommend, convert, and re-engage — completely on autopilot.',
+    features: [
+      { icon: 'fa-brain', title: 'AI Product Recommendations', desc: 'Real-time recommendation engines trained on purchase history and behavioral data — proven to lift average order value by 20–30%.' },
+      { icon: 'fa-magnifying-glass', title: 'Semantic AI Search', desc: 'Natural language product search that understands shopper intent — dramatically improving find-to-purchase rates.' },
+      { icon: 'fa-tag', title: 'Dynamic Pricing Intelligence', desc: 'AI pricing engine that responds to demand signals, competitor data, and customer segments in real time.' },
+      { icon: 'fa-rotate-left', title: 'Predictive Churn & Cart Recovery', desc: 'ML models that detect at-risk customers and trigger personalized re-engagement campaigns automatically.' },
+    ],
+    capabilities: ['Recommendation Engine', 'Semantic Search', 'Dynamic Pricing AI', 'Churn Prediction', 'Fraud Detection', 'Visual Search'],
+    stat: { num: '35%', label: 'average reduction in cart abandonment with AI-powered checkout flows' },
+    badge: 'AI Commerce Engine',
+  },
+  'enterprise-software': {
+    hero: 'AI-Driven Enterprise Software',
+    sub: 'Intelligent business systems that automate decisions, surface insights, and eliminate manual bottlenecks.',
+    features: [
+      { icon: 'fa-robot', title: 'Intelligent Workflow Automation', desc: 'AI agents handle approvals, routing, and repetitive tasks — freeing your teams to focus exclusively on high-value work.' },
+      { icon: 'fa-chart-line', title: 'Predictive Business Intelligence', desc: 'ML-powered dashboards that forecast demand, flag anomalies, and surface actionable insights before problems occur.' },
+      { icon: 'fa-plug', title: 'AI-Enhanced Integrations', desc: 'Smart data pipelines with built-in anomaly detection that keep all your systems synchronized without human babysitting.' },
+      { icon: 'fa-shield-halved', title: 'AI Security & Compliance', desc: 'Real-time threat detection and automated compliance monitoring baked directly into your enterprise platform.' },
+    ],
+    capabilities: ['AI Workflow Engine', 'Predictive BI', 'NLP Document Processing', 'Anomaly Detection', 'Smart Integrations', 'AI Compliance'],
+    stat: { num: '80%', label: 'of routine business tasks automated in our AI-enhanced enterprise deployments' },
+    badge: 'Enterprise AI Platform',
+  },
+  'qa-testing': {
+    hero: 'AI-Powered QA & Testing',
+    sub: 'Intelligent test automation that finds bugs before your users do — 10× faster than manual QA.',
+    features: [
+      { icon: 'fa-robot', title: 'AI-Generated Test Suites', desc: 'ML models auto-generate comprehensive test cases from your codebase — covering edge cases that human testers miss.' },
+      { icon: 'fa-eye', title: 'Visual AI Regression Testing', desc: 'Computer vision that detects pixel-level UI regressions across every browser and device combination automatically.' },
+      { icon: 'fa-gauge-high', title: 'Predictive Load & Performance Testing', desc: 'AI load simulation that accurately predicts breaking points before real traffic hits your production environment.' },
+      { icon: 'fa-shield-halved', title: 'Automated Security & Vulnerability Scanning', desc: 'AI-driven penetration testing and OWASP vulnerability detection integrated directly into your CI/CD pipeline.' },
+    ],
+    capabilities: ['AI Test Generation', 'Visual Regression AI', 'Smart Load Testing', 'AI Security Scan', 'Self-Healing Tests', 'Predictive QA'],
+    stat: { num: '10×', label: 'faster bug detection with AI-powered automated test suites vs. manual QA' },
+    badge: 'AI Quality Engineering',
+  },
+  'devops-cloud': {
+    hero: 'AI-Driven DevOps & Cloud Engineering',
+    sub: 'Self-healing infrastructure and intelligent pipelines that ship faster with fewer incidents — guaranteed.',
+    features: [
+      { icon: 'fa-arrows-spin', title: 'AI-Optimized CI/CD Pipelines', desc: 'Intelligent pipelines that predict build failures, auto-fix flaky tests, and select optimal deployment windows automatically.' },
+      { icon: 'fa-chart-line', title: 'AIOps & Predictive Monitoring', desc: 'AI that detects infrastructure anomalies before they become incidents — reducing mean time to resolution by up to 60%.' },
+      { icon: 'fa-cloud-arrow-up', title: 'AI Cloud Cost Optimization', desc: 'Continuous ML-driven right-sizing and reserved capacity planning that cuts your cloud bills by 30–40%.' },
+      { icon: 'fa-shield-halved', title: 'AI Security Posture Management', desc: 'Automated threat detection, configuration drift monitoring, and compliance enforcement across your entire cloud estate.' },
+    ],
+    capabilities: ['AIOps Monitoring', 'AI Cost Optimizer', 'Predictive Autoscaling', 'Self-Healing Infra', 'AI SecOps', 'Smart Pipelines'],
+    stat: { num: '60%', label: 'reduction in incident response time with our AIOps monitoring platform' },
+    badge: 'AI Cloud Native',
+  },
 };
 
+/* ─────────────────────────────────────────────────────────────────────
+   ENGAGEMENT MODELS
+───────────────────────────────────────────────────────────────────── */
+const MODELS = [
+  {
+    icon: 'fa-user-tie',
+    title: 'Hire an AI Developer',
+    tag: 'Most popular',
+    tagBg: 'rgba(255,128,72,0.1)',
+    tagColor: ORANGE,
+    border: 'rgba(255,128,72,0.3)',
+    desc: 'Get a senior AI-skilled developer matched to your project. Works exclusively on your codebase, your timezone, your tools.',
+    perks: ['Dedicated full-time AI developer', 'Direct Slack / daily standups', 'Weekly sprint reports', 'Scale up or down anytime'],
+  },
+  {
+    icon: 'fa-users',
+    title: 'Dedicated AI Team',
+    tag: 'Best for scale',
+    tagBg: 'rgba(99,102,241,0.1)',
+    tagColor: '#6366F1',
+    border: 'rgba(99,102,241,0.3)',
+    desc: 'A complete AI squad — lead developer, ML engineer, designer, and QA — assembled for your product and fully managed.',
+    perks: ['Cross-functional AI product team', 'Agile sprint delivery', 'Daily demos & retrospectives', 'Transparent hourly billing'],
+  },
+  {
+    icon: 'fa-file-contract',
+    title: 'Fixed-Price AI Project',
+    tag: 'Clear budget',
+    tagBg: 'rgba(16,185,129,0.1)',
+    tagColor: '#10B981',
+    border: 'rgba(16,185,129,0.3)',
+    desc: 'Defined scope, fixed timeline, guaranteed delivery. Best for well-scoped AI projects where predictable cost matters most.',
+    perks: ['Milestone-based payments', 'Fixed timeline & budget', 'Full IP & source code ownership', '90-day post-launch support'],
+  },
+];
+
+/* ─────────────────────────────────────────────────────────────────────
+   PROCESS
+───────────────────────────────────────────────────────────────────── */
+const PROCESS = [
+  { num: '01', icon: 'fa-comments', title: 'AI Discovery Call', desc: 'We map your goals and uncover where AI can deliver measurable impact — no sales pitch, just clarity.' },
+  { num: '02', icon: 'fa-pen-ruler', title: 'AI Architecture & Design', desc: 'We select the right AI models, tools, and tech stack for your exact use case — then design the experience.' },
+  { num: '03', icon: 'fa-robot', title: 'AI-Assisted Development', desc: 'Our engineers use Copilot, AI code review, and automated testing to ship production-quality code faster.' },
+  { num: '04', icon: 'fa-rocket', title: 'Launch & Continuous AI Improvement', desc: 'Smooth go-live, full docs, training, and ongoing AI model fine-tuning as your data grows.' },
+];
+
+/* ─────────────────────────────────────────────────────────────────────
+   HOOKS
+───────────────────────────────────────────────────────────────────── */
+function useTypewriter(text, speed = 32) {
+  const [out, setOut] = useState('');
+  useEffect(() => {
+    setOut('');
+    let i = 0;
+    const timer = setTimeout(() => {
+      const id = setInterval(() => { i++; setOut(text.slice(0, i)); if (i >= text.length) clearInterval(id); }, speed);
+      return () => clearInterval(id);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [text]);
+  return out;
+}
+
+function CountUp({ to, suffix = '', duration = 1500 }) {
+  const [val, setVal] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  const num = parseFloat(String(to).replace(/[^\d.]/g, ''));
+  useEffect(() => {
+    if (!inView || isNaN(num)) return;
+    let start = null;
+    const step = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      setVal(Math.floor((1 - Math.pow(1 - p, 3)) * num));
+      if (p < 1) requestAnimationFrame(step); else setVal(num);
+    };
+    requestAnimationFrame(step);
+  }, [inView, num, duration]);
+  return <span ref={ref}>{val}{suffix}</span>;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   ANIMATION HELPERS
+───────────────────────────────────────────────────────────────────── */
+const fadeUp = (delay = 0) => ({ initial: { opacity: 0, y: 22 }, animate: { opacity: 1, y: 0 }, transition: { delay, duration: 0.65, ease: [0.16, 1, 0.3, 1] } });
+const rise   = (delay = 0) => ({ initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-50px' }, transition: { delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] } });
+
+/* ─────────────────────────────────────────────────────────────────────
+   TRUST STATS
+───────────────────────────────────────────────────────────────────── */
+const TRUST = [
+  { num: 500, suffix: '+', label: 'AI Projects Delivered' },
+  { num: 14,  suffix: '+', label: 'Years of Expertise' },
+  { num: 92,  suffix: '+', label: 'Countries Served' },
+  { num: 50,  suffix: '+', label: 'AI Engineers' },
+  { num: 98,  suffix: '%', label: 'Client Retention' },
+];
+
+/* ═════════════════════════════════════════════════════════════════════
+   COMPONENT
+═════════════════════════════════════════════════════════════════════ */
 export default function ServiceDetail() {
   const { slug } = useParams();
-  const service = getService(slug);
+  const { dark } = useTheme();
+  const C = t(dark);
 
-  useEffect(() => { window.scrollTo(0, 0); }, [slug]);
+  const service = SERVICES.find(s => s.slug === slug);
+  const ai = AI_CONTENT[slug] ?? null;
 
-  // Unknown slug → bounce home
+  const typedSub = useTypewriter(ai?.sub ?? service?.tagline ?? '', 30);
+  const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => { window.scrollTo(0, 0); setActiveTab(0); }, [slug]);
   if (!service) return <Navigate to="/" replace />;
 
-  const others = SERVICES.filter((s) => s.slug !== slug);
+  const others = SERVICES.filter(s => s.slug !== slug);
+  const features = ai?.features ?? service.features;
+  const capabilities = ai?.capabilities ?? service.techStack;
+  const stat = ai?.stat ?? service.stat;
+  const statNum = String(stat.num).replace(/[^\d.]/g, '');
+  const statSuffix = String(stat.num).replace(/[\d.]/g, '');
+
+  /* Tech tabs */
+  const techGroups = [
+    { label: 'AI Capabilities', items: capabilities },
+    { label: 'Core Tech Stack', items: service.techStack },
+    { label: 'All Technologies', items: [...new Set([...capabilities, ...service.techStack])] },
+  ];
+
+  /* Section bg helpers */
+  const altBg = dark ? '#161513' : '#f0ede3';
 
   return (
-    <main style={{ fontFamily: 'inherit' }}>
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: PAGE, padding: '130px 6% 70px', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: -120, right: -80, width: 420, height: 420, borderRadius: '50%', background: 'rgba(255,128,72,0.12)', filter: 'blur(90px)', pointerEvents: 'none' }} />
+    <main>
+      <style>{`
+        @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+        @keyframes pulse-ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+      `}</style>
 
-        <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
+      {/* ══════════════════════════════════════════════════════════════
+          HERO — light, AI product-page feel
+      ══════════════════════════════════════════════════════════════ */}
+      <section style={{
+        position: 'relative', background: C.bg,
+        padding: 'clamp(110px,12vw,160px) 6% clamp(56px,7vw,80px)',
+        overflow: 'hidden', borderBottom: `1px solid ${C.border}`,
+        transition: 'background 0.3s',
+      }}>
+        {/* Dot grid */}
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: `radial-gradient(${dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.065)'} 1px,transparent 1px)`, backgroundSize: '28px 28px' }} />
+        {/* Orange bloom */}
+        <div style={{ position: 'absolute', top: -80, right: -60, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,128,72,0.1) 0%,transparent 68%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        {/* Indigo bloom bottom-left */}
+        <div style={{ position: 'absolute', bottom: -60, left: '10%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 70%)', filter: 'blur(70px)', pointerEvents: 'none' }} />
+
+        <div style={{ position: 'relative', maxWidth: 1200, margin: '0 auto' }}>
           {/* Breadcrumb */}
-          <motion.div {...rise(0)} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#9a9a9a', marginBottom: 26 }}>
-            <Link to="/" style={{ color: '#9a9a9a', textDecoration: 'none' }}>Home</Link>
-            <i className="fa-solid fa-chevron-right" style={{ fontSize: 9 }} />
-            <Link to="/#services" style={{ color: '#9a9a9a', textDecoration: 'none' }}>Services</Link>
-            <i className="fa-solid fa-chevron-right" style={{ fontSize: 9 }} />
-            <span style={{ color: ORANGE_DARK, fontWeight: 600 }}>{service.name}</span>
-          </motion.div>
+          <motion.nav {...fadeUp(0)} style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12, color: C.muted, marginBottom: 34, fontWeight: 500 }}>
+            <Link to="/" style={{ color: C.muted, textDecoration: 'none' }}>Home</Link>
+            <i className="fa-solid fa-chevron-right" style={{ fontSize: 8 }} />
+            <Link to="/services" style={{ color: C.muted, textDecoration: 'none' }}>Services</Link>
+            <i className="fa-solid fa-chevron-right" style={{ fontSize: 8 }} />
+            <span style={{ color: ORANGE, fontWeight: 600 }}>{ai?.hero ?? service.name}</span>
+          </motion.nav>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1.3fr) minmax(0,0.7fr)', gap: 48, alignItems: 'center' }} className="about-origin-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,400px)', gap: 'clamp(28px,5vw,64px)', alignItems: 'center' }} className="about-origin-grid">
+
+            {/* LEFT */}
             <div>
-              <motion.div {...rise(0.05)} style={{ width: 60, height: 60, borderRadius: 16, background: ORANGE_GRADIENT, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, boxShadow: '0 14px 30px -12px rgba(242,106,46,0.7)' }}>
-                <i className={`fa-solid ${service.icon}`} style={{ color: '#fff', fontSize: 24 }} />
+              {/* AI badge */}
+              <motion.div {...fadeUp(0.04)}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6366F1', background: 'rgba(99,102,241,0.09)', border: '1px solid rgba(99,102,241,0.2)', padding: '6px 14px', borderRadius: 999, marginBottom: 20 }}>
+                  <i className="fa-solid fa-microchip" style={{ fontSize: 10 }} /> {ai?.badge ?? 'AI-Powered Service'}
+                </span>
               </motion.div>
-              <motion.h1 {...rise(0.1)} style={{ fontSize: 'clamp(34px,4.6vw,62px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.035em', color: INK, margin: 0 }}>
-                {service.name}
+
+              {/* Main headline */}
+              <motion.h1 {...fadeUp(0.08)} style={{ fontSize: 'clamp(30px,4.8vw,64px)', fontWeight: 900, lineHeight: 1.04, letterSpacing: '-0.04em', color: C.heading, margin: '0 0 20px' }}>
+                {ai?.hero ?? service.name}
               </motion.h1>
-              <motion.p {...rise(0.16)} style={{ fontSize: 'clamp(16px,1.6vw,20px)', fontWeight: 600, color: ORANGE_DARK, margin: '16px 0 0' }}>
-                {service.tagline}
-              </motion.p>
-              <motion.p {...rise(0.22)} style={{ fontSize: 16, color: BODY, lineHeight: 1.7, maxWidth: 560, margin: '18px 0 0' }}>
+
+              {/* Typewriter sub */}
+              <motion.div {...fadeUp(0.13)} style={{ minHeight: 30, marginBottom: 20 }}>
+                <span style={{ fontSize: 'clamp(14px,1.4vw,17px)', fontWeight: 500, color: C.bodyMid, fontStyle: 'italic', lineHeight: 1.6 }}>
+                  "{typedSub}<span style={{ display: 'inline-block', width: 2, height: '0.85em', background: ORANGE, marginLeft: 1, verticalAlign: 'middle', animation: 'blink 0.9s step-end infinite' }} />"
+                </span>
+              </motion.div>
+
+              {/* Intro */}
+              <motion.p {...fadeUp(0.18)} style={{ fontSize: 'clamp(14px,1.2vw,16px)', color: C.body, lineHeight: 1.8, maxWidth: 560, margin: '0 0 34px' }}>
                 {service.intro}
               </motion.p>
-              <motion.div {...rise(0.28)} style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 32 }}>
-                <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 28px -12px rgba(255,128,72,0.7)' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)}
-                  onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
-                  Get a free quote <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 13 }} />
-                </Link>
-                <Link to="/#services" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, color: INK, fontSize: 15, fontWeight: 600, padding: '14px 24px', borderRadius: 8, textDecoration: 'none', border: '1px solid #e2e2e2', background: '#fff' }}>
-                  All services
+
+              {/* CTAs */}
+              <motion.div {...fadeUp(0.23)} style={{ display: 'flex', flexWrap: 'wrap', gap: 11 }}>
+                <a href="#hire" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14, fontWeight: 700, padding: '13px 28px', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 16px rgba(255,128,72,0.4)', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = ORANGE_DARK; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(255,128,72,0.52)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = ORANGE; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(255,128,72,0.4)'; }}>
+                  <i className="fa-solid fa-user-tie" style={{ fontSize: 12 }} /> Hire a Developer
+                </a>
+                <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, color: C.bodyMid, fontSize: 14, fontWeight: 600, padding: '13px 22px', borderRadius: 10, textDecoration: 'none', border: `1px solid ${C.border}`, background: C.bgCard, transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.4)'; e.currentTarget.style.color = C.heading; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.bodyMid; }}>
+                  Get a free quote
                 </Link>
               </motion.div>
             </div>
 
-            {/* Stat card */}
-            <motion.div {...rise(0.18)} style={{ background: '#fff', border: '1px solid #ececec', borderRadius: 22, padding: '38px 32px', boxShadow: '0 24px 50px -30px rgba(20,20,30,0.4)', justifySelf: 'stretch' }}>
-              <p style={{ fontSize: 'clamp(36px,4vw,52px)', fontWeight: 800, color: INK, margin: 0, letterSpacing: '-0.03em', lineHeight: 1 }}>{service.stat.num}</p>
-              <p style={{ fontSize: 14, color: BODY, lineHeight: 1.55, margin: '14px 0 0' }}>{service.stat.label}</p>
-              <div style={{ height: 1, background: '#eee', margin: '24px 0' }} />
-              <p style={{ ...sectionLabel, margin: '0 0 12px' }}>Tech we use</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {service.techStack.map(t => (
-                  <span key={t} style={{ fontSize: 12, fontWeight: 600, color: ORANGE_DARK, background: 'rgba(255,128,72,0.1)', padding: '6px 12px', borderRadius: 999 }}>{t}</span>
-                ))}
+            {/* RIGHT — floating AI capability card */}
+            <motion.div {...fadeUp(0.16)} style={{ animation: 'float 5s ease-in-out infinite' }}>
+              <div style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 22, overflow: 'hidden', boxShadow: dark ? '0 24px 64px rgba(0,0,0,0.5)' : '0 24px 64px rgba(0,0,0,0.09), 0 4px 16px rgba(0,0,0,0.04)' }}>
+                {/* Card chrome */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 18px', borderBottom: `1px solid ${C.border}`, background: dark ? '#161513' : '#f8f7f4' }}>
+                  <div style={{ display: 'flex', gap: 5 }}>
+                    {['#FF5F57','#FEBC2E','#28C840'].map(c => <span key={c} style={{ width: 9, height: 9, borderRadius: '50%', background: c, opacity: 0.85 }} />)}
+                  </div>
+                  <span style={{ flex: 1, textAlign: 'center', fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.muted }}>AI Capabilities Dashboard</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 10, fontWeight: 700, color: '#22c55e' }}>
+                    <span style={{ position: 'relative', display: 'inline-flex', width: 7, height: 7 }}>
+                      <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#22c55e', animation: 'pulse-ring 1.6s ease-out infinite', opacity: 0.6 }} />
+                      <span style={{ position: 'relative', display: 'block', width: 7, height: 7, borderRadius: '50%', background: '#22c55e' }} />
+                    </span>
+                    Active
+                  </span>
+                </div>
+
+                <div style={{ padding: '20px 20px 8px' }}>
+                  {/* Service icon + name */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 18 }}>
+                    <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(255,128,72,0.1)', border: '1px solid rgba(255,128,72,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className={`fa-solid ${service.icon}`} style={{ color: ORANGE, fontSize: 15 }} />
+                    </div>
+                    <div>
+                      <p style={{ fontSize: 13, fontWeight: 800, color: C.heading, margin: 0 }}>{ai?.hero ?? service.name}</p>
+                      <p style={{ fontSize: 10, color: C.muted, margin: '2px 0 0', fontWeight: 500 }}>Professional Softtech · AI Edition</p>
+                    </div>
+                  </div>
+
+                  {/* AI feature checklist */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 18 }}>
+                    {features.slice(0, 4).map((f, i) => (
+                      <motion.div key={f.title} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 + i * 0.12, duration: 0.3 }}
+                        style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+                        <span style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.28)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <i className="fa-solid fa-check" style={{ fontSize: 7, color: '#22c55e' }} />
+                        </span>
+                        <span style={{ fontSize: 12, fontWeight: 600, color: C.bodyMid }}>{f.title}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Stat */}
+                  <div style={{ background: altBg, border: `1px solid ${C.border}`, borderRadius: 12, padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+                    <div>
+                      <p style={{ fontSize: 26, fontWeight: 900, color: ORANGE, margin: 0, letterSpacing: '-0.04em', lineHeight: 1 }}>{stat.num}</p>
+                      <p style={{ fontSize: 11, color: C.body, margin: '5px 0 0', maxWidth: 190, lineHeight: 1.4 }}>{stat.label}</p>
+                    </div>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#22c55e', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', padding: '4px 10px', borderRadius: 999 }}>Proven ✓</span>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
 
-      {/* ── What's included ── */}
-      <section style={{ background: PAGE, padding: '90px 6%' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
-            <p style={sectionLabel}>What's included</p>
-            <h2 style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 800, color: INK, lineHeight: 1.14, letterSpacing: '-0.025em', margin: 0 }}>
-              Everything you need, in one team.
-            </h2>
-          </motion.div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 20 }}>
-            {service.features.map((f, i) => (
-              <motion.div key={f.title} {...rise((i % 2) * 0.08)}
-                style={{ background: PAGE, border: '1px solid #ececec', borderRadius: 18, padding: '28px 26px' }}>
-                <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(255,128,72,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
-                  <i className={`fa-solid ${f.icon}`} style={{ color: ORANGE_DARK, fontSize: 18 }} />
-                </div>
-                <h3 style={{ fontSize: 18, fontWeight: 700, color: INK, margin: '0 0 8px', letterSpacing: '-0.01em' }}>{f.title}</h3>
-                <p style={{ fontSize: 14.5, color: BODY, lineHeight: 1.65, margin: 0 }}>{f.desc}</p>
+          {/* ── Stats bar ── */}
+          <div style={{ marginTop: 56, paddingTop: 36, borderTop: `1px solid ${C.border}`, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(110px,1fr))', gap: 24, textAlign: 'center' }}>
+            {TRUST.map((item, i) => (
+              <motion.div key={item.label} {...fadeUp(0.1 + i * 0.06)}>
+                <p style={{ fontSize: 'clamp(24px,3vw,36px)', fontWeight: 900, color: C.heading, margin: 0, letterSpacing: '-0.04em', lineHeight: 1 }}>
+                  <CountUp to={item.num} suffix={item.suffix} />
+                </p>
+                <p style={{ fontSize: 10, fontWeight: 600, color: C.muted, margin: '6px 0 0', letterSpacing: '0.07em', textTransform: 'uppercase' }}>{item.label}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Explore other services ── */}
-      <section style={{ background: PAGE, padding: '80px 6%' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <motion.div {...rise(0)} style={{ marginBottom: 34 }}>
-            <p style={sectionLabel}>Explore more</p>
-            <h2 style={{ fontSize: 'clamp(24px,2.6vw,34px)', fontWeight: 800, color: INK, letterSpacing: '-0.025em', margin: 0 }}>
-              Other things we build.
-            </h2>
+      {/* ══════════════════════════════════════════════════════════════
+          AI FEATURES — alternating bg
+      ══════════════════════════════════════════════════════════════ */}
+      <section style={{ background: dark ? C.bg : '#fff', padding: 'clamp(64px,8vw,96px) 6%', borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <motion.div {...rise(0)} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 20, marginBottom: 48 }}>
+            <div>
+              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: ORANGE, margin: '0 0 10px' }}>AI capabilities</p>
+              <h2 style={{ fontSize: 'clamp(24px,3vw,40px)', fontWeight: 800, color: C.heading, letterSpacing: '-0.03em', lineHeight: 1.1, margin: 0 }}>
+                What AI unlocks in your<br />{service.name.toLowerCase()} project
+              </h2>
+            </div>
+            <p style={{ fontSize: 14, color: C.body, maxWidth: 360, lineHeight: 1.75, paddingBottom: 4 }}>
+              Every feature is AI-enhanced, developed, and QA-tested under one roof — zero handoffs, measurable ROI.
+            </p>
           </motion.div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 18 }}>
+            {features.map((f, i) => (
+              <motion.div key={f.title} {...rise(i * 0.07)}
+                style={{ background: dark ? C.bgCard : '#fafaf8', border: `1px solid ${C.border}`, borderRadius: 18, padding: '28px 24px', position: 'relative', overflow: 'hidden', transition: 'border-color 0.22s, box-shadow 0.22s, transform 0.22s' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.4)'; e.currentTarget.style.boxShadow = '0 10px 32px rgba(255,128,72,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${ORANGE},transparent)`, opacity: 0.55, borderRadius: '18px 18px 0 0' }} />
+                <span style={{ position: 'absolute', top: 16, right: 18, fontSize: 11, fontWeight: 900, color: dark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' }}>{String(i + 1).padStart(2, '0')}</span>
+                <div style={{ width: 48, height: 48, borderRadius: 13, background: 'rgba(255,128,72,0.1)', border: '1px solid rgba(255,128,72,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
+                  <i className={`fa-solid ${f.icon}`} style={{ color: ORANGE, fontSize: 18 }} />
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: C.heading, margin: '0 0 8px', letterSpacing: '-0.01em' }}>{f.title}</h3>
+                <p style={{ fontSize: 13.5, color: C.body, lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          AI TECH STACK — light alt bg
+      ══════════════════════════════════════════════════════════════ */}
+      <section style={{ background: altBg, padding: 'clamp(60px,7vw,88px) 6%', borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <motion.div {...rise(0)} style={{ textAlign: 'center', marginBottom: 36 }}>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: ORANGE, margin: '0 0 10px' }}>AI tools & tech</p>
+            <h2 style={{ fontSize: 'clamp(24px,3vw,38px)', fontWeight: 800, color: C.heading, letterSpacing: '-0.03em', lineHeight: 1.1, margin: '0 0 10px' }}>
+              The AI stack powering your {service.name.toLowerCase()}
+            </h2>
+            <p style={{ fontSize: 14, color: C.body, maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>
+              We combine proven frameworks with cutting-edge AI tooling to deliver faster, smarter results.
+            </p>
+          </motion.div>
+
+          {/* Tabs */}
+          <motion.div {...rise(0.06)} style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 32, flexWrap: 'wrap' }}>
+            {techGroups.map((g, i) => (
+              <button key={g.label} onClick={() => setActiveTab(i)} style={{ fontSize: 12, fontWeight: 700, padding: '8px 20px', borderRadius: 999, border: '1px solid', borderColor: activeTab === i ? ORANGE : C.border, background: activeTab === i ? 'rgba(255,128,72,0.1)' : C.bgCard, color: activeTab === i ? ORANGE : C.bodyMid, cursor: 'pointer', transition: 'all 0.2s' }}>
+                {g.label}
+              </button>
+            ))}
+          </motion.div>
+
+          <motion.div key={activeTab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.28 }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
+            {techGroups[activeTab].items.map((item, i) => (
+              <motion.span key={item} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.04, duration: 0.25 }}
+                style={{ fontSize: 13, fontWeight: 700, color: C.bodyMid, background: C.bgCard, border: `1px solid ${C.border}`, padding: '10px 20px', borderRadius: 999, transition: 'all 0.2s', cursor: 'default' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,128,72,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,128,72,0.35)'; e.currentTarget.style.color = ORANGE; }}
+                onMouseLeave={e => { e.currentTarget.style.background = C.bgCard; e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.bodyMid; }}>
+                {item}
+              </motion.span>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          HIRE / ENGAGEMENT MODELS — white
+      ══════════════════════════════════════════════════════════════ */}
+      <section id="hire" style={{ background: dark ? C.bg : '#fff', padding: 'clamp(64px,8vw,96px) 6%', borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s', scrollMarginTop: 72 }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <motion.div {...rise(0)} style={{ textAlign: 'center', marginBottom: 16 }}>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: ORANGE, margin: '0 0 10px' }}>Engagement models</p>
+            <h2 style={{ fontSize: 'clamp(26px,3.2vw,44px)', fontWeight: 900, color: C.heading, letterSpacing: '-0.03em', lineHeight: 1.08, margin: '0 0 12px' }}>
+              Hire an AI developer the way<br />that works for your team
+            </h2>
+            <p style={{ fontSize: 15, color: C.body, maxWidth: 520, margin: '0 auto', lineHeight: 1.72 }}>
+              From a single AI specialist to a full product team — we flex to your model, timeline, and budget.
+            </p>
+          </motion.div>
+
+          {/* Availability badge */}
+          <motion.div {...rise(0.06)} style={{ display: 'flex', justifyContent: 'center', margin: '24px 0 44px' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 700, color: '#22c55e', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', padding: '8px 20px', borderRadius: 999 }}>
+              <span style={{ position: 'relative', display: 'inline-flex', width: 8, height: 8 }}>
+                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#22c55e', animation: 'pulse-ring 1.6s ease-out infinite', opacity: 0.6 }} />
+                <span style={{ position: 'relative', display: 'block', width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} />
+              </span>
+              AI developers available now — onboarding within 48 hours
+            </span>
+          </motion.div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 20 }}>
+            {MODELS.map((m, i) => (
+              <motion.div key={m.title} {...rise(i * 0.1)}
+                style={{ background: dark ? C.bgCard : '#fafaf8', border: `1px solid ${C.border}`, borderRadius: 22, padding: '32px 28px', position: 'relative', overflow: 'hidden', transition: 'border-color 0.22s, box-shadow 0.22s, transform 0.22s' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = m.border; e.currentTarget.style.boxShadow = `0 16px 48px ${m.tagColor}12`; e.currentTarget.style.transform = 'translateY(-5px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                {/* Color top bar */}
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: m.tagColor, borderRadius: '22px 22px 0 0' }} />
+                {/* Tag */}
+                <span style={{ position: 'absolute', top: 22, right: 20, fontSize: 9, fontWeight: 800, color: m.tagColor, background: m.tagBg, border: `1px solid ${m.border}`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{m.tag}</span>
+
+                <div style={{ width: 52, height: 52, borderRadius: 14, background: m.tagBg, border: `1px solid ${m.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                  <i className={`fa-solid ${m.icon}`} style={{ color: m.tagColor, fontSize: 20 }} />
+                </div>
+                <h3 style={{ fontSize: 19, fontWeight: 800, color: C.heading, margin: '0 0 10px', letterSpacing: '-0.02em' }}>{m.title}</h3>
+                <p style={{ fontSize: 13.5, color: C.body, lineHeight: 1.72, margin: '0 0 22px' }}>{m.desc}</p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginBottom: 26 }}>
+                  {m.perks.map(p => (
+                    <div key={p} style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+                      <span style={{ width: 18, height: 18, borderRadius: '50%', background: m.tagBg, border: `1px solid ${m.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <i className="fa-solid fa-check" style={{ fontSize: 8, color: m.tagColor }} />
+                      </span>
+                      <span style={{ fontSize: 13, fontWeight: 500, color: C.bodyMid }}>{p}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Link to="/#contact" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: m.tagColor, color: '#fff', fontSize: 13, fontWeight: 700, padding: '13px', borderRadius: 11, textDecoration: 'none', boxShadow: `0 4px 14px ${m.tagColor}38`, transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+                  {m.title} <i className="fa-solid fa-arrow-right" style={{ fontSize: 11 }} />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          AI PROCESS — light cream
+      ══════════════════════════════════════════════════════════════ */}
+      <section style={{ background: altBg, padding: 'clamp(60px,7vw,88px) 6%', borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <motion.div {...rise(0)} style={{ maxWidth: 580, marginBottom: 52 }}>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: ORANGE, margin: '0 0 10px' }}>How we work</p>
+            <h2 style={{ fontSize: 'clamp(24px,3vw,40px)', fontWeight: 800, color: C.heading, letterSpacing: '-0.03em', lineHeight: 1.1, margin: '0 0 12px' }}>
+              Our AI-assisted development process
+            </h2>
+            <p style={{ fontSize: 14, color: C.body, lineHeight: 1.75, margin: 0 }}>
+              From first call to live AI product — a structured process that keeps you in control and delivers measurable results at every milestone.
+            </p>
+          </motion.div>
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(230px,1fr))', gap: 16 }}>
-            {others.map((s, i) => (
-              <motion.div key={s.slug} {...rise(i * 0.06)}>
-                <Link to={`/services/${s.slug}`}
-                  style={{ display: 'flex', flexDirection: 'column', gap: 12, background: '#fff', border: '1px solid #ececec', borderRadius: 16, padding: '24px 22px', textDecoration: 'none', height: '100%' }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.4)'; e.currentTarget.style.boxShadow = '0 16px 34px -22px rgba(242,106,46,0.45)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = '#ececec'; e.currentTarget.style.boxShadow = 'none'; }}>
-                  <div style={{ width: 42, height: 42, borderRadius: 10, background: 'rgba(255,128,72,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className={`fa-solid ${s.icon}`} style={{ color: ORANGE_DARK, fontSize: 17 }} />
+            {PROCESS.map((step, i) => (
+              <motion.div key={step.num} {...rise(i * 0.08)}
+                style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 18, padding: '28px 22px', transition: 'border-color 0.2s, transform 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.38)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(255,128,72,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className={`fa-solid ${step.icon}`} style={{ color: ORANGE, fontSize: 14 }} />
                   </div>
-                  <h3 style={{ fontSize: 16, fontWeight: 700, color: INK, margin: 0 }}>{s.name}</h3>
-                  <p style={{ fontSize: 13, color: BODY, lineHeight: 1.55, margin: 0, flexGrow: 1 }}>{s.short}</p>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: ORANGE_DARK }}>
-                    View More <i className="fa-solid fa-arrow-right" style={{ fontSize: 11 }} />
+                  <span style={{ fontSize: 'clamp(30px,4vw,44px)', fontWeight: 900, color: dark ? 'rgba(255,128,72,0.1)' : 'rgba(255,128,72,0.12)', letterSpacing: '-0.05em', lineHeight: 1 }}>{step.num}</span>
+                </div>
+                <h3 style={{ fontSize: 15, fontWeight: 700, color: C.heading, margin: '0 0 8px' }}>{step.title}</h3>
+                <p style={{ fontSize: 13, color: C.body, lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          OTHER SERVICES
+      ══════════════════════════════════════════════════════════════ */}
+      <section style={{ background: dark ? C.bg : '#fff', padding: 'clamp(56px,7vw,84px) 6%', borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <motion.div {...rise(0)} style={{ marginBottom: 32 }}>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: ORANGE, margin: '0 0 10px' }}>Explore more</p>
+            <h2 style={{ fontSize: 'clamp(22px,2.8vw,36px)', fontWeight: 800, color: C.heading, letterSpacing: '-0.025em', margin: 0 }}>Other AI solutions we build.</h2>
+          </motion.div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))', gap: 13 }}>
+            {others.map((s, i) => (
+              <motion.div key={s.slug} {...rise(i * 0.04)}>
+                <Link to={`/services/${s.slug}`}
+                  style={{ display: 'flex', flexDirection: 'column', gap: 10, background: dark ? C.bgCard : '#fafaf8', border: `1px solid ${C.border}`, borderRadius: 16, padding: '20px 18px', textDecoration: 'none', height: '100%', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.38)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(255,128,72,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(255,128,72,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className={`fa-solid ${s.icon}`} style={{ color: ORANGE, fontSize: 13 }} />
+                  </div>
+                  <h3 style={{ fontSize: 14, fontWeight: 700, color: C.heading, margin: 0 }}>{AI_CONTENT[s.slug]?.hero ?? s.name}</h3>
+                  <p style={{ fontSize: 12.5, color: C.body, lineHeight: 1.55, margin: 0, flexGrow: 1 }}>{s.short}</p>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 600, color: ORANGE }}>
+                    View more <i className="fa-solid fa-arrow-right" style={{ fontSize: 9 }} />
                   </span>
                 </Link>
               </motion.div>
@@ -147,28 +606,37 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ background: PAGE, padding: '90px 6%' }}>
-        <motion.div {...rise(0)} style={{
-          maxWidth: 980, margin: '0 auto', borderRadius: 28, padding: 'clamp(40px,5vw,68px)',
-          background: 'linear-gradient(145deg,#1f2127 0%,#272a33 100%)', textAlign: 'center', position: 'relative', overflow: 'hidden',
-        }}>
-          <div style={{ position: 'absolute', top: -100, right: -60, width: 360, height: 360, borderRadius: '50%', background: 'rgba(255,128,72,0.25)', filter: 'blur(80px)' }} />
+      {/* ══════════════════════════════════════════════════════════════
+          CTA — warm gradient, still light
+      ══════════════════════════════════════════════════════════════ */}
+      <section style={{ background: dark ? C.bg : '#fff', padding: 'clamp(44px,5vw,72px) 6% clamp(60px,8vw,92px)', transition: 'background 0.3s' }}>
+        <motion.div {...rise(0)} style={{ maxWidth: 1040, margin: '0 auto', borderRadius: 24, padding: 'clamp(44px,5.5vw,76px)', background: `linear-gradient(135deg,${dark ? '#1a1118' : '#fff8f4'} 0%,${dark ? '#0f0e16' : '#fff4ee'} 100%)`, border: `1px solid ${dark ? 'rgba(255,128,72,0.15)' : 'rgba(255,128,72,0.2)'}`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+          {/* Dot grid */}
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 24, pointerEvents: 'none', backgroundImage: `radial-gradient(${dark ? 'rgba(255,255,255,0.04)' : 'rgba(255,128,72,0.07)'} 1px,transparent 1px)`, backgroundSize: '24px 24px' }} />
+          {/* Bloom */}
+          <div style={{ position: 'absolute', top: -60, right: -40, width: 320, height: 320, borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,128,72,0.15) 0%,transparent 70%)', filter: 'blur(50px)', pointerEvents: 'none' }} />
+
           <div style={{ position: 'relative' }}>
-            <h2 style={{ fontSize: 'clamp(26px,3.4vw,44px)', fontWeight: 800, color: '#fff', lineHeight: 1.14, letterSpacing: '-0.03em', margin: '0 0 16px' }}>
-              Ready to start your {service.name.toLowerCase()} project?
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: ORANGE, background: 'rgba(255,128,72,0.1)', border: '1px solid rgba(255,128,72,0.25)', padding: '5px 14px', borderRadius: 999, marginBottom: 22 }}>
+              <span style={{ width: 5, height: 5, borderRadius: '50%', background: ORANGE, animation: 'pulse-ring 1.6s ease-out infinite' }} />
+              Start your AI project today
+            </span>
+            <h2 style={{ fontSize: 'clamp(26px,3.6vw,50px)', fontWeight: 900, color: C.heading, lineHeight: 1.08, letterSpacing: '-0.035em', margin: '0 0 16px' }}>
+              Ready to hire an AI developer<br />and ship your {service.name.toLowerCase()} product?
             </h2>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, maxWidth: 520, margin: '0 auto 30px' }}>
-              Tell us what you're building — we'll reply with honest rates and an upfront estimate. No hidden charges, no fuss.
+            <p style={{ fontSize: 15, color: C.body, lineHeight: 1.75, maxWidth: 500, margin: '0 auto 36px' }}>
+              Tell us what you're building — we'll match you with the right AI developer in 48 hours. Honest estimate, zero hidden charges.
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
-              <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 30px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 30px -12px rgba(255,128,72,0.8)' }}
-                onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)}
-                onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
-                Get a free quote <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 13 }} />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
+              <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14, fontWeight: 700, padding: '14px 30px', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 20px rgba(255,128,72,0.45)', transition: 'all 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.background = ORANGE_DARK; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(255,128,72,0.58)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = ORANGE; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(255,128,72,0.45)'; }}>
+                <i className="fa-solid fa-user-tie" style={{ fontSize: 12 }} /> Hire an AI developer
               </Link>
-              <a href="tel:+14135294901" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 28px', borderRadius: 8, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.25)' }}>
-                <i className="fa-solid fa-phone" style={{ fontSize: 12, color: ORANGE }} /> +1 (413) 529-4901
+              <a href="tel:+14135294901" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, color: C.bodyMid, fontSize: 14, fontWeight: 600, padding: '14px 26px', borderRadius: 10, textDecoration: 'none', border: `1px solid ${C.border}`, background: C.bgCard, transition: 'all 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.4)'; e.currentTarget.style.color = C.heading; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.bodyMid; }}>
+                <i className="fa-solid fa-phone" style={{ fontSize: 10, color: ORANGE }} /> +1 (413) 529-4901
               </a>
             </div>
           </div>

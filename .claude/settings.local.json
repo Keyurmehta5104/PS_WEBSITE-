@@ -3,7 +3,26 @@
     "allow": [
       "WebFetch(domain:www.indianic.com)",
       "WebFetch(domain:web.archive.org)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(npx playwright *)",
+      "Bash(node -e ' *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(npm run *)",
+      "WebFetch(domain:professionalsoft-tech.vercel.app)",
+      "Bash(curl -s http://localhost:5173/)",
+      "WebFetch(domain:www.webstacks.com)",
+      "WebFetch(domain:midrocket.com)",
+      "PowerShell(Start-Process \"http://localhost:5175/services/web-development\")",
+      "WebFetch(domain:www.softr.io)",
+      "WebFetch(domain:www.gridrebels.studio)",
+      "WebFetch(domain:www.orangemantra.com)",
+      "WebFetch(domain:www.solutionbowl.com)",
+      "WebFetch(domain:tecoreng.com)",
+      "PowerShell(Start-Process \"http://localhost:5175/#services\")",
+      "PowerShell(Start-Process \"http://localhost:5175/\")"
     ]
   }
 }
