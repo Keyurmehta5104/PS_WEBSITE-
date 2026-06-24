@@ -11,6 +11,7 @@ import Work from './components/Work';
 import Industries from './components/Industries';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
+import Awards from './components/Awards';
 import Contact from './components/Contact';
 import GlobalPresence from './components/GlobalPresence';
 import Footer from './components/Footer';
@@ -79,6 +80,7 @@ function Home() {
       <GlobalPresence />
       <Industries />
       <Testimonials />
+      <Awards />
       <Contact />
     </>
   );

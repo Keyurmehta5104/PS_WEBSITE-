@@ -144,8 +144,8 @@ export default function Services() {
   const { dark } = useTheme();
   const C = t(dark);
   return (
-    <section id="services" style={{ background: C.bg, padding: 'clamp(70px,8vw,120px) 6%', transition: 'background 0.3s' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+    <section id="services" style={{ background: C.bg, padding: 'clamp(70px,8vw,120px) 0', transition: 'background 0.3s' }}>
+      <div className="w-full px-6 md:px-10 lg:px-16">
 
         {/* Header */}
         <div className="services-head" style={{ display: 'grid', gridTemplateColumns: '1.4fr 0.9fr', gap: 48, alignItems: 'end', marginBottom: 'clamp(40px,5vw,66px)' }}>

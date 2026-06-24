@@ -90,7 +90,7 @@ export default function FAQ() {
   const C = t(dark);
   return (
     <section style={{ background: C.bg, borderBottom: `1px solid ${C.border}`, transition: 'background 0.3s' }} className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="w-full px-6 md:px-10 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
 
           {/* Left sticky */}

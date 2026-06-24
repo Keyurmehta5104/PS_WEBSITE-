@@ -149,7 +149,7 @@ export default function Testimonials() {
     <section id="testimonials" style={{ padding: 'clamp(70px,8vw,120px) 0', background: C.bg, borderBottom: `1px solid ${C.border}`, overflow: 'hidden', transition: 'background 0.3s' }}>
 
       {/* Header */}
-      <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto', padding: '0 6%', marginBottom: 'clamp(40px,5vw,64px)' }}>
+      <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto', padding: '0 clamp(24px,4vw,64px)', marginBottom: 'clamp(40px,5vw,64px)' }}>
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +176,6 @@ export default function Testimonials() {
         style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
       >
         <MarqueeRow items={testimonials} direction="left" speed={32} />
-        <MarqueeRow items={row2} direction="right" speed={28} />
       </motion.div>
 
     </section>

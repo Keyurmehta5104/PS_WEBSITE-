@@ -45,7 +45,7 @@ function OfficeCard({ o, last }) {
 export default function GlobalPresence() {
   return (
     <section className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ece7da]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="w-full px-6 md:px-10 lg:px-16">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">

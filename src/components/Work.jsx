@@ -143,7 +143,7 @@ export default function Work() {
       <div className="pointer-events-none absolute inset-0"
         style={{ backgroundImage: 'linear-gradient(#e8e3d8 1px, transparent 1px), linear-gradient(90deg, #e8e3d8 1px, transparent 1px)', backgroundSize: '60px 60px', opacity: 0.35 }} />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
+      <div className="relative w-full px-6 md:px-10 lg:px-16">
 
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
