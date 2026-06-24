@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Hero, { ImpactSection } from './components/Hero';
@@ -20,6 +21,42 @@ import ServiceDetail from './pages/ServiceDetail';
 import WhatWeDo from './pages/WhatWeDo';
 import IndustriesPage from './pages/Industries';
 import IndustryDetail from './pages/IndustryDetail';
+
+/* Floating scroll-to-top button */
+function ScrollToTop() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          key="scroll-top"
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.7 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.92 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{
+            position: 'fixed', bottom: 28, right: 28, zIndex: 999,
+            width: 48, height: 48, borderRadius: '50%',
+            background: '#FF8048', border: 'none', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 8px 24px rgba(255,128,72,0.45)',
+          }}
+          aria-label="Back to top"
+        >
+          <i className="fa-solid fa-arrow-up" style={{ fontSize: 16, color: '#fff' }} />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+}
 
 /* Thin gradient progress bar that tracks scroll depth */
 function ScrollProgress() {
@@ -92,6 +129,7 @@ function AppInner() {
     <BrowserRouter>
     <ScrollToHash />
     <ScrollProgress />
+    <ScrollToTop />
     <div style={{ background: dark ? '#111110' : '#F7F4EC', minHeight: '100vh', color: dark ? '#e8e4dc' : '#0f0f0f', transition: 'background 0.3s, color 0.3s' }}
       className="relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
       <Navbar />

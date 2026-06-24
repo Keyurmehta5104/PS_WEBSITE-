@@ -308,15 +308,6 @@ export default function Footer() {
           </a>
         </p>
 
-        {/* Scroll to top */}
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="w-9 h-9 rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110 cursor-pointer flex-shrink-0"
-          style={{ background: ORANGE }}
-          aria-label="Scroll to top"
-        >
-          <i className="fa-solid fa-arrow-up" style={{ fontSize: 12, color: '#fff' }} />
-        </button>
       </div>
 
     </footer>
