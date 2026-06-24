@@ -7,7 +7,7 @@ const socialLinks = [
   { label: 'YouTube',   icon: 'fa-brands fa-youtube',       href: '#' },
   { label: 'X',         icon: 'fa-brands fa-x-twitter',     href: '#' },
   { label: 'Upwork',    icon: 'fa-brands fa-upwork',         href: 'https://www.upwork.com/agencies/425296127165009920/' },
-  { label: 'Dribbble',  icon: 'fa-brands fa-dribbble',      href: '#' },
+  { label: 'Clutch',    icon: 'fa-solid fa-award',            href: 'https://clutch.co/profile/professional-soft-tech' },
 ];
 
 const company = [
@@ -84,6 +84,9 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
+                  title={s.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200"
                   style={{ background: '#d8d3c8', color: MUTED }}
                   onMouseEnter={e => { e.currentTarget.style.background = ORANGE; e.currentTarget.style.color = '#fff'; }}
