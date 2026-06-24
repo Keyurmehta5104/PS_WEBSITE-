@@ -4,8 +4,6 @@ const socialLinks = [
   { label: 'LinkedIn',  icon: 'fa-brands fa-linkedin-in',  href: 'https://www.linkedin.com/company/professional-softtech' },
   { label: 'Facebook',  icon: 'fa-brands fa-facebook-f',    href: 'https://www.facebook.com/ProfessionalSofttech/' },
   { label: 'Instagram', icon: 'fa-brands fa-instagram',     href: 'https://www.instagram.com/professional_softtech' },
-  { label: 'YouTube',   icon: 'fa-brands fa-youtube',       href: '#' },
-  { label: 'X',         icon: 'fa-brands fa-x-twitter',     href: '#' },
   { label: 'Upwork',    icon: 'fa-brands fa-upwork',         href: 'https://www.upwork.com/agencies/425296127165009920/' },
   { label: 'Clutch',    icon: 'fa-solid fa-award',            href: 'https://clutch.co/profile/professional-soft-tech' },
 ];
