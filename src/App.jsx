@@ -16,6 +16,7 @@ import Awards from './components/Awards';
 import Contact from './components/Contact';
 import GlobalPresence from './components/GlobalPresence';
 import Footer from './components/Footer';
+import ChatWidget from './components/ChatWidget';
 import About from './pages/About';
 import ServiceDetail from './pages/ServiceDetail';
 import WhatWeDo from './pages/WhatWeDo';
@@ -130,6 +131,7 @@ function AppInner() {
     <ScrollToHash />
     <ScrollProgress />
     <ScrollToTop />
+    <ChatWidget />
     <div style={{ background: dark ? '#111110' : '#F7F4EC', minHeight: '100vh', color: dark ? '#e8e4dc' : '#0f0f0f', transition: 'background 0.3s, color 0.3s' }}
       className="relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
       <Navbar />
