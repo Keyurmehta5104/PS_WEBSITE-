@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { INDUSTRIES } from '../data/industries';
+import { useSEO } from '../useSEO';
 
 /* ── Brand tokens ───────────────────────────────────────────────── */
 const ORANGE = '#FF8048';
@@ -278,6 +279,11 @@ function CTA() {
 
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function Industries() {
+  useSEO({
+    title: 'Industries We Serve | Professional Soft-Tech',
+    description: 'We build software for education, healthcare, real estate, e-commerce, HR, logistics, travel, automobile, startups and more — 18+ industries since 2010.',
+    path: '/industries',
+  });
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <main style={{ fontFamily: 'inherit' }}>

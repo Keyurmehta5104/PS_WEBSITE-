@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useSEO } from '../useSEO';
 
 /* ── Brand tokens (shared with Hero) ────────────────────────────── */
 const ORANGE = '#FF8048';
@@ -334,6 +335,11 @@ function FinalCTA() {
 
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function About() {
+  useSEO({
+    title: 'About Us | Professional Soft-Tech',
+    description: "Meet the team behind Professional Soft-Tech — web and mobile app developers since 2010, serving clients across USA, Singapore and India.",
+    path: '/about',
+  });
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <main style={{ fontFamily: 'inherit' }}>

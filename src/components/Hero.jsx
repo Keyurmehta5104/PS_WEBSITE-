@@ -275,10 +275,19 @@ export default function Hero() {
             {/* Headline */}
             <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
               <h1 style={{ fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.035em', color: C.heading, margin: 0 }}>Turning</h1>
-              <h1 style={{ fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.035em', color: C.heading, margin: '2px 0 0' }}>Ideas into</h1>
+              <h2 style={{ fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.035em', color: C.heading, margin: '2px 0 0' }}>Ideas into</h2>
               <div style={{ height: 'clamp(46px,5.3vw,84px)', overflow: 'hidden', marginTop: 2 }}>
                 <AnimatePresence mode="wait">
-                  <motion.h1 key={wordIdx}
+                  <motion.h2 key={wordIdx}
+                    initial={{ y: '105%' }} animate={{ y: '0%' }} exit={{ y: '-105%' }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    style={{
+                      fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.035em',
+                      margin: 0, paddingBottom: 4,
+                      background: ORANGE_GRADIENT, WebkitBackgroundClip: 'text', backgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent', color: 'transparent',
+                    }}>{CYCLE_WORDS[wordIdx]}</motion.h2>
+                </AnimatePresence>
                     initial={{ y: '105%' }} animate={{ y: '0%' }} exit={{ y: '-105%' }}
                     transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     style={{

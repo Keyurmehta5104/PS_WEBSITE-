@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { INDUSTRIES, getIndustry } from '../data/industries';
+import { useSEO } from '../useSEO';
 
 /* ── Brand tokens ───────────────────────────────────────────────── */
 const ORANGE = '#FF8048';
@@ -23,9 +24,14 @@ const sectionLabel = {
   textTransform: 'uppercase', color: ORANGE, margin: '0 0 14px',
 };
 
-export default function IndustryDetail() {
-  const { slug } = useParams();
+const { slug } = useParams();
   const industry = getIndustry(slug);
+
+  useSEO({
+    title: industry ? `${industry.name} Software Development | Professional Soft-Tech` : 'Industry | Professional Soft-Tech',
+    description: industry?.intro || `Custom software solutions for the ${industry?.name || ''} industry by Professional Soft-Tech.`,
+    path: `/industries/${slug}`,
+  });
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 

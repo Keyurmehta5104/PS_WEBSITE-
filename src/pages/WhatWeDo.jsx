@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSEO } from '../useSEO';
 
 /* ── Brand tokens ───────────────────────────────────────────────── */
 const ORANGE = '#FF8048';
@@ -595,6 +596,11 @@ function FollowTheSun() {
 
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function WhatWeDo() {
+  useSEO({
+    title: 'Our Services | Web, Mobile & UI/UX Development — Professional Soft-Tech',
+    description: 'Explore our software development services: mobile apps, web development, UI/UX design, e-commerce, enterprise software, QA testing and DevOps.',
+    path: '/services',
+  });
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <main style={{ fontFamily: 'inherit' }}>

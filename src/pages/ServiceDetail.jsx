@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { SERVICES } from '../data/services';
 import { useTheme, t } from '../context/ThemeContext';
+import { useSEO } from '../useSEO';
 
 const ORANGE = '#FF8048';
 const ORANGE_DARK = '#F26A2E';
@@ -227,6 +228,12 @@ export default function ServiceDetail() {
 
   const service = SERVICES.find(s => s.slug === slug);
   const ai = AI_CONTENT[slug] ?? null;
+
+  useSEO({
+    title: service ? `${ai?.hero ?? service.name} | Professional Soft-Tech` : 'Service | Professional Soft-Tech',
+    description: service?.intro || ai?.sub || 'AI-powered software development services by Professional Soft-Tech.',
+    path: `/services/${slug}`,
+  });
 
   const typedSub = useTypewriter(ai?.sub ?? service?.tagline ?? '', 30);
   const [activeTab, setActiveTab] = useState(0);
