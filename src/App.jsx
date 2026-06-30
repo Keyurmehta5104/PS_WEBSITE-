@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Navbar from './components/Navbar';
@@ -17,11 +17,13 @@ import Contact from './components/Contact';
 import GlobalPresence from './components/GlobalPresence';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
-import About from './pages/About';
-import ServiceDetail from './pages/ServiceDetail';
-import WhatWeDo from './pages/WhatWeDo';
-import IndustriesPage from './pages/Industries';
-import IndustryDetail from './pages/IndustryDetail';
+
+/* Sub-pages are lazy-loaded so the homepage doesn't ship their code upfront. */
+const About = lazy(() => import('./pages/About'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const WhatWeDo = lazy(() => import('./pages/WhatWeDo'));
+const IndustriesPage = lazy(() => import('./pages/Industries'));
+const IndustryDetail = lazy(() => import('./pages/IndustryDetail'));
 
 /* Floating scroll-to-top button */
 function ScrollToTop() {
@@ -135,14 +137,16 @@ function AppInner() {
     <div style={{ background: dark ? '#111110' : '#F7F4EC', minHeight: '100vh', color: dark ? '#e8e4dc' : '#0f0f0f', transition: 'background 0.3s, color 0.3s' }}
       className="relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<WhatWeDo />} />
-        <Route path="/services/:slug" element={<ServiceDetail />} />
-        <Route path="/industries" element={<IndustriesPage />} />
-        <Route path="/industries/:slug" element={<IndustryDetail />} />
-      </Routes>
+      <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<WhatWeDo />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/industries" element={<IndustriesPage />} />
+          <Route path="/industries/:slug" element={<IndustryDetail />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </div>
     </BrowserRouter>
