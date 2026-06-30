@@ -24,14 +24,17 @@
     <meta name="twitter:description" content="We build highly scalable, user-friendly web and mobile applications across USA, Singapore and India." />
     <meta name="twitter:image" content="https://ps-website-test.vercel.app/ps-logo.png" />
 
-    <!-- Google Fonts — Poppins (brand typeface) -->
+    <!-- Google Fonts + Font Awesome — loaded non-render-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome 6 (free: solid + brands) -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+    </noscript>
   </head>
   <body class="bg-white text-[#4D4D4D] selection:bg-[#FF8048] selection:text-white">
     <div id="root"></div>
