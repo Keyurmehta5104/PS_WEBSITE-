@@ -326,7 +326,7 @@ export default function Hero() {
             {/* Trust row */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }}
               style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 16px', marginTop: 26 }}>
-              {['Clutch Top Developer', 'Google Partner', 'AWS Partner', 'ISO 9001:2015'].map(b => (
+              {['Clutch Top Developer', 'Google Partner', 'AWS Partner'].map(b => (
                 <span key={b} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10.5, fontWeight: 600, color: C.muted, letterSpacing: '0.04em' }}>
                   <i className="fa-solid fa-circle-check" style={{ fontSize: 11, color: C.borderLight }} />{b}
                 </span>

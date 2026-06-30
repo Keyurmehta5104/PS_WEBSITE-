@@ -22,7 +22,20 @@
       "WebFetch(domain:www.solutionbowl.com)",
       "WebFetch(domain:tecoreng.com)",
       "PowerShell(Start-Process \"http://localhost:5175/#services\")",
-      "PowerShell(Start-Process \"http://localhost:5175/\")"
+      "PowerShell(Start-Process \"http://localhost:5175/\")",
+      "WebFetch(domain:www.professionalsofttech.com)",
+      "WebFetch(domain:www.infintechdesigns.com)",
+      "WebFetch(domain:eastsideco.com)",
+      "WebFetch(domain:www.eleken.co)",
+      "WebFetch(domain:herothemes.com)",
+      "WebFetch(domain:saaslandingpage.com)",
+      "WebFetch(domain:muz.li)",
+      "PowerShell(Select-String -Path \"E:\\\\Website trial\\\\src\\\\components\\\\Services.jsx\" -Pattern \"px-|w-full|max-w-|mx-auto\" | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" } | Select-Object -First 20)",
+      "WebFetch(domain:www.ramotion.com)",
+      "WebFetch(domain:clutch.co)",
+      "WebFetch(domain:hypersense-software.com)",
+      "WebFetch(domain:pscsoftware.com)",
+      "WebFetch(domain:www.intellectsoft.net)"
     ]
   }
 }
