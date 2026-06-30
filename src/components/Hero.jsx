@@ -288,15 +288,6 @@ export default function Hero() {
                       WebkitTextFillColor: 'transparent', color: 'transparent',
                     }}>{CYCLE_WORDS[wordIdx]}</motion.h2>
                 </AnimatePresence>
-                    initial={{ y: '105%' }} animate={{ y: '0%' }} exit={{ y: '-105%' }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                      fontSize: 'clamp(40px,4.9vw,76px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.035em',
-                      margin: 0, paddingBottom: 4,
-                      background: ORANGE_GRADIENT, WebkitBackgroundClip: 'text', backgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent', color: 'transparent',
-                    }}>{CYCLE_WORDS[wordIdx]}</motion.h1>
-                </AnimatePresence>
               </div>
             </motion.div>
 

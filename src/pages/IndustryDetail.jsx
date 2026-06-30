@@ -24,7 +24,8 @@ const sectionLabel = {
   textTransform: 'uppercase', color: ORANGE, margin: '0 0 14px',
 };
 
-const { slug } = useParams();
+export default function IndustryDetail() {
+  const { slug } = useParams();
   const industry = getIndustry(slug);
 
   useSEO({
