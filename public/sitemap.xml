@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://ps-website-test.vercel.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/about</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services</loc><priority>0.9</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/mobile-app-development</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/web-development</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/ui-ux-design</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/email-template-development</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/e-commerce</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/enterprise-software</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/qa-testing</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/services/devops-cloud</loc><priority>0.8</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries</loc><priority>0.9</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/education</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/human-resources</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/real-estate</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/e-commerce</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/healthcare</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/social-networking</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/travel-hospitality</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/logistics</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/startups</loc><priority>0.7</priority></url>
+  <url><loc>https://ps-website-test.vercel.app/industries/automobile</loc><priority>0.7</priority></url>
+</urlset>
