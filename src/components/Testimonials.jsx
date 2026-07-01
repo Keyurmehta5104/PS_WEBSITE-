@@ -82,7 +82,7 @@ function TestimonialCard({ t: item }) {
     >
       {/* Quote icon */}
       <i className="fa-solid fa-quote-right"
-        style={{ position: 'absolute', top: 20, right: 22, fontSize: 28, color: dark ? 'rgba(255,128,72,0.12)' : '#FFF1E9' }} />
+        style={{ position: 'absolute', top: 20, right: 22, fontSize: 28, color: dark ? 'rgba(91,63,160,0.12)' : '#EDE7F7' }} />
 
       <div>
         {/* Stars */}

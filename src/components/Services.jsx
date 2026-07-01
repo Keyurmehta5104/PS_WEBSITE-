@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { SERVICES } from '../data/services';
 import { useTheme, t } from '../context/ThemeContext';
 
-const ORANGE = '#FF8048';
+const ORANGE = '#5B3FA0';
 
 /* AI-focused card content per slug */
 const AI_CARDS = {
@@ -80,12 +80,12 @@ function ServiceCard({ svc, i }) {
         style={{
           display: 'flex', flexDirection: 'column', height: '100%', textDecoration: 'none',
           background: h
-            ? (dark ? 'linear-gradient(160deg,#242220 0%,#1e1b18 100%)' : 'linear-gradient(160deg,#FFFCFA 0%,#FFF6F0 100%)')
+            ? (dark ? 'linear-gradient(160deg,#242220 0%,#1e1b18 100%)' : 'linear-gradient(160deg,#FFFCFA 0%,#F3EFFA 100%)')
             : C.bgCard,
           borderRadius: 18,
-          border: `1px solid ${h ? 'rgba(255,128,72,0.4)' : C.border}`,
+          border: `1px solid ${h ? 'rgba(91,63,160,0.4)' : C.border}`,
           boxShadow: h
-            ? '0 28px 56px -28px rgba(242,106,46,0.5), 0 0 0 1.5px rgba(255,128,72,0.25)'
+            ? '0 28px 56px -28px rgba(74,48,128,0.5), 0 0 0 1.5px rgba(91,63,160,0.25)'
             : dark ? '0 4px 24px -12px rgba(0,0,0,0.4)' : '0 14px 32px -28px rgba(20,20,30,0.3)',
           padding: 'clamp(24px,2.4vw,32px) clamp(20px,2vw,28px)',
           transform: h ? 'translateY(-6px)' : 'none',
@@ -109,7 +109,7 @@ function ServiceCard({ svc, i }) {
         </div>
 
         {/* Service icon */}
-        <div style={{ width: 42, height: 42, borderRadius: 11, background: 'rgba(255,128,72,0.1)', border: '1px solid rgba(255,128,72,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+        <div style={{ width: 42, height: 42, borderRadius: 11, background: 'rgba(91,63,160,0.1)', border: '1px solid rgba(91,63,160,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
           <i className={`fa-solid ${svc.icon}`} style={{ color: ORANGE, fontSize: 16 }} />
         </div>
 

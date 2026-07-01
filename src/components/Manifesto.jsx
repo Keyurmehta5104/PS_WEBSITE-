@@ -4,7 +4,7 @@ export default function Manifesto() {
   return (
     <section
       className="border-b border-white/20 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg,#FF8048 0%,#F26A2E 100%)' }}
+      style={{ background: 'linear-gradient(135deg,#5B3FA0 0%,#4A3080 100%)' }}
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[560px]">
@@ -31,7 +31,7 @@ export default function Manifesto() {
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 bg-white text-[#F26A2E] font-semibold text-sm px-7 py-3.5 rounded-full w-fit hover:bg-[#f5f5f5] transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-white text-[#4A3080] font-semibold text-sm px-7 py-3.5 rounded-full w-fit hover:bg-[#f5f5f5] transition-all duration-300"
             >
               Let's work together <i className="fa-solid fa-arrow-right w-4 h-4" />
             </motion.a>

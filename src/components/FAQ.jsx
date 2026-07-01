@@ -41,7 +41,7 @@ function Item({ faq, i }) {
       transition={{ duration: 0.45, delay: (i % 6) * 0.05, ease: [0.16, 1, 0.3, 1] }}
       style={{
         borderBottom: `1px solid ${C.borderLight}`,
-        borderLeft: open ? '3px solid #FF8048' : '3px solid transparent',
+        borderLeft: open ? '3px solid #5B3FA0' : '3px solid transparent',
         paddingLeft: open ? 14 : 0,
         transition: 'border-left-color 0.25s, padding-left 0.25s, border-bottom-color 0.3s',
       }}
@@ -50,8 +50,8 @@ function Item({ faq, i }) {
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-6 py-5 text-left group cursor-pointer"
       >
-        <span style={{ fontWeight: 600, color: open ? '#FF8048' : C.heading, fontSize: 15, transition: 'color 0.25s', lineHeight: 1.35 }}
-          className="group-hover:text-[#FF8048] transition-colors leading-snug">
+        <span style={{ fontWeight: 600, color: open ? '#5B3FA0' : C.heading, fontSize: 15, transition: 'color 0.25s', lineHeight: 1.35 }}
+          className="group-hover:text-[#5B3FA0] transition-colors leading-snug">
           {faq.q}
         </span>
         <motion.span
@@ -59,10 +59,10 @@ function Item({ faq, i }) {
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
           className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
           style={{
-            background: open ? '#FF8048' : '#fafafa',
+            background: open ? '#5B3FA0' : '#fafafa',
             border: open ? '1.5px solid transparent' : '1.5px solid #e5e5e5',
             color: open ? '#fff' : '#737373',
-            boxShadow: open ? '0 6px 16px -8px rgba(242,106,46,0.5)' : 'none',
+            boxShadow: open ? '0 6px 16px -8px rgba(74,48,128,0.5)' : 'none',
           }}
         >
           <i className="fa-solid fa-plus" style={{ fontSize: 11 }} />
@@ -106,7 +106,7 @@ export default function FAQ() {
               Frequently asked questions.
             </h2>
             <p style={{ color: C.body }} className="text-sm leading-relaxed">Can't find your answer? Reach out directly.</p>
-            <a href="mailto:enquiry@professionalsofttech.com" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF8048] hover:text-[#F26A2E] transition-colors">
+            <a href="mailto:enquiry@professionalsofttech.com" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#5B3FA0] hover:text-[#4A3080] transition-colors">
               enquiry@professionalsofttech.com →
             </a>
           </motion.div>

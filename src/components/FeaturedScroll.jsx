@@ -12,7 +12,7 @@ const cards = [
       <div className="mt-5 bg-[#F7F4EC] border border-[#ececec] rounded-xl p-4 flex flex-col gap-2">
         {['Analysing data stream…', 'Tool call: fetch_crm()', 'Action: send_report ✓'].map((l, i) => (
           <div key={i} className="flex items-center gap-2.5">
-            <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${i === 2 ? 'bg-green-500' : 'bg-[#FF8048] animate-pulse'}`} />
+            <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${i === 2 ? 'bg-green-500' : 'bg-[#5B3FA0] animate-pulse'}`} />
             <span className="text-[11px] font-mono text-[#8a8a8a]">{l}</span>
           </div>
         ))}
@@ -44,7 +44,7 @@ const cards = [
     tag: 'Mobile',
     visual: (
       <div className="mt-5 flex gap-3 items-end">
-        {['#FF8048', '#FFB066', '#F26A2E'].map((c, i) => (
+        {['#5B3FA0', '#8B6FC7', '#4A3080'].map((c, i) => (
           <div key={i} className="flex-1 rounded-t-xl border border-[#ececec]"
             style={{ height: `${[56, 80, 44][i]}px`, background: `${c}30` }} />
         ))}
@@ -62,7 +62,7 @@ const cards = [
       <div className="mt-5 bg-[#F7F4EC] border border-[#ececec] rounded-xl p-4 flex items-end gap-1 h-20">
         {[35, 55, 42, 72, 88, 60, 95].map((h, i) => (
           <div key={i} className="flex-1 rounded-t"
-            style={{ height: `${h}%`, background: i === 6 ? 'linear-gradient(to top,#FF8048,#FFB066)' : `rgba(255,128,72,${0.15 + i * 0.04})` }} />
+            style={{ height: `${h}%`, background: i === 6 ? 'linear-gradient(to top,#5B3FA0,#8B6FC7)' : `rgba(91,63,160,${0.15 + i * 0.04})` }} />
         ))}
       </div>
     ),
@@ -92,14 +92,14 @@ export default function FeaturedScroll() {
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
         <div>
-          <p className="section-label mb-3" style={{ color: '#FF8048' }}>WHAT WE SHIP</p>
+          <p className="section-label mb-3" style={{ color: '#5B3FA0' }}>WHAT WE SHIP</p>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#2b2b2b] tracking-[-0.03em] leading-[1.07]">
             Five pillars of<br />
             <span className="text-gradient">engineering excellence.</span>
           </h2>
         </div>
         <div className="hidden sm:flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#8a8a8a]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF8048] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#5B3FA0] animate-pulse" />
           SCROLL TO EXPLORE →
         </div>
       </div>
@@ -113,11 +113,11 @@ export default function FeaturedScroll() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: idx * 0.07 }}
-            className="flex-shrink-0 w-[300px] md:w-[340px] bg-white border border-[#ececec] rounded-2xl p-7 flex flex-col justify-between h-[450px] group cursor-pointer hover:border-[#FF8048]/40 transition-all duration-300 shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)]"
+            className="flex-shrink-0 w-[300px] md:w-[340px] bg-white border border-[#ececec] rounded-2xl p-7 flex flex-col justify-between h-[450px] group cursor-pointer hover:border-[#5B3FA0]/40 transition-all duration-300 shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)]"
           >
             <div>
               <div className="flex items-start justify-between mb-6">
-                <span className="font-extrabold text-[52px] text-[#FF8048]/15 leading-none tracking-tight select-none">
+                <span className="font-extrabold text-[52px] text-[#5B3FA0]/15 leading-none tracking-tight select-none">
                   {card.num}
                 </span>
                 <span className="text-[9px] font-bold border border-[#ececec] text-[#8a8a8a] px-2.5 py-1 rounded-full uppercase tracking-widest mt-2">
@@ -125,7 +125,7 @@ export default function FeaturedScroll() {
                 </span>
               </div>
               <p className="text-[9px] font-black tracking-[0.15em] text-[#8a8a8a] uppercase mb-2">{card.label}</p>
-              <h3 className="text-[17px] font-bold text-[#2b2b2b] mb-3 tracking-tight group-hover:text-[#F26A2E] transition-colors duration-300">
+              <h3 className="text-[17px] font-bold text-[#2b2b2b] mb-3 tracking-tight group-hover:text-[#4A3080] transition-colors duration-300">
                 {card.title}
               </h3>
               <p className="text-[#4D4D4D] text-sm leading-relaxed">{card.desc}</p>
@@ -140,7 +140,7 @@ export default function FeaturedScroll() {
                   </span>
                 ))}
               </div>
-              <span className="flex items-center gap-1 text-xs font-semibold text-[#FF8048] group-hover:text-[#F26A2E] transition-colors">
+              <span className="flex items-center gap-1 text-xs font-semibold text-[#5B3FA0] group-hover:text-[#4A3080] transition-colors">
                 Learn More <i className="fa-solid fa-arrow-right w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </span>
             </div>

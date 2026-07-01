@@ -1,4 +1,4 @@
-const ORANGE = '#FF8048';
+const ORANGE = '#5B3FA0';
 
 const socialLinks = [
   { label: 'LinkedIn',  icon: 'fa-brands fa-linkedin-in',  href: 'https://www.linkedin.com/company/professional-softtech' },

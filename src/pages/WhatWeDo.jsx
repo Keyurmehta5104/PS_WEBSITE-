@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { useSEO } from '../useSEO';
 
 /* ── Brand tokens ───────────────────────────────────────────────── */
-const ORANGE = '#FF8048';
-const ORANGE_DARK = '#F26A2E';
+const ORANGE = '#5B3FA0';
+const ORANGE_DARK = '#4A3080';
 const INK = '#1a1a1a';
 const BODY = '#5a5a5a';
 const PAGE = '#F7F4EC';
@@ -151,7 +151,7 @@ function Hero() {
               A full-service web and app development team — building beautiful, efficiently coded products under one roof since 2010. Delivered across 17 countries.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-              <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14.5, fontWeight: 600, padding: '13px 26px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 28px -12px rgba(255,128,72,0.7)' }}
+              <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14.5, fontWeight: 600, padding: '13px 26px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 28px -12px rgba(91,63,160,0.7)' }}
                 onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)} onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
                 Scope a project <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 12 }} />
               </Link>
@@ -226,7 +226,7 @@ function Disciplines() {
                     width: '100%', textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit',
                     border: 'none', borderBottom: '1px solid #e6e0d2',
                     borderLeft: `3px solid ${on ? ORANGE : 'transparent'}`,
-                    background: on ? 'rgba(255,128,72,0.07)' : 'none',
+                    background: on ? 'rgba(91,63,160,0.07)' : 'none',
                     borderRadius: on ? '0 10px 10px 0' : 0,
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
                     padding: 'clamp(14px,1.6vw,20px) 16px',
@@ -283,10 +283,10 @@ function EngagementCard({ m, i }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? 'linear-gradient(155deg,#FFF1E8 0%,#FCE9E4 100%)' : '#fff',
-        border: `1px solid ${hovered ? 'rgba(255,128,72,0.4)' : '#ececec'}`, borderRadius: 16,
+        background: hovered ? 'linear-gradient(155deg,#EDE7F7 0%,#E3D9F2 100%)' : '#fff',
+        border: `1px solid ${hovered ? 'rgba(91,63,160,0.4)' : '#ececec'}`, borderRadius: 16,
         padding: '26px 24px', display: 'flex', flexDirection: 'column', minHeight: 230,
-        boxShadow: hovered ? '0 26px 52px -28px rgba(242,106,46,0.4)' : '0 14px 32px -28px rgba(20,20,30,0.28)',
+        boxShadow: hovered ? '0 26px 52px -28px rgba(74,48,128,0.4)' : '0 14px 32px -28px rgba(20,20,30,0.28)',
         transform: hovered ? 'translateY(-5px)' : 'none',
         transition: 'background .3s, border-color .3s, box-shadow .3s, transform .3s',
       }}>
@@ -336,9 +336,9 @@ function TechTile({ t }) {
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
       style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 14,
-        background: '#fff', border: `1px solid ${h ? 'rgba(255,128,72,0.45)' : '#ece7da'}`, borderRadius: 14,
+        background: '#fff', border: `1px solid ${h ? 'rgba(91,63,160,0.45)' : '#ece7da'}`, borderRadius: 14,
         padding: '26px 14px', minHeight: 124,
-        boxShadow: h ? '0 18px 36px -24px rgba(242,106,46,0.4)' : 'none',
+        boxShadow: h ? '0 18px 36px -24px rgba(74,48,128,0.4)' : 'none',
         transform: h ? 'translateY(-4px)' : 'none',
         transition: 'border-color .25s, box-shadow .25s, transform .25s',
       }}>
@@ -408,7 +408,7 @@ function CaseTeaser() {
 function CTA() {
   return (
     <section style={{ position: 'relative', background: '#ffffff', padding: 'clamp(80px,10vw,140px) 6%', overflow: 'hidden', textAlign: 'center' }}>
-      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 600, height: 360, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,128,72,0.22), rgba(235,47,91,0.12) 45%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 600, height: 360, borderRadius: '50%', background: 'radial-gradient(circle, rgba(91,63,160,0.22), rgba(235,47,91,0.12) 45%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
       <div style={{ position: 'relative', maxWidth: 980, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...label, marginBottom: 22 }}>— Let's Build</motion.p>
         <motion.h2 {...rise(0.05)} style={{ fontSize: 'clamp(38px,6vw,84px)', fontWeight: 800, color: INK, lineHeight: 1.0, letterSpacing: '-0.04em', margin: 0 }}>
@@ -418,7 +418,7 @@ function CTA() {
           Tell us what you're building. We'll reply with honest rates and an upfront estimate — no hidden charges, no fuss.
         </motion.p>
         <motion.div {...rise(0.16)} style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 30 }}>
-          <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 30px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 16px 32px -12px rgba(255,128,72,0.8)' }}
+          <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 30px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 16px 32px -12px rgba(91,63,160,0.8)' }}
             onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)} onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
             Get a free quote <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 13 }} />
           </Link>
@@ -579,8 +579,8 @@ function FollowTheSun() {
             </svg>
             {OFFICES.map(o => (
               <span key={o.code} style={{ position: 'absolute', left: o.x, top: o.y, transform: 'translate(-50%,-50%)', width: 14, height: 14 }}>
-                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: ORANGE, boxShadow: '0 0 0 5px rgba(255,128,72,0.18)' }} />
-                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'rgba(255,128,72,0.5)', animation: 'gp-ping 2s ease-out infinite' }} />
+                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: ORANGE, boxShadow: '0 0 0 5px rgba(91,63,160,0.18)' }} />
+                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'rgba(91,63,160,0.5)', animation: 'gp-ping 2s ease-out infinite' }} />
               </span>
             ))}
           </div>

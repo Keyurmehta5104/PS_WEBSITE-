@@ -48,7 +48,23 @@
       "Bash(cd \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES \")",
       "Bash(node -p \"process.arch\")",
       "Bash(rm -rf \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES /node_modules\" \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES /package-lock.json\")",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(sips -c 220 260 340 460 \"/Users/chintankotadia/.claude/image-cache/ef379ac0-f599-42ca-aef4-a5468f47f884/1.png\" --out logo_crop.png)",
+      "Bash(sips -z 400 400 logo_crop.png --out logo_crop_big.png)",
+      "Bash(python3 *)",
+      "Bash(sips -c 90 125 -p 165 100 \"/Users/chintankotadia/.claude/image-cache/ef379ac0-f599-42ca-aef4-a5468f47f884/1.png\" --out /private/tmp/claude-501/-Users-chintankotadia-Documents-PS-WEBSITE-CHANGES-/ef379ac0-f599-42ca-aef4-a5468f47f884/scratchpad/logo_zoom.png)",
+      "Bash(sips -z 450 450 /private/tmp/claude-501/-Users-chintankotadia-Documents-PS-WEBSITE-CHANGES-/ef379ac0-f599-42ca-aef4-a5468f47f884/scratchpad/logo_zoom.png)",
+      "Bash(sips --help)",
+      "Bash(sips --cropOffset 155 90 -c 100 100 /Users/chintankotadia/.claude/image-cache/ef379ac0-f599-42ca-aef4-a5468f47f884/1.png --out /private/tmp/claude-501/-Users-chintankotadia-Documents-PS-WEBSITE-CHANGES-/ef379ac0-f599-42ca-aef4-a5468f47f884/scratchpad/logo_zoom.png)",
+      "Bash(sips -z 500 500 /private/tmp/claude-501/-Users-chintankotadia-Documents-PS-WEBSITE-CHANGES-/ef379ac0-f599-42ca-aef4-a5468f47f884/scratchpad/logo_zoom.png)",
+      "Bash(grep -roE \"#FF[0-9A-Fa-f]{4}|#F[0-9A-Fa-f]{5}|#EB2F5B|rgba\\\\\\(255,\\\\s*\\(128|106|90|154\\),\\\\s*[0-9]+,\\\\s*[0-9]+\" src --include=\"*.jsx\" --include=\"*.css\")",
+      "Bash(cd \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES\")",
+      "Bash(lsof -i :5173 -sTCP:LISTEN -t)",
+      "Bash(nohup npm run dev)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(awk -F: '{print $NF, $1}')",
+      "Bash(curl -s http://localhost:5174/ -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(pkill -f \"vite.*5174\")"
     ]
   }
 }

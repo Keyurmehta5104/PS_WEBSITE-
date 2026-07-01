@@ -24,13 +24,13 @@ function CountUp({ to, prefix = '', suffix = '' }) {
 }
 
 const stats = [
-  { to: '500',  suffix: '+',  label: 'Satisfied Clients',     sub: 'Across 17+ countries',          col: 'text-[#FF8048]'  },
+  { to: '500',  suffix: '+',  label: 'Satisfied Clients',     sub: 'Across 17+ countries',          col: 'text-[#5B3FA0]'  },
   { to: '1000', suffix: '+',  label: 'Projects Delivered',    sub: '100% delivery success',          col: 'text-[#2b2b2b]'  },
-  { to: '30',   suffix: '+',  label: 'Expert Engineers',      sub: 'Under one roof',                 col: 'text-[#FF8048]' },
+  { to: '30',   suffix: '+',  label: 'Expert Engineers',      sub: 'Under one roof',                 col: 'text-[#5B3FA0]' },
   { to: '17',   suffix: '+',  label: 'Countries Served',      sub: 'Across four continents',         col: 'text-[#2b2b2b]'  },
-  { to: '14',   suffix: '+',  label: 'Years of Excellence',   sub: 'Engineering since 2010',         col: 'text-[#FF8048]'    },
+  { to: '14',   suffix: '+',  label: 'Years of Excellence',   sub: 'Engineering since 2010',         col: 'text-[#5B3FA0]'    },
   { to: '95',   suffix: '%',  label: 'Client Retention',      sub: 'Clients who always come back',   col: 'text-[#2b2b2b]'  },
-  { to: '92',   suffix: '%',  label: 'On-Time Delivery',      sub: 'Sprint after sprint',            col: 'text-[#FF8048]'    },
+  { to: '92',   suffix: '%',  label: 'On-Time Delivery',      sub: 'Sprint after sprint',            col: 'text-[#5B3FA0]'    },
   { to: '50',   prefix: '$', suffix: 'M+', label: 'Client Cost Savings', sub: 'Through smart engineering', col: 'text-[#2b2b2b]' },
 ];
 
@@ -42,7 +42,7 @@ export default function StatsImpact() {
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end mb-16">
           <div>
-            <p className="section-label mb-4" style={{ color: '#FF8048' }}>IMPACT AT SCALE</p>
+            <p className="section-label mb-4" style={{ color: '#5B3FA0' }}>IMPACT AT SCALE</p>
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#2b2b2b] tracking-[-0.03em] leading-[1.07]">
               Built for outcomes.<br />
               <span className="text-gradient">Proven at scale.</span>
@@ -67,7 +67,7 @@ export default function StatsImpact() {
             <motion.div
               key={s.label}
               variants={{ hidden: { y: 24, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.6 } } }}
-              className="bg-white border border-[#ececec] rounded-2xl p-6 md:p-7 flex flex-col gap-2 shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)] hover:border-[#FF8048] transition-all duration-300"
+              className="bg-white border border-[#ececec] rounded-2xl p-6 md:p-7 flex flex-col gap-2 shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)] hover:border-[#5B3FA0] transition-all duration-300"
             >
               <span className={`text-3xl md:text-4xl font-extrabold tracking-tight ${s.col}`}>
                 <CountUp to={s.to} prefix={s.prefix || ''} suffix={s.suffix} />

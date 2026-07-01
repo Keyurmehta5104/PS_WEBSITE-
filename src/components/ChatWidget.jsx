@@ -1,7 +1,7 @@
 // import { useState, useEffect, useRef } from 'react';
 // import { AnimatePresence, motion } from 'framer-motion';
 
-// const ORANGE = '#FF8048';
+// const ORANGE = '#5B3FA0';
 
 // const BOT_GREETING = {
 //   id: 1,
@@ -131,7 +131,7 @@
 //                   background: ORANGE, display: 'flex', alignItems: 'center',
 //                   justifyContent: 'center', cursor: 'pointer',
 //                   border: '3px solid #fff',
-//                   boxShadow: '0 4px 16px rgba(255,128,72,0.35)',
+//                   boxShadow: '0 4px 16px rgba(91,63,160,0.35)',
 //                   fontSize: 14, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em',
 //                 }}
 //               >

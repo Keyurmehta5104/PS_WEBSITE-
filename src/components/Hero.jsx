@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { useTheme, t } from '../context/ThemeContext';
 
 /* ── Brand tokens ───────────────────────────────────────────────── */
-const ORANGE      = '#FF8048';
-const ORANGE_DARK = '#F26A2E';
-const ORANGE_GRADIENT = 'linear-gradient(100deg,#FF8048 0%,#FF6A2E 55%,#EB2F5B 120%)';
+const ORANGE      = '#5B3FA0';
+const ORANGE_DARK = '#4A3080';
+const ORANGE_GRADIENT = 'linear-gradient(100deg,#5B3FA0 0%,#7C3AAD 55%,#EB2F5B 120%)';
 
 /* ── Cycling headline word ──────────────────────────────────────── */
 const CYCLE_WORDS = ['Reality.', 'Products.', 'Platforms.', 'Businesses.', 'Solutions.'];
@@ -85,7 +85,7 @@ function ArrowCircle({ variant = 'outline', hovered = false, dark = false }) {
   if (hovered) {
     styles = variant === 'ghost'
       ? { border: 'none', background: '#fff', color: ORANGE_DARK, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }
-      : { border: 'none', background: ORANGE, color: '#fff', boxShadow: '0 6px 16px rgba(255,128,72,0.5)' };
+      : { border: 'none', background: ORANGE, color: '#fff', boxShadow: '0 6px 16px rgba(91,63,160,0.5)' };
   }
   return (
     <div style={{ width: 30, height: 30, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s', ...styles }}>
@@ -111,12 +111,12 @@ function Card01() {
         style={{
           textDecoration: 'none',
           background: hovered
-            ? 'linear-gradient(145deg,#FFA672 0%,#FF8B54 50%,#F47436 100%)'
-            : 'linear-gradient(145deg,#FF9A5E 0%,#FF8048 50%,#F26A2E 100%)',
+            ? 'linear-gradient(145deg,#A78BDD 0%,#7C5FC4 50%,#5B3FA0 100%)'
+            : 'linear-gradient(145deg,#8B6FC7 0%,#5B3FA0 50%,#4A3080 100%)',
           borderRadius: 16, padding: '24px 26px', position: 'relative', overflow: 'hidden',
           cursor: 'pointer', height: '100%', width: '100%',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-          boxShadow: hovered ? '0 26px 52px -18px rgba(242,106,46,0.7)' : '0 22px 46px -20px rgba(242,106,46,0.6)',
+          boxShadow: hovered ? '0 26px 52px -18px rgba(74,48,128,0.7)' : '0 22px 46px -20px rgba(74,48,128,0.6)',
           transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
           transition: 'background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease',
         }}>
@@ -170,15 +170,15 @@ function LogoCard({ delay, tag, title, tech, logos, to = '/' }) {
         style={{
           textDecoration: 'none',
           background: hovered
-            ? (dark ? 'linear-gradient(150deg,#2a2420 0%,#241e18 100%)' : 'linear-gradient(150deg,#FFF6F0 0%,#FFEAD9 100%)')
+            ? (dark ? 'linear-gradient(150deg,#2a2420 0%,#241e18 100%)' : 'linear-gradient(150deg,#F3EFFA 0%,#E3D9F2 100%)')
             : C.bgCard,
           borderRadius: 16, padding: '18px 20px',
-          border: `1px solid ${hovered ? 'rgba(255,128,72,0.45)' : C.border}`,
+          border: `1px solid ${hovered ? 'rgba(91,63,160,0.45)' : C.border}`,
           cursor: 'pointer',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden',
           height: '100%', width: '100%',
           boxShadow: hovered
-            ? '0 22px 44px -22px rgba(242,106,46,0.4)'
+            ? '0 22px 44px -22px rgba(74,48,128,0.4)'
             : dark ? '0 4px 24px -12px rgba(0,0,0,0.5)' : '0 16px 36px -28px rgba(20,20,30,0.35)',
           transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
           transition: 'background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease',
@@ -226,8 +226,8 @@ export default function Hero() {
           <div style={{
             position: 'absolute', width: 720, height: 720, borderRadius: '50%',
             background: dark
-              ? 'radial-gradient(circle at center, rgba(255,128,72,0.13) 0%, transparent 65%)'
-              : 'radial-gradient(circle at center, rgba(255,128,72,0.10) 0%, transparent 65%)',
+              ? 'radial-gradient(circle at center, rgba(91,63,160,0.13) 0%, transparent 65%)'
+              : 'radial-gradient(circle at center, rgba(91,63,160,0.10) 0%, transparent 65%)',
             top: '-15%', right: '-2%', animation: 'orb-float-1 22s ease-in-out infinite',
           }} />
           <div style={{
@@ -310,11 +310,11 @@ export default function Hero() {
             {/* CTAs */}
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
               style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap', marginTop: 30 }}>
-              <motion.a href="#contact" whileHover={{ scale: 1.03, boxShadow: '0 16px 32px -10px rgba(255,128,72,0.75)' }} whileTap={{ scale: 0.97 }}
+              <motion.a href="#contact" whileHover={{ scale: 1.03, boxShadow: '0 16px 32px -10px rgba(91,63,160,0.75)' }} whileTap={{ scale: 0.97 }}
                 className="shimmer-btn"
                 onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)}
                 onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14.5, fontWeight: 600, padding: '13px 28px', borderRadius: 6, textDecoration: 'none', transition: 'background 0.2s', boxShadow: '0 12px 24px -10px rgba(255,128,72,0.65)' }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14.5, fontWeight: 600, padding: '13px 28px', borderRadius: 6, textDecoration: 'none', transition: 'background 0.2s', boxShadow: '0 12px 24px -10px rgba(91,63,160,0.65)' }}>
                 Get a Free Quote <i className="fa-solid fa-arrow-right" style={{ fontSize: 13 }} />
               </motion.a>
               <motion.a href="#work" whileHover={{ x: 4 }}
@@ -423,7 +423,7 @@ function ImpactSection() {
               transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 padding: 'clamp(20px,2.4vw,30px) 0',
-                borderTop: `1px solid ${i === 0 ? 'transparent' : s.accent ? 'rgba(242,106,46,0.55)' : C.border}`,
+                borderTop: `1px solid ${i === 0 ? 'transparent' : s.accent ? 'rgba(74,48,128,0.55)' : C.border}`,
               }}>
               <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
                 <div>

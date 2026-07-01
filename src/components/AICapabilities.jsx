@@ -23,7 +23,7 @@ export default function AICapabilities() {
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
-            <p className="section-label mb-4" style={{ color: '#FF8048' }}>AI & MACHINE LEARNING</p>
+            <p className="section-label mb-4" style={{ color: '#5B3FA0' }}>AI & MACHINE LEARNING</p>
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#2b2b2b] tracking-[-0.03em] leading-[1.07]">
               Advanced AI capabilities,<br />
               <span className="text-gradient">productionised.</span>
@@ -32,7 +32,7 @@ export default function AICapabilities() {
               AI agents that work like your team — interacting with users, analysing data, automating repetitive workflows. From custom LLM fine-tuning and NLP to computer vision, predictive analytics, and MLOps — every solution tailored to your use case.
             </p>
           </div>
-          <a href="#contact" className="flex items-center gap-2 text-sm font-semibold text-[#FF8048] hover:text-[#F26A2E] transition-colors whitespace-nowrap">
+          <a href="#contact" className="flex items-center gap-2 text-sm font-semibold text-[#5B3FA0] hover:text-[#4A3080] transition-colors whitespace-nowrap">
             Explore all AI services <i className="fa-solid fa-arrow-right w-4 h-4" />
           </a>
         </div>
@@ -50,14 +50,14 @@ export default function AICapabilities() {
               <motion.div
                 key={cap.name}
                 variants={{ hidden: { y: 18, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.5 } } }}
-                className="group bg-white border border-[#ececec] rounded-2xl p-6 flex flex-col gap-3 cursor-pointer shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)] hover:border-[#FF8048] transition-all duration-300"
+                className="group bg-white border border-[#ececec] rounded-2xl p-6 flex flex-col gap-3 cursor-pointer shadow-[0_16px_40px_-28px_rgba(20,20,30,0.25)] hover:border-[#5B3FA0] transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#FFF1E9] text-[#FF8048] flex items-center justify-center group-hover:bg-[#FF8048] group-hover:text-white transition-all duration-300 flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-[#EDE7F7] text-[#5B3FA0] flex items-center justify-center group-hover:bg-[#5B3FA0] group-hover:text-white transition-all duration-300 flex-shrink-0">
                   <i className={`fa-solid ${cap.icon} w-4.5 h-4.5`} />
                 </div>
-                <h3 className="font-bold text-[#2b2b2b] text-sm group-hover:text-[#F26A2E] transition-colors">{cap.name}</h3>
+                <h3 className="font-bold text-[#2b2b2b] text-sm group-hover:text-[#4A3080] transition-colors">{cap.name}</h3>
                 <p className="text-[#4D4D4D] text-xs leading-relaxed flex-grow">{cap.desc}</p>
-                <span className="flex items-center gap-1 text-[11px] font-semibold text-[#8a8a8a] group-hover:text-[#FF8048] transition-colors mt-auto pt-1">
+                <span className="flex items-center gap-1 text-[11px] font-semibold text-[#8a8a8a] group-hover:text-[#5B3FA0] transition-colors mt-auto pt-1">
                   Explore <i className="fa-solid fa-arrow-right w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </motion.div>

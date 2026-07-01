@@ -26,13 +26,13 @@ function OfficeCard({ o, last }) {
   return (
     <div style={{ padding: 'clamp(20px,2vw,28px)', borderRight: last ? 'none' : '1px solid #ece7da', borderTop: '1px solid #ece7da' }} className="gp-card">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-        <span style={{ fontFamily: 'ui-monospace, monospace', fontSize: 12, fontWeight: 700, color: '#fff', background: '#FF8048', padding: '3px 9px', borderRadius: 6 }}>{o.code}</span>
-        <i className="fa-solid fa-location-dot" style={{ fontSize: 13, color: '#FF8048' }} />
+        <span style={{ fontFamily: 'ui-monospace, monospace', fontSize: 12, fontWeight: 700, color: '#fff', background: '#5B3FA0', padding: '3px 9px', borderRadius: 6 }}>{o.code}</span>
+        <i className="fa-solid fa-location-dot" style={{ fontSize: 13, color: '#5B3FA0' }} />
       </div>
       <p style={{ fontSize: 18, fontWeight: 700, color: '#272a33', margin: '0 0 2px' }}>{o.city}</p>
       <p style={{ fontSize: 12.5, color: '#9a9a9a', margin: 0 }}>{o.country}</p>
       <div style={{ height: 1, background: '#eee', margin: '16px 0' }} />
-      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#F26A2E', margin: '0 0 6px' }}>{o.role}</p>
+      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4A3080', margin: '0 0 6px' }}>{o.role}</p>
       <p style={{ fontSize: 13, color: '#4D4D4D', lineHeight: 1.5, margin: '0 0 16px' }}>{o.detail}</p>
       <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
         <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#3ecf8e', boxShadow: '0 0 0 3px rgba(62,207,142,0.2)' }} />
@@ -49,7 +49,7 @@ export default function GlobalPresence() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <p className="section-label mb-4" style={{ color: '#FF8048' }}>GLOBAL PRESENCE</p>
+          <p className="section-label mb-4" style={{ color: '#5B3FA0' }}>GLOBAL PRESENCE</p>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0a] tracking-[-0.035em] leading-[1.04]">
             Follow the sun. <span style={serif}>Never lose a day.</span>
           </h2>
@@ -89,15 +89,15 @@ export default function GlobalPresence() {
             {/* animated connection arcs */}
             <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible', pointerEvents: 'none' }}>
               {[['M27,34 Q50,12 70.5,47'], ['M27,34 Q54,14 77,58'], ['M70.5,47 Q72,42 77,58']].map(([d], i) => (
-                <path key={i} d={d} fill="none" stroke="#FF8048" strokeWidth="1.4" strokeDasharray="4 4" strokeLinecap="round"
+                <path key={i} d={d} fill="none" stroke="#5B3FA0" strokeWidth="1.4" strokeDasharray="4 4" strokeLinecap="round"
                   vectorEffect="non-scaling-stroke" opacity="0.6" style={{ animation: `gp-dash 1s linear infinite` }} />
               ))}
             </svg>
             {/* pins (not masked) */}
             {OFFICES.map(o => (
               <span key={o.code} style={{ position: 'absolute', left: o.x, top: o.y, transform: 'translate(-50%,-50%)', width: 14, height: 14 }}>
-                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#FF8048', boxShadow: '0 0 0 5px rgba(255,128,72,0.18)' }} />
-                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'rgba(255,128,72,0.5)', animation: 'gp-ping 2s ease-out infinite' }} />
+                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#5B3FA0', boxShadow: '0 0 0 5px rgba(91,63,160,0.18)' }} />
+                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'rgba(91,63,160,0.5)', animation: 'gp-ping 2s ease-out infinite' }} />
               </span>
             ))}
           </div>

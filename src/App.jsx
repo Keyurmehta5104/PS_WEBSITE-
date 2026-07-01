@@ -48,9 +48,9 @@ function ScrollToTop() {
           style={{
             position: 'fixed', bottom: 28, right: 28, zIndex: 999,
             width: 48, height: 48, borderRadius: '50%',
-            background: '#FF8048', border: 'none', cursor: 'pointer',
+            background: '#5B3FA0', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 8px 24px rgba(255,128,72,0.45)',
+            boxShadow: '0 8px 24px rgba(91,63,160,0.45)',
           }}
           aria-label="Back to top"
         >
@@ -135,7 +135,7 @@ function AppInner() {
     <ScrollToTop />
     {/* <ChatWidget /> */}
     <div style={{ background: dark ? '#111110' : '#FFFFFF', minHeight: '100vh', color: dark ? '#e8e4dc' : '#0f0f0f', transition: 'background 0.3s, color 0.3s' }}
-      className="relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
+      className="relative antialiased scroll-smooth selection:bg-[#5B3FA0] selection:text-white">
       <Navbar />
       <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
         <Routes>

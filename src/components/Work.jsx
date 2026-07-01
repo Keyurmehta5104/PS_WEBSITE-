@@ -14,7 +14,7 @@ const CASES = [
     tech: ['WordPress', 'MySQL', 'jQuery'], grad: ['#0EA5A4', '#0F766E'], stat: '2× organic traffic', num: '03' },
   { name: 'Echo', cat: 'On-Demand', type: 'Mobile App', icon: 'fa-comment-dots', image: '',
     desc: 'Cross-platform mobile app with in-app payments and real-time messaging across iOS & Android.',
-    tech: ['React Native', 'PayPal', 'Twilio'], grad: ['#FF9A5E', '#F26A2E'], stat: '50k+ downloads', num: '04' },
+    tech: ['React Native', 'PayPal', 'Twilio'], grad: ['#8B6FC7', '#4A3080'], stat: '50k+ downloads', num: '04' },
   { name: 'Udrivers', cat: 'Logistics', type: 'Mobile App', icon: 'fa-car-side', image: '',
     desc: 'Driver & rider mobile app with live maps, real-time tracking, and intelligent dispatch routing.',
     tech: ['React Native', 'Google Maps', 'Twilio'], grad: ['#3B82F6', '#1D4ED8'], stat: '99.9% uptime', num: '05' },
@@ -123,7 +123,7 @@ function SmallCard({ c, i }) {
           </div>
           <div className="flex items-center justify-between pt-3 border-t border-[#f0ece2]">
             <span className="text-[10px] font-semibold text-[#b0a898] uppercase tracking-wider">{c.type}</span>
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF8048] group-hover:gap-2.5 transition-all duration-300">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#5B3FA0] group-hover:gap-2.5 transition-all duration-300">
               View study <i className="fa-solid fa-arrow-right" style={{ fontSize: 10 }} />
             </span>
           </div>
@@ -148,9 +148,9 @@ export default function Work() {
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
           <div>
-            <p className="section-label mb-4" style={{ color: '#FF8048' }}>CASE STUDIES</p>
+            <p className="section-label mb-4" style={{ color: '#5B3FA0' }}>CASE STUDIES</p>
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0a] tracking-[-0.035em] leading-[1.04]">
-              Real clients,<br /><span style={{ ...serif, color: '#FF8048' }}>real products.</span>
+              Real clients,<br /><span style={{ ...serif, color: '#5B3FA0' }}>real products.</span>
             </h2>
           </div>
           <div className="flex flex-col gap-4 max-w-md">
@@ -161,7 +161,7 @@ export default function Work() {
             <div className="flex gap-3 flex-wrap">
               {[['50+', 'Projects'], ['17+', 'Countries'], ['18+', 'Industries']].map(([n, l]) => (
                 <div key={l} className="flex items-center gap-2 bg-white border border-[#ece7da] rounded-xl px-4 py-2 shadow-sm">
-                  <span className="font-extrabold text-[#FF8048] text-base">{n}</span>
+                  <span className="font-extrabold text-[#5B3FA0] text-base">{n}</span>
                   <span className="text-xs text-[#9a9a9a] font-medium">{l}</span>
                 </div>
               ))}

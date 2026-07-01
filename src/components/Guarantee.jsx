@@ -10,7 +10,7 @@ export default function Guarantee() {
   return (
     <section className="py-20 bg-[#FFFFFF] border-b border-[#ece7da]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="rounded-3xl p-10 md:p-16 overflow-hidden relative" style={{ background: 'linear-gradient(135deg,#FF8048 0%,#F26A2E 100%)' }}>
+        <div className="rounded-3xl p-10 md:p-16 overflow-hidden relative" style={{ background: 'linear-gradient(135deg,#5B3FA0 0%,#4A3080 100%)' }}>
 
           <div className="absolute top-0 right-0 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(255,255,255,0.15)' }} />
 
@@ -23,7 +23,7 @@ export default function Guarantee() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.7 }}
             >
-              <p className="section-label mb-6" style={{ color: '#FF8048' }}>OUR GUARANTEE</p>
+              <p className="section-label mb-6" style={{ color: '#5B3FA0' }}>OUR GUARANTEE</p>
               <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-[-0.03em] leading-[1.07] mb-6">
                 Outsourcing demands trust.<br />
                 <span className="text-white">We deliver it.</span>
@@ -62,7 +62,7 @@ export default function Guarantee() {
               <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                className="mt-2 flex items-center justify-center bg-white text-[#FF8048] hover:text-[#F26A2E] font-semibold text-sm px-8 py-4 rounded-full transition-all duration-300 shadow-[0_16px_40px_-20px_rgba(20,20,30,0.35)]"
+                className="mt-2 flex items-center justify-center bg-white text-[#5B3FA0] hover:text-[#4A3080] font-semibold text-sm px-8 py-4 rounded-full transition-all duration-300 shadow-[0_16px_40px_-20px_rgba(20,20,30,0.35)]"
               >
                 Start Free Trial →
               </motion.a>

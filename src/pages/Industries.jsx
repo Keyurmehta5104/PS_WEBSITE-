@@ -5,9 +5,9 @@ import { INDUSTRIES } from '../data/industries';
 import { useSEO } from '../useSEO';
 
 /* ── Brand tokens ───────────────────────────────────────────────── */
-const ORANGE = '#FF8048';
-const ORANGE_DARK = '#F26A2E';
-const ORANGE_GRADIENT = 'linear-gradient(100deg,#FF8048 0%,#FF6A2E 55%,#EB2F5B 120%)';
+const ORANGE = '#5B3FA0';
+const ORANGE_DARK = '#4A3080';
+const ORANGE_GRADIENT = 'linear-gradient(100deg,#5B3FA0 0%,#7C3AAD 55%,#EB2F5B 120%)';
 const INK = '#272a33';
 const BODY = '#4D4D4D';
 const PAGE = '#F7F4EC';
@@ -62,7 +62,7 @@ const HERO_STATS = [
 function Hero() {
   return (
     <section style={{ position: 'relative', background: '#ffffff', padding: '130px 6% 70px', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: -120, right: -80, width: 460, height: 460, borderRadius: '50%', background: 'rgba(255,128,72,0.12)', filter: 'blur(95px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: -120, right: -80, width: 460, height: 460, borderRadius: '50%', background: 'rgba(91,63,160,0.12)', filter: 'blur(95px)', pointerEvents: 'none' }} />
       <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...sectionLabel, display: 'flex', alignItems: 'center', gap: 12 }}>
           <span style={{ width: 26, height: 2, background: ORANGE, borderRadius: 2 }} /> Industries
@@ -77,7 +77,7 @@ function Hero() {
           Fifteen years of building web and mobile products across 18+ industries — so we arrive with proven patterns, not a blank page. Whatever your vertical, we’ve probably shipped something close.
         </motion.p>
         <motion.div {...rise(0.24)} style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 32 }}>
-          <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 28px -12px rgba(255,128,72,0.7)' }}
+          <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 28px -12px rgba(91,63,160,0.7)' }}
             onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)} onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
             Bring us your industry <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 13 }} />
           </Link>
@@ -108,9 +108,9 @@ function IndustryCard({ ind, i }) {
         onMouseLeave={() => setHovered(false)}
         style={{
           display: 'flex', flexDirection: 'column', textDecoration: 'none', height: '100%',
-          background: '#fff', border: `1px solid ${hovered ? 'rgba(255,128,72,0.45)' : '#ececec'}`, borderRadius: 16,
+          background: '#fff', border: `1px solid ${hovered ? 'rgba(91,63,160,0.45)' : '#ececec'}`, borderRadius: 16,
           padding: 'clamp(26px,2.2vw,32px) clamp(22px,1.8vw,28px)',
-          boxShadow: hovered ? '0 26px 52px -28px rgba(242,106,46,0.45)' : '0 14px 32px -28px rgba(20,20,30,0.3)',
+          boxShadow: hovered ? '0 26px 52px -28px rgba(74,48,128,0.45)' : '0 14px 32px -28px rgba(20,20,30,0.3)',
           transform: hovered ? 'translateY(-5px)' : 'none',
           transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.3s',
         }}>
@@ -162,7 +162,7 @@ function Depth() {
           {DEPTH.map((d, i) => (
             <motion.div key={d.title} {...rise((i % 3) * 0.08)}
               style={{ background: PAGE, border: '1px solid #ececec', borderRadius: 18, padding: '28px 26px' }}>
-              <span style={{ fontSize: 26, fontWeight: 800, color: 'rgba(255,128,72,0.3)', letterSpacing: '-0.03em' }}>{String(i + 1).padStart(2, '0')}</span>
+              <span style={{ fontSize: 26, fontWeight: 800, color: 'rgba(91,63,160,0.3)', letterSpacing: '-0.03em' }}>{String(i + 1).padStart(2, '0')}</span>
               <h3 style={{ fontSize: 18, fontWeight: 700, color: INK, margin: '10px 0 8px', letterSpacing: '-0.01em' }}>{d.title}</h3>
               <p style={{ fontSize: 14.5, color: BODY, lineHeight: 1.65, margin: 0 }}>{d.desc}</p>
             </motion.div>
@@ -188,7 +188,7 @@ function Process() {
           {PROCESS.map((p, i) => (
             <motion.div key={p.title} {...rise(i * 0.07)}
               style={{ background: '#fff', border: '1px solid #ececec', borderRadius: 16, padding: '26px 22px', position: 'relative' }}>
-              <div style={{ width: 38, height: 38, borderRadius: '50%', background: ORANGE_GRADIENT, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 15, marginBottom: 16, boxShadow: '0 10px 20px -10px rgba(242,106,46,0.6)' }}>{i + 1}</div>
+              <div style={{ width: 38, height: 38, borderRadius: '50%', background: ORANGE_GRADIENT, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 15, marginBottom: 16, boxShadow: '0 10px 20px -10px rgba(74,48,128,0.6)' }}>{i + 1}</div>
               <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: ORANGE }}>{p.phase}</span>
               <h3 style={{ fontSize: 17, fontWeight: 700, color: INK, margin: '6px 0 8px' }}>{p.title}</h3>
               <p style={{ fontSize: 13.5, color: BODY, lineHeight: 1.55, margin: 0 }}>{p.desc}</p>
@@ -217,7 +217,7 @@ function FAQ() {
             const isOpen = open === i;
             return (
               <motion.div key={f.q} {...rise(i * 0.04)}
-                style={{ background: PAGE, border: `1px solid ${isOpen ? 'rgba(255,128,72,0.35)' : '#ececec'}`, borderRadius: 14, overflow: 'hidden', transition: 'border-color 0.3s' }}>
+                style={{ background: PAGE, border: `1px solid ${isOpen ? 'rgba(91,63,160,0.35)' : '#ececec'}`, borderRadius: 14, overflow: 'hidden', transition: 'border-color 0.3s' }}>
                 <button onClick={() => setOpen(isOpen ? -1 : i)}
                   style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '20px 24px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit' }}>
                   <span style={{ fontSize: 16, fontWeight: 700, color: INK }}>{f.q}</span>
@@ -247,7 +247,7 @@ function CTA() {
         maxWidth: 980, margin: '0 auto', borderRadius: 28, padding: 'clamp(40px,5vw,72px)',
         background: 'linear-gradient(145deg,#1f2127 0%,#272a33 100%)', textAlign: 'center', position: 'relative', overflow: 'hidden',
       }}>
-        <div style={{ position: 'absolute', top: -100, right: -60, width: 360, height: 360, borderRadius: '50%', background: 'rgba(255,128,72,0.25)', filter: 'blur(80px)' }} />
+        <div style={{ position: 'absolute', top: -100, right: -60, width: 360, height: 360, borderRadius: '50%', background: 'rgba(91,63,160,0.25)', filter: 'blur(80px)' }} />
         <div style={{ position: 'relative' }}>
           <h2 style={{ fontSize: 'clamp(28px,3.6vw,46px)', fontWeight: 800, color: '#fff', lineHeight: 1.12, letterSpacing: '-0.03em', margin: '0 0 16px' }}>
             Bring us your industry.
@@ -256,7 +256,7 @@ function CTA() {
             Tell us about your business and what you want to build. We’ll reply with honest rates and an upfront estimate — no hidden charges, no fuss.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 32 }}>
-            <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 30px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 30px -12px rgba(255,128,72,0.8)' }}
+            <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 30px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 30px -12px rgba(91,63,160,0.8)' }}
               onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)} onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
               Get a free quote <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 13 }} />
             </Link>

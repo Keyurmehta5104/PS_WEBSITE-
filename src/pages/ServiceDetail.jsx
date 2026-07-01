@@ -5,8 +5,8 @@ import { SERVICES } from '../data/services';
 import { useTheme, t } from '../context/ThemeContext';
 import { useSEO } from '../useSEO';
 
-const ORANGE = '#FF8048';
-const ORANGE_DARK = '#F26A2E';
+const ORANGE = '#5B3FA0';
+const ORANGE_DARK = '#4A3080';
 
 /* ─────────────────────────────────────────────────────────────────────
    AI-FOCUSED CONTENT — per service slug
@@ -127,9 +127,9 @@ const MODELS = [
     icon: 'fa-user-tie',
     title: 'Hire an AI Developer',
     tag: 'Most popular',
-    tagBg: 'rgba(255,128,72,0.1)',
+    tagBg: 'rgba(91,63,160,0.1)',
     tagColor: ORANGE,
-    border: 'rgba(255,128,72,0.3)',
+    border: 'rgba(91,63,160,0.3)',
     desc: 'Get a senior AI-skilled developer matched to your project. Works exclusively on your codebase, your timezone, your tools.',
     perks: ['Dedicated full-time AI developer', 'Direct Slack / daily standups', 'Weekly sprint reports', 'Scale up or down anytime'],
   },
@@ -278,7 +278,7 @@ export default function ServiceDetail() {
         {/* Dot grid */}
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: `radial-gradient(${dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.065)'} 1px,transparent 1px)`, backgroundSize: '28px 28px' }} />
         {/* Orange bloom */}
-        <div style={{ position: 'absolute', top: -80, right: -60, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,128,72,0.1) 0%,transparent 68%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: -80, right: -60, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle,rgba(91,63,160,0.1) 0%,transparent 68%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         {/* Indigo bloom bottom-left */}
         <div style={{ position: 'absolute', bottom: -60, left: '10%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 70%)', filter: 'blur(70px)', pointerEvents: 'none' }} />
 
@@ -322,13 +322,13 @@ export default function ServiceDetail() {
 
               {/* CTAs */}
               <motion.div {...fadeUp(0.23)} style={{ display: 'flex', flexWrap: 'wrap', gap: 11 }}>
-                <a href="#hire" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14, fontWeight: 700, padding: '13px 28px', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 16px rgba(255,128,72,0.4)', transition: 'all 0.2s' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = ORANGE_DARK; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(255,128,72,0.52)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = ORANGE; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(255,128,72,0.4)'; }}>
+                <a href="#hire" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14, fontWeight: 700, padding: '13px 28px', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 16px rgba(91,63,160,0.4)', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = ORANGE_DARK; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(91,63,160,0.52)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = ORANGE; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(91,63,160,0.4)'; }}>
                   <i className="fa-solid fa-user-tie" style={{ fontSize: 12 }} /> Hire a Developer
                 </a>
                 <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, color: C.bodyMid, fontSize: 14, fontWeight: 600, padding: '13px 22px', borderRadius: 10, textDecoration: 'none', border: `1px solid ${C.border}`, background: C.bgCard, transition: 'all 0.2s' }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.4)'; e.currentTarget.style.color = C.heading; }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(91,63,160,0.4)'; e.currentTarget.style.color = C.heading; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.bodyMid; }}>
                   Get a free quote
                 </Link>
@@ -356,7 +356,7 @@ export default function ServiceDetail() {
                 <div style={{ padding: '20px 20px 8px' }}>
                   {/* Service icon + name */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 18 }}>
-                    <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(255,128,72,0.1)', border: '1px solid rgba(255,128,72,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(91,63,160,0.1)', border: '1px solid rgba(91,63,160,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <i className={`fa-solid ${service.icon}`} style={{ color: ORANGE, fontSize: 15 }} />
                     </div>
                     <div>
@@ -426,12 +426,12 @@ export default function ServiceDetail() {
             {features.map((f, i) => (
               <motion.div key={f.title} {...rise(i * 0.07)}
                 style={{ background: dark ? C.bgCard : '#fafaf8', border: `1px solid ${C.border}`, borderRadius: 18, padding: '28px 24px', position: 'relative', overflow: 'hidden', transition: 'border-color 0.22s, box-shadow 0.22s, transform 0.22s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.4)'; e.currentTarget.style.boxShadow = '0 10px 32px rgba(255,128,72,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(91,63,160,0.4)'; e.currentTarget.style.boxShadow = '0 10px 32px rgba(91,63,160,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >
                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${ORANGE},transparent)`, opacity: 0.55, borderRadius: '18px 18px 0 0' }} />
                 <span style={{ position: 'absolute', top: 16, right: 18, fontSize: 11, fontWeight: 900, color: dark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' }}>{String(i + 1).padStart(2, '0')}</span>
-                <div style={{ width: 48, height: 48, borderRadius: 13, background: 'rgba(255,128,72,0.1)', border: '1px solid rgba(255,128,72,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
+                <div style={{ width: 48, height: 48, borderRadius: 13, background: 'rgba(91,63,160,0.1)', border: '1px solid rgba(91,63,160,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
                   <i className={`fa-solid ${f.icon}`} style={{ color: ORANGE, fontSize: 18 }} />
                 </div>
                 <h3 style={{ fontSize: 16, fontWeight: 700, color: C.heading, margin: '0 0 8px', letterSpacing: '-0.01em' }}>{f.title}</h3>
@@ -460,7 +460,7 @@ export default function ServiceDetail() {
           {/* Tabs */}
           <motion.div {...rise(0.06)} style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 32, flexWrap: 'wrap' }}>
             {techGroups.map((g, i) => (
-              <button key={g.label} onClick={() => setActiveTab(i)} style={{ fontSize: 12, fontWeight: 700, padding: '8px 20px', borderRadius: 999, border: '1px solid', borderColor: activeTab === i ? ORANGE : C.border, background: activeTab === i ? 'rgba(255,128,72,0.1)' : C.bgCard, color: activeTab === i ? ORANGE : C.bodyMid, cursor: 'pointer', transition: 'all 0.2s' }}>
+              <button key={g.label} onClick={() => setActiveTab(i)} style={{ fontSize: 12, fontWeight: 700, padding: '8px 20px', borderRadius: 999, border: '1px solid', borderColor: activeTab === i ? ORANGE : C.border, background: activeTab === i ? 'rgba(91,63,160,0.1)' : C.bgCard, color: activeTab === i ? ORANGE : C.bodyMid, cursor: 'pointer', transition: 'all 0.2s' }}>
                 {g.label}
               </button>
             ))}
@@ -471,7 +471,7 @@ export default function ServiceDetail() {
             {techGroups[activeTab].items.map((item, i) => (
               <motion.span key={item} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.04, duration: 0.25 }}
                 style={{ fontSize: 13, fontWeight: 700, color: C.bodyMid, background: C.bgCard, border: `1px solid ${C.border}`, padding: '10px 20px', borderRadius: 999, transition: 'all 0.2s', cursor: 'default' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,128,72,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,128,72,0.35)'; e.currentTarget.style.color = ORANGE; }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(91,63,160,0.1)'; e.currentTarget.style.borderColor = 'rgba(91,63,160,0.35)'; e.currentTarget.style.color = ORANGE; }}
                 onMouseLeave={e => { e.currentTarget.style.background = C.bgCard; e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.bodyMid; }}>
                 {item}
               </motion.span>
@@ -565,14 +565,14 @@ export default function ServiceDetail() {
             {PROCESS.map((step, i) => (
               <motion.div key={step.num} {...rise(i * 0.08)}
                 style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 18, padding: '28px 22px', transition: 'border-color 0.2s, transform 0.2s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.38)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(91,63,160,0.38)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.transform = 'translateY(0)'; }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(255,128,72,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(91,63,160,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className={`fa-solid ${step.icon}`} style={{ color: ORANGE, fontSize: 14 }} />
                   </div>
-                  <span style={{ fontSize: 'clamp(30px,4vw,44px)', fontWeight: 900, color: dark ? 'rgba(255,128,72,0.1)' : 'rgba(255,128,72,0.12)', letterSpacing: '-0.05em', lineHeight: 1 }}>{step.num}</span>
+                  <span style={{ fontSize: 'clamp(30px,4vw,44px)', fontWeight: 900, color: dark ? 'rgba(91,63,160,0.1)' : 'rgba(91,63,160,0.12)', letterSpacing: '-0.05em', lineHeight: 1 }}>{step.num}</span>
                 </div>
                 <h3 style={{ fontSize: 15, fontWeight: 700, color: C.heading, margin: '0 0 8px' }}>{step.title}</h3>
                 <p style={{ fontSize: 13, color: C.body, lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
@@ -596,9 +596,9 @@ export default function ServiceDetail() {
               <motion.div key={s.slug} {...rise(i * 0.04)}>
                 <Link to={`/services/${s.slug}`}
                   style={{ display: 'flex', flexDirection: 'column', gap: 10, background: dark ? C.bgCard : '#fafaf8', border: `1px solid ${C.border}`, borderRadius: 16, padding: '20px 18px', textDecoration: 'none', height: '100%', transition: 'all 0.2s' }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.38)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(255,128,72,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(91,63,160,0.38)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(91,63,160,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(255,128,72,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(91,63,160,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className={`fa-solid ${s.icon}`} style={{ color: ORANGE, fontSize: 13 }} />
                   </div>
                   <h3 style={{ fontSize: 14, fontWeight: 700, color: C.heading, margin: 0 }}>{AI_CONTENT[s.slug]?.hero ?? s.name}</h3>
@@ -617,14 +617,14 @@ export default function ServiceDetail() {
           CTA — warm gradient, still light
       ══════════════════════════════════════════════════════════════ */}
       <section style={{ background: dark ? C.bg : '#fff', padding: 'clamp(44px,5vw,72px) 6% clamp(60px,8vw,92px)', transition: 'background 0.3s' }}>
-        <motion.div {...rise(0)} style={{ maxWidth: 1040, margin: '0 auto', borderRadius: 24, padding: 'clamp(44px,5.5vw,76px)', background: `linear-gradient(135deg,${dark ? '#1a1118' : '#fff8f4'} 0%,${dark ? '#0f0e16' : '#fff4ee'} 100%)`, border: `1px solid ${dark ? 'rgba(255,128,72,0.15)' : 'rgba(255,128,72,0.2)'}`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <motion.div {...rise(0)} style={{ maxWidth: 1040, margin: '0 auto', borderRadius: 24, padding: 'clamp(44px,5.5vw,76px)', background: `linear-gradient(135deg,${dark ? '#1a1118' : '#f8f5fc'} 0%,${dark ? '#0f0e16' : '#f4eefa'} 100%)`, border: `1px solid ${dark ? 'rgba(91,63,160,0.15)' : 'rgba(91,63,160,0.2)'}`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
           {/* Dot grid */}
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 24, pointerEvents: 'none', backgroundImage: `radial-gradient(${dark ? 'rgba(255,255,255,0.04)' : 'rgba(255,128,72,0.07)'} 1px,transparent 1px)`, backgroundSize: '24px 24px' }} />
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 24, pointerEvents: 'none', backgroundImage: `radial-gradient(${dark ? 'rgba(255,255,255,0.04)' : 'rgba(91,63,160,0.07)'} 1px,transparent 1px)`, backgroundSize: '24px 24px' }} />
           {/* Bloom */}
-          <div style={{ position: 'absolute', top: -60, right: -40, width: 320, height: 320, borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,128,72,0.15) 0%,transparent 70%)', filter: 'blur(50px)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', top: -60, right: -40, width: 320, height: 320, borderRadius: '50%', background: 'radial-gradient(circle,rgba(91,63,160,0.15) 0%,transparent 70%)', filter: 'blur(50px)', pointerEvents: 'none' }} />
 
           <div style={{ position: 'relative' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: ORANGE, background: 'rgba(255,128,72,0.1)', border: '1px solid rgba(255,128,72,0.25)', padding: '5px 14px', borderRadius: 999, marginBottom: 22 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: ORANGE, background: 'rgba(91,63,160,0.1)', border: '1px solid rgba(91,63,160,0.25)', padding: '5px 14px', borderRadius: 999, marginBottom: 22 }}>
               <span style={{ width: 5, height: 5, borderRadius: '50%', background: ORANGE, animation: 'pulse-ring 1.6s ease-out infinite' }} />
               Start your AI project today
             </span>
@@ -635,13 +635,13 @@ export default function ServiceDetail() {
               Tell us what you're building — we'll match you with the right AI developer in 48 hours. Honest estimate, zero hidden charges.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-              <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14, fontWeight: 700, padding: '14px 30px', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 20px rgba(255,128,72,0.45)', transition: 'all 0.2s' }}
-                onMouseEnter={e => { e.currentTarget.style.background = ORANGE_DARK; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(255,128,72,0.58)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = ORANGE; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(255,128,72,0.45)'; }}>
+              <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 14, fontWeight: 700, padding: '14px 30px', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 20px rgba(91,63,160,0.45)', transition: 'all 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.background = ORANGE_DARK; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(91,63,160,0.58)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = ORANGE; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(91,63,160,0.45)'; }}>
                 <i className="fa-solid fa-user-tie" style={{ fontSize: 12 }} /> Hire an AI developer
               </Link>
               <a href="tel:+14135294901" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, color: C.bodyMid, fontSize: 14, fontWeight: 600, padding: '14px 26px', borderRadius: 10, textDecoration: 'none', border: `1px solid ${C.border}`, background: C.bgCard, transition: 'all 0.2s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,128,72,0.4)'; e.currentTarget.style.color = C.heading; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(91,63,160,0.4)'; e.currentTarget.style.color = C.heading; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.bodyMid; }}>
                 <i className="fa-solid fa-phone" style={{ fontSize: 10, color: ORANGE }} /> +1 (413) 529-4901
               </a>

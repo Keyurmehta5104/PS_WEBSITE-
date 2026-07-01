@@ -57,7 +57,7 @@ function OrbitAnimation() {
           transform: 'translateY(-50%)',
           width: 8, height: 8,
           borderRadius: '50%',
-          background: '#FF8048',
+          background: '#5B3FA0',
           boxShadow: '0 0 6px rgba(255,92,26,0.6)',
         }} />
       </motion.div>
@@ -89,7 +89,7 @@ function OrbitAnimation() {
           transform: 'translateY(-50%)',
           width: 5, height: 5,
           borderRadius: '50%',
-          background: '#FF8048',
+          background: '#5B3FA0',
           opacity: 0.5,
         }} />
       </motion.div>
@@ -235,7 +235,7 @@ function WorkCardWrapper({ href, children, title, desc, titleColor = '#1a1a1a' }
 
       {/* Text */}
       <div style={{ padding: '12px 4px 4px' }}>
-        <p style={{ fontSize: 14, fontWeight: 700, color: hovered ? '#FF8048' : titleColor, margin: '0 0 3px', display: 'flex', alignItems: 'center', gap: 4, transition: 'color 0.2s' }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: hovered ? '#5B3FA0' : titleColor, margin: '0 0 3px', display: 'flex', alignItems: 'center', gap: 4, transition: 'color 0.2s' }}>
           {title} <FaIcon icon="fa-arrow-up-right" size={12} />
         </p>
         <p style={{ fontSize: 12, color: '#888', margin: 0 }}>{desc}</p>
@@ -451,7 +451,7 @@ function DropdownCard({ menuKey, darkMode }) {
   const menu = MENUS[menuKey];
   if (!menu) return null;
 
-  const ORANGE = '#FF8048';
+  const ORANGE = '#5B3FA0';
   const D = darkMode;
 
   // Dark mode tokens
@@ -931,14 +931,14 @@ export default function Navbar() {
                   whileTap={{ scale: 0.97 }}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: 5,
-                    background: '#FF8048', color: '#fff',
+                    background: '#5B3FA0', color: '#fff',
                     fontSize: 14, fontWeight: 500,
                     padding: '10px 22px', borderRadius: 999,
                     textDecoration: 'none',
                     transition: 'background 0.2s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#F26A2E'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#FF8048'}
+                  onMouseEnter={e => e.currentTarget.style.background = '#4A3080'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#5B3FA0'}
                 >
                   Contact <FaIcon icon="fa-arrow-up-right" size={13} />
                 </motion.a>
@@ -948,7 +948,7 @@ export default function Navbar() {
               <div className="lg:hidden" style={{ alignItems: 'center', gap: 10 }}>
                 <a href="#contact" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 4,
-                  background: '#FF8048', color: '#fff',
+                  background: '#5B3FA0', color: '#fff',
                   fontSize: 13, fontWeight: 500,
                   padding: '8px 16px', borderRadius: 999,
                   textDecoration: 'none',
@@ -1038,14 +1038,14 @@ export default function Navbar() {
                   whileTap={{ scale: 0.97 }}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: 5,
-                    background: '#FF8048', color: '#fff',
+                    background: '#5B3FA0', color: '#fff',
                     fontSize: 13.5, fontWeight: 500,
                     padding: '9px 20px', borderRadius: 999,
                     textDecoration: 'none',
                     transition: 'background 0.2s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#F26A2E'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#FF8048'}
+                  onMouseEnter={e => e.currentTarget.style.background = '#4A3080'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#5B3FA0'}
                 >
                   Contact <FaIcon icon="fa-arrow-up-right" size={12} />
                 </motion.a>
@@ -1109,8 +1109,8 @@ export default function Navbar() {
 /* ─── NavLink atom ───────────────────────────────────────────────── */
 function NavLink({ label, menu, href, isActive, onEnter, onLeave, onClick, darkMode }) {
   const [hovered, setHovered] = useState(false);
-  const color  = (hovered || isActive) ? '#FF8048' : darkMode ? 'rgba(255,255,255,0.85)' : '#1a1a1a';
-  const ulLine = (hovered || isActive) ? '2px solid #FF8048' : '2px solid transparent';
+  const color  = (hovered || isActive) ? '#5B3FA0' : darkMode ? 'rgba(255,255,255,0.85)' : '#1a1a1a';
+  const ulLine = (hovered || isActive) ? '2px solid #5B3FA0' : '2px solid transparent';
 
   const baseStyle = {
     fontSize: 15, fontWeight: 400, color,

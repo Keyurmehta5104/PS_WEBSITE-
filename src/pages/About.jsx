@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 import { useSEO } from '../useSEO';
 
 /* ── Brand tokens (shared with Hero) ────────────────────────────── */
-const ORANGE = '#FF8048';
-const ORANGE_DARK = '#F26A2E';
-const ORANGE_GRADIENT = 'linear-gradient(100deg,#FF8048 0%,#FF6A2E 55%,#EB2F5B 120%)';
+const ORANGE = '#5B3FA0';
+const ORANGE_DARK = '#4A3080';
+const ORANGE_GRADIENT = 'linear-gradient(100deg,#5B3FA0 0%,#7C3AAD 55%,#EB2F5B 120%)';
 const INK = '#272a33';
 const BODY = '#4D4D4D';
 const PAGE = '#F7F4EC';
@@ -28,7 +28,7 @@ const sectionLabel = {
 function AboutHero() {
   return (
     <section style={{ position: 'relative', background: '#ffffff', padding: '140px 6% 78px', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: -120, right: -80, width: 420, height: 420, borderRadius: '50%', background: 'rgba(255,128,72,0.12)', filter: 'blur(90px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: -120, right: -80, width: 420, height: 420, borderRadius: '50%', background: 'rgba(91,63,160,0.12)', filter: 'blur(90px)', pointerEvents: 'none' }} />
 
       <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...sectionLabel, display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -50,7 +50,7 @@ function AboutHero() {
         </motion.p>
 
         <motion.div {...rise(0.24)} style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 34 }}>
-          <a href="#about-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 28px -12px rgba(255,128,72,0.7)' }}
+          <a href="#about-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 28px -12px rgba(91,63,160,0.7)' }}
             onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)}
             onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
             Work with us <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 13 }} />
@@ -118,12 +118,12 @@ function Origin() {
 
         {/* Visual: orbiting accent */}
         <motion.div {...rise(0.12)} style={{ position: 'relative', aspectRatio: '1', maxWidth: 380, justifySelf: 'center', width: '100%' }}>
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 24, background: 'linear-gradient(150deg,#FFF6F0,#FFEAD9)', border: '1px solid rgba(255,128,72,0.25)', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 24, background: 'linear-gradient(150deg,#F3EFFA,#E3D9F2)', border: '1px solid rgba(91,63,160,0.25)', overflow: 'hidden' }}>
             {[0, 1, 2].map(r => (
-              <div key={r} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: `${45 + r * 28}%`, height: `${45 + r * 28}%`, borderRadius: '50%', border: '1px dashed rgba(242,106,46,0.35)' }} />
+              <div key={r} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: `${45 + r * 28}%`, height: `${45 + r * 28}%`, borderRadius: '50%', border: '1px dashed rgba(74,48,128,0.35)' }} />
             ))}
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 14, repeat: Infinity, ease: 'linear' }} style={{ position: 'absolute', top: '50%', left: '50%', width: '73%', height: '73%', transform: 'translate(-50%,-50%)' }}>
-              <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: 14, height: 14, borderRadius: '50%', background: ORANGE, boxShadow: '0 0 14px rgba(255,128,72,0.7)' }} />
+              <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: 14, height: 14, borderRadius: '50%', background: ORANGE, boxShadow: '0 0 14px rgba(91,63,160,0.7)' }} />
             </motion.div>
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', textAlign: 'center' }}>
               <p style={{ fontSize: 40, fontWeight: 800, color: INK, margin: 0, letterSpacing: '-0.03em' }}>2010</p>
@@ -156,7 +156,7 @@ function Pillars() {
           {PILLARS.map((p, i) => (
             <motion.div key={p.title} {...rise(i * 0.1)}
               style={{ background: PAGE, border: '1px solid #ececec', borderRadius: 18, padding: '30px 28px' }}>
-              <div style={{ width: 50, height: 50, borderRadius: 12, background: 'linear-gradient(145deg,#FF9A5E,#F26A2E)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, boxShadow: '0 10px 22px -10px rgba(242,106,46,0.6)' }}>
+              <div style={{ width: 50, height: 50, borderRadius: 12, background: 'linear-gradient(145deg,#8B6FC7,#4A3080)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, boxShadow: '0 10px 22px -10px rgba(74,48,128,0.6)' }}>
                 <i className={`fa-solid ${p.icon}`} style={{ color: '#fff', fontSize: 19 }} />
               </div>
               <h3 style={{ fontSize: 19, fontWeight: 700, color: INK, margin: '0 0 10px', letterSpacing: '-0.01em' }}>{p.title}</h3>
@@ -172,7 +172,7 @@ function Pillars() {
 /* ── Section 5 · Philosophy quote ───────────────────────────────── */
 function Philosophy() {
   return (
-    <section style={{ background: 'linear-gradient(145deg,#FF9A5E 0%,#FF8048 50%,#F26A2E 100%)', padding: '90px 6%', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ background: 'linear-gradient(145deg,#8B6FC7 0%,#5B3FA0 50%,#4A3080 100%)', padding: '90px 6%', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: -80, left: -60, width: 320, height: 320, borderRadius: '50%', background: 'rgba(255,255,255,0.14)', filter: 'blur(50px)' }} />
       <motion.div {...rise(0)} style={{ position: 'relative', maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
         <i className="fa-solid fa-quote-left" style={{ fontSize: 38, color: 'rgba(255,255,255,0.45)', marginBottom: 18 }} />
@@ -209,7 +209,7 @@ function Services() {
           {SERVICES.map((v, i) => (
             <motion.div key={v.title} {...rise((i % 3) * 0.08)}
               style={{ display: 'flex', gap: 16, background: '#fff', border: '1px solid #ececec', borderRadius: 16, padding: '24px 22px' }}>
-              <div style={{ width: 42, height: 42, flexShrink: 0, borderRadius: 10, background: 'rgba(255,128,72,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: 42, height: 42, flexShrink: 0, borderRadius: 10, background: 'rgba(91,63,160,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <i className={`fa-solid ${v.icon}`} style={{ color: ORANGE_DARK, fontSize: 17 }} />
               </div>
               <div>
@@ -284,7 +284,7 @@ function Locations() {
               <span style={{ fontSize: 34, display: 'block', marginBottom: 14 }}>{o.flag}</span>
               <h3 style={{ fontSize: 19, fontWeight: 700, color: INK, margin: '0 0 4px' }}>{o.city}</h3>
               <p style={{ fontSize: 13.5, color: BODY, margin: '0 0 10px' }}>{o.country}</p>
-              <span style={{ display: 'inline-block', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: ORANGE_DARK, background: 'rgba(255,128,72,0.12)', padding: '5px 12px', borderRadius: 999 }}>{o.role}</span>
+              <span style={{ display: 'inline-block', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: ORANGE_DARK, background: 'rgba(91,63,160,0.12)', padding: '5px 12px', borderRadius: 999 }}>{o.role}</span>
             </motion.div>
           ))}
         </div>
@@ -301,7 +301,7 @@ function FinalCTA() {
         maxWidth: 980, margin: '0 auto', borderRadius: 28, padding: 'clamp(40px,5vw,72px)',
         background: 'linear-gradient(145deg,#1f2127 0%,#272a33 100%)', textAlign: 'center', position: 'relative', overflow: 'hidden',
       }}>
-        <div style={{ position: 'absolute', top: -100, right: -60, width: 360, height: 360, borderRadius: '50%', background: 'rgba(255,128,72,0.25)', filter: 'blur(80px)' }} />
+        <div style={{ position: 'absolute', top: -100, right: -60, width: 360, height: 360, borderRadius: '50%', background: 'rgba(91,63,160,0.25)', filter: 'blur(80px)' }} />
         <div style={{ position: 'relative' }}>
           <h2 style={{ fontSize: 'clamp(28px,3.6vw,48px)', fontWeight: 800, color: '#fff', lineHeight: 1.12, letterSpacing: '-0.03em', margin: '0 0 18px' }}>
             Have a project in mind?<br />Let's talk.
@@ -310,7 +310,7 @@ function FinalCTA() {
             Tell us what you're building and we'll get back with honest rates and an upfront estimate — no hidden charges, no fuss.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 28 }}>
-            <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 30px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 30px -12px rgba(255,128,72,0.8)' }}
+            <Link to="/#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: ORANGE, color: '#fff', fontSize: 15, fontWeight: 600, padding: '15px 30px', borderRadius: 8, textDecoration: 'none', boxShadow: '0 14px 30px -12px rgba(91,63,160,0.8)' }}
               onMouseEnter={e => (e.currentTarget.style.background = ORANGE_DARK)}
               onMouseLeave={e => (e.currentTarget.style.background = ORANGE)}>
               Get a free quote <i className="fa-solid fa-arrow-up-right" style={{ fontSize: 13 }} />

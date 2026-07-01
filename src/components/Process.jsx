@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useTheme, t } from '../context/ThemeContext';
 
-const ORANGE   = '#FF8048';
+const ORANGE   = '#5B3FA0';
 const AI_COLOR = '#6c5ce7';
 
 const STAGES = [

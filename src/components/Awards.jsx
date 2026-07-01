@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useTheme, t } from '../context/ThemeContext';
 
-const ORANGE = '#FF8048';
+const ORANGE = '#5B3FA0';
 
 const ISO_CERTS = [
   {

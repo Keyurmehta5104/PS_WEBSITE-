@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useTheme, t } from '../context/ThemeContext';
 
-const ORANGE = '#FF8048';
-const ORANGE_BG_HOVER = '#FFF3EC';
+const ORANGE = '#5B3FA0';
+const ORANGE_BG_HOVER = '#EDE7F7';
 const ORANGE_BG_HOVER_DARK = '#2a1a10';
 
 const INDUSTRIES = [
@@ -123,9 +123,9 @@ export default function Industries() {
                   background: isHovered
                     ? (dark ? ORANGE_BG_HOVER_DARK : ORANGE_BG_HOVER)
                     : (dark ? '#1a1917' : '#ffffff'),
-                  border: `1px solid ${isHovered ? '#FFB899' : (dark ? '#2a2826' : '#e8e4de')}`,
+                  border: `1px solid ${isHovered ? '#C4B5E8' : (dark ? '#2a2826' : '#e8e4de')}`,
                   boxShadow: isHovered
-                    ? '0 8px 32px rgba(255,128,72,0.12)'
+                    ? '0 8px 32px rgba(91,63,160,0.12)'
                     : (dark ? 'none' : '0 1px 3px rgba(0,0,0,0.05)'),
                   transform: isHovered ? 'translateY(-3px)' : 'translateY(0)',
                   transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s',

@@ -35,6 +35,6 @@ export function t(dark) {
     muted:        dark ? '#666260' : '#a3a3a3',
     border:       dark ? '#2d2b28' : '#ece7da',
     borderLight:  dark ? '#252320' : '#e5e5e5',
-    orange:       '#FF8048',
+    orange:       '#5B3FA0',
   };
 }

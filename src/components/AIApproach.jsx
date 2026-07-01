@@ -2,11 +2,11 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useTheme, t } from '../context/ThemeContext';
 
-const ORANGE = '#FF8048';
+const ORANGE = '#5B3FA0';
 const AI_BG   = '#edeaff';   // lavender
 const AI_FG   = '#6c5ce7';   // purple
-const HU_BG   = '#fff3ec';   // peach
-const HU_FG   = '#FF8048';   // orange
+const HU_BG   = '#ffe9f0';   // pink
+const HU_FG   = '#EB2F5B';   // pink
 
 const STAGES = [
   {
@@ -185,7 +185,7 @@ export default function AIApproach() {
               {/* Human card */}
               <div
                 className="rounded-xl p-3 flex flex-col gap-2"
-                style={{ background: dark ? '#2a1c14' : HU_BG }}
+                style={{ background: dark ? '#2a1420' : HU_BG }}
               >
                 <div
                   className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"

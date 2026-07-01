@@ -76,20 +76,20 @@ function TechTile({ name, i }) {
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: i * 0.025, duration: 0.35 }}
-      whileHover={{ y: -4, boxShadow: '0 16px 32px -12px rgba(242,106,46,0.28), 0 0 0 1.5px rgba(255,128,72,0.22)' }}
+      whileHover={{ y: -4, boxShadow: '0 16px 32px -12px rgba(74,48,128,0.28), 0 0 0 1.5px rgba(91,63,160,0.22)' }}
       style={{
         background: dark ? '#1d1c1a' : '#ece9e1',
         borderColor: dark ? '#2d2b28' : 'transparent',
         transition: 'background 0.3s, border-color 0.3s',
       }}
-      className="group flex flex-col items-center justify-center gap-3 border rounded-2xl p-5 aspect-square hover:border-[#FF8048]/30 transition-all duration-300 cursor-default"
+      className="group flex flex-col items-center justify-center gap-3 border rounded-2xl p-5 aspect-square hover:border-[#5B3FA0]/30 transition-all duration-300 cursor-default"
     >
       <div className="flex items-center justify-center w-10 h-10">
         {isImg
           ? <img src={icon} alt={name} className="w-9 h-9 object-contain" loading="lazy" />
           : <i className={icon.fa} style={{ fontSize: 30, color: icon.color }} />}
       </div>
-      <span style={{ color: dark ? '#9a9690' : '#555' }} className="text-[11px] font-medium text-center leading-tight group-hover:text-[#FF8048] transition-colors duration-300">{name}</span>
+      <span style={{ color: dark ? '#9a9690' : '#555' }} className="text-[11px] font-medium text-center leading-tight group-hover:text-[#5B3FA0] transition-colors duration-300">{name}</span>
     </motion.div>
   );
 }
@@ -139,7 +139,7 @@ export default function TechStack() {
               onClick={() => setActive(tab.id)}
               style={
                 active === tab.id
-                  ? { background: '#FF8048', color: '#fff' }
+                  ? { background: '#5B3FA0', color: '#fff' }
                   : { background: 'transparent', color: C.body }
               }
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
