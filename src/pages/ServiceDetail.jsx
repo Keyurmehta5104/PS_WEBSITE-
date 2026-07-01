@@ -256,7 +256,7 @@ export default function ServiceDetail() {
   ];
 
   /* Section bg helpers */
-  const altBg = dark ? '#161513' : '#f0ede3';
+  const altBg = dark ? '#161513' : '#ffffff';
 
   return (
     <main>

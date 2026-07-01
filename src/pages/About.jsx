@@ -27,7 +27,7 @@ const sectionLabel = {
 /* ── Section 1 · Hero ───────────────────────────────────────────── */
 function AboutHero() {
   return (
-    <section style={{ position: 'relative', background: PAGE, padding: '140px 6% 78px', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', background: '#ffffff', padding: '140px 6% 78px', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: -120, right: -80, width: 420, height: 420, borderRadius: '50%', background: 'rgba(255,128,72,0.12)', filter: 'blur(90px)', pointerEvents: 'none' }} />
 
       <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
@@ -83,7 +83,7 @@ const STATS = [
 ];
 function StatBand() {
   return (
-    <section style={{ background: PAGE, borderTop: '1px solid #efefef', borderBottom: '1px solid #efefef' }}>
+    <section style={{ background: '#ffffff', borderTop: '1px solid #efefef', borderBottom: '1px solid #efefef' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 6%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))' }}>
         {STATS.map((s, i) => (
           <motion.div key={s.label} {...rise(i * 0.08)}
@@ -101,7 +101,7 @@ function StatBand() {
 /* ── Section 3 · Origin / Story ─────────────────────────────────── */
 function Origin() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0,1.1fr) minmax(0,0.9fr)', gap: 56, alignItems: 'center' }} className="about-origin-grid">
         <motion.div {...rise(0)}>
           <p style={sectionLabel}>Who we are</p>
@@ -144,7 +144,7 @@ const PILLARS = [
 ];
 function Pillars() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
           <p style={sectionLabel}>What sets us apart</p>
@@ -197,7 +197,7 @@ const SERVICES = [
 ];
 function Services() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
           <p style={sectionLabel}>What we build</p>
@@ -239,7 +239,7 @@ const INDUSTRIES = [
 ];
 function Industries() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
           <p style={sectionLabel}>Industries we serve</p>
@@ -269,7 +269,7 @@ const OFFICES = [
 ];
 function Locations() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
           <p style={sectionLabel}>Where we are</p>
@@ -296,7 +296,7 @@ function Locations() {
 /* ── Section 9 · Final CTA ──────────────────────────────────────── */
 function FinalCTA() {
   return (
-    <section id="about-cta" style={{ background: PAGE, padding: '100px 6%' }}>
+    <section id="about-cta" style={{ background: '#ffffff', padding: '100px 6%' }}>
       <motion.div {...rise(0)} style={{
         maxWidth: 980, margin: '0 auto', borderRadius: 28, padding: 'clamp(40px,5vw,72px)',
         background: 'linear-gradient(145deg,#1f2127 0%,#272a33 100%)', textAlign: 'center', position: 'relative', overflow: 'hidden',

@@ -61,7 +61,7 @@ const HERO_STATS = [
 /* ── Section 1 · Hero ───────────────────────────────────────────── */
 function Hero() {
   return (
-    <section style={{ position: 'relative', background: PAGE, padding: '130px 6% 70px', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', background: '#ffffff', padding: '130px 6% 70px', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: -120, right: -80, width: 460, height: 460, borderRadius: '50%', background: 'rgba(255,128,72,0.12)', filter: 'blur(95px)', pointerEvents: 'none' }} />
       <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...sectionLabel, display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -131,7 +131,7 @@ function IndustryCard({ ind, i }) {
 
 function Grid() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
           <p style={sectionLabel}>Where we work</p>
@@ -150,7 +150,7 @@ function Grid() {
 /* ── Section 3 · Why vertical depth ─────────────────────────────── */
 function Depth() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ maxWidth: 660, marginBottom: 46 }}>
           <p style={sectionLabel}>Why it matters</p>
@@ -176,7 +176,7 @@ function Depth() {
 /* ── Section 4 · Process timeline ───────────────────────────────── */
 function Process() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
           <p style={sectionLabel}>How we start</p>
@@ -204,7 +204,7 @@ function Process() {
 function FAQ() {
   const [open, setOpen] = useState(0);
   return (
-    <section style={{ background: PAGE, padding: '90px 6%' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6%' }}>
       <div style={{ maxWidth: 820, margin: '0 auto' }}>
         <motion.div {...rise(0)} style={{ marginBottom: 40, textAlign: 'center' }}>
           <p style={sectionLabel}>FAQs</p>
@@ -242,7 +242,7 @@ function FAQ() {
 /* ── Section 6 · CTA ────────────────────────────────────────────── */
 function CTA() {
   return (
-    <section style={{ background: PAGE, padding: '90px 6% 100px' }}>
+    <section style={{ background: '#ffffff', padding: '90px 6% 100px' }}>
       <motion.div {...rise(0)} style={{
         maxWidth: 980, margin: '0 auto', borderRadius: 28, padding: 'clamp(40px,5vw,72px)',
         background: 'linear-gradient(145deg,#1f2127 0%,#272a33 100%)', textAlign: 'center', position: 'relative', overflow: 'hidden',

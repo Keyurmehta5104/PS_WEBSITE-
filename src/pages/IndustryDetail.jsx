@@ -43,7 +43,7 @@ export default function IndustryDetail() {
   return (
     <main style={{ fontFamily: 'inherit' }}>
       {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: PAGE, padding: '130px 6% 70px', overflow: 'hidden' }}>
+      <section style={{ position: 'relative', background: '#ffffff', padding: '130px 6% 70px', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: -120, right: -80, width: 420, height: 420, borderRadius: '50%', background: 'rgba(255,128,72,0.12)', filter: 'blur(90px)', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
           {/* Breadcrumb */}
@@ -98,7 +98,7 @@ export default function IndustryDetail() {
       </section>
 
       {/* ── What we build ── */}
-      <section style={{ background: PAGE, padding: '90px 6%' }}>
+      <section style={{ background: '#ffffff', padding: '90px 6%' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <motion.div {...rise(0)} style={{ maxWidth: 640, marginBottom: 46 }}>
             <p style={sectionLabel}>What we build</p>
@@ -122,7 +122,7 @@ export default function IndustryDetail() {
       </section>
 
       {/* ── Other industries ── */}
-      <section style={{ background: PAGE, padding: '80px 6%' }}>
+      <section style={{ background: '#ffffff', padding: '80px 6%' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <motion.div {...rise(0)} style={{ marginBottom: 34 }}>
             <p style={sectionLabel}>Explore more</p>
@@ -153,7 +153,7 @@ export default function IndustryDetail() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ background: PAGE, padding: '90px 6%' }}>
+      <section style={{ background: '#ffffff', padding: '90px 6%' }}>
         <motion.div {...rise(0)} style={{
           maxWidth: 980, margin: '0 auto', borderRadius: 28, padding: 'clamp(40px,5vw,68px)',
           background: 'linear-gradient(145deg,#1f2127 0%,#272a33 100%)', textAlign: 'center', position: 'relative', overflow: 'hidden',

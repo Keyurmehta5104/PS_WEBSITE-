@@ -76,7 +76,7 @@ export default function Industries() {
   return (
     <section
       id="industries"
-      style={{ background: dark ? C.bg : '#f9f8f5', transition: 'background 0.3s' }}
+      style={{ background: dark ? C.bg : '#ffffff', transition: 'background 0.3s' }}
       className="py-24 md:py-32"
     >
       <div className="w-full px-6 md:px-10 lg:px-16">

@@ -134,7 +134,7 @@ function AppInner() {
     <ScrollProgress />
     <ScrollToTop />
     <ChatWidget />
-    <div style={{ background: dark ? '#111110' : '#F7F4EC', minHeight: '100vh', color: dark ? '#e8e4dc' : '#0f0f0f', transition: 'background 0.3s, color 0.3s' }}
+    <div style={{ background: dark ? '#111110' : '#FFFFFF', minHeight: '100vh', color: dark ? '#e8e4dc' : '#0f0f0f', transition: 'background 0.3s, color 0.3s' }}
       className="relative antialiased scroll-smooth selection:bg-[#FF8048] selection:text-white">
       <Navbar />
       <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>

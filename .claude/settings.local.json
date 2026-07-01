@@ -35,7 +35,20 @@
       "WebFetch(domain:clutch.co)",
       "WebFetch(domain:hypersense-software.com)",
       "WebFetch(domain:pscsoftware.com)",
-      "WebFetch(domain:www.intellectsoft.net)"
+      "WebFetch(domain:www.intellectsoft.net)",
+      "Read(//Users/chintankotadia/Documents/PS WEBSITE CHANGES /src/components/**)",
+      "Read(//Users/chintankotadia/Documents/PS WEBSITE CHANGES /src/pages/**)",
+      "Read(//Users/chintankotadia/Documents/PS WEBSITE CHANGES /src/data/**)",
+      "Read(//Users/chintankotadia/Documents/PS WEBSITE CHANGES /src/context/**)",
+      "Read(//Users/chintankotadia/Documents/PS WEBSITE CHANGES /src/assets/**)",
+      "Bash(xargs sed -i '' 's/F7F4EC/FFFFFF/g')",
+      "Bash(npx vite *)",
+      "Bash(chmod +x \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES /node_modules/.bin/\"*)",
+      "Bash(xattr *)",
+      "Bash(cd \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES \")",
+      "Bash(node -p \"process.arch\")",
+      "Bash(rm -rf \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES /node_modules\" \"/Users/chintankotadia/Documents/PS WEBSITE CHANGES /package-lock.json\")",
+      "Bash(npm install *)"
     ]
   }
 }

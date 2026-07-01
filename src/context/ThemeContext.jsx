@@ -24,7 +24,7 @@ export const useTheme = () => useContext(ThemeContext);
 /* Shared color tokens — call t(dark) in any component */
 export function t(dark) {
   return {
-    bg:           dark ? '#111110' : '#F7F4EC',
+    bg:           dark ? '#111110' : '#FFFFFF',
     bgCard:       dark ? '#1d1c1a' : '#ffffff',
     bgCardSubtle: dark ? '#161513' : '#fafafa',
     bgInput:      dark ? '#141312' : '#fafafa',

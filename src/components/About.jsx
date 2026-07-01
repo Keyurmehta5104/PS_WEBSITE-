@@ -53,7 +53,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 px-6 md:px-12 bg-[#faf5ff] border-b border-gray-200 relative overflow-hidden">
+    <section id="about" className="py-24 md:py-32 px-6 md:px-12 bg-white border-b border-gray-200 relative overflow-hidden">
       {/* Soft orb background */}
       <div className="absolute top-[10%] right-[10%] w-[300px] h-[300px] bg-purple-250/10 rounded-full blur-[100px] pointer-events-none z-0" />
 

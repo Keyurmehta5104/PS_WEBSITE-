@@ -873,7 +873,7 @@ export default function Navbar() {
             style={{
               position: 'fixed', top: 0, left: 0, right: 0,
               zIndex: 1000,
-              background: darkMode ? '#0a0a0a' : '#F7F4EC',
+              background: darkMode ? '#0a0a0a' : '#FFFFFF',
               transition: 'background 0.3s ease',
             }}
           >

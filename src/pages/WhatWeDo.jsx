@@ -134,7 +134,7 @@ const MARQUEE = ['Education', 'Healthcare', 'Real Estate', 'E-Commerce', 'Logist
 /* ── Section 1 · Hero ───────────────────────────────────────────── */
 function Hero() {
   return (
-    <section style={{ position: 'relative', background: PAGE, padding: '130px 6% 60px', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', background: '#ffffff', padding: '130px 6% 60px', overflow: 'hidden' }}>
       <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...label, display: 'flex', alignItems: 'center', gap: 12, marginBottom: 26 }}>
           <span style={{ width: 26, height: 2, background: ORANGE, borderRadius: 2 }} /> Custom Software Development Services
@@ -180,7 +180,7 @@ function Hero() {
 function TrustedBy() {
   const row = [...MARQUEE, ...MARQUEE];
   return (
-    <section style={{ background: PAGE, borderTop: '1px solid #efe9dc', borderBottom: '1px solid #efe9dc', padding: '30px 0', overflow: 'hidden' }}>
+    <section style={{ background: '#ffffff', borderTop: '1px solid #efe9dc', borderBottom: '1px solid #efe9dc', padding: '30px 0', overflow: 'hidden' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 6%' }}>
         <p style={{ ...label, marginBottom: 20 }}>Trusted across 17 countries · since 2010</p>
       </div>
@@ -200,7 +200,7 @@ function Disciplines() {
   const [active, setActive] = useState(0);
   const d = DISCIPLINES[active];
   return (
-    <section id="services-grid" style={{ background: PAGE, padding: 'clamp(70px,8vw,110px) 6%' }}>
+    <section id="services-grid" style={{ background: '#ffffff', padding: 'clamp(70px,8vw,110px) 6%' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         {/* header */}
         <div className="services-head" style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.9fr', gap: 48, alignItems: 'end', marginBottom: 'clamp(36px,4vw,56px)' }}>
@@ -306,7 +306,7 @@ function EngagementCard({ m, i }) {
 
 function Engagement() {
   return (
-    <section style={{ background: PAGE, padding: 'clamp(70px,8vw,110px) 6%' }}>
+    <section style={{ background: '#ffffff', padding: 'clamp(70px,8vw,110px) 6%' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div className="services-head" style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.9fr', gap: 48, alignItems: 'end', marginBottom: 'clamp(36px,4vw,56px)' }}>
           <motion.div {...rise(0)}>
@@ -356,7 +356,7 @@ function TechStack() {
   const tabs = Object.keys(TECH_TABS);
   const [active, setActive] = useState(tabs[0]);
   return (
-    <section id="tech" style={{ background: PAGE, padding: 'clamp(70px,8vw,110px) 6%' }}>
+    <section id="tech" style={{ background: '#ffffff', padding: 'clamp(70px,8vw,110px) 6%' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...label, marginBottom: 22 }}>— Technology</motion.p>
         <motion.h2 {...rise(0.04)} style={{ fontSize: 'clamp(30px,4.6vw,62px)', fontWeight: 800, color: INK, lineHeight: 1.02, letterSpacing: '-0.04em', margin: 0, maxWidth: 820 }}>
@@ -385,7 +385,7 @@ function TechStack() {
 /* ── Section 6 · Case teaser ────────────────────────────────────── */
 function CaseTeaser() {
   return (
-    <section style={{ background: PAGE, padding: 'clamp(70px,8vw,110px) 6%' }}>
+    <section style={{ background: '#ffffff', padding: 'clamp(70px,8vw,110px) 6%' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...label, marginBottom: 20 }}>— Case Studies</motion.p>
         <motion.h2 {...rise(0.05)} style={{ fontSize: 'clamp(30px,4.2vw,58px)', fontWeight: 800, color: INK, lineHeight: 1.04, letterSpacing: '-0.035em', margin: '0 0 20px', maxWidth: 900 }}>
@@ -407,7 +407,7 @@ function CaseTeaser() {
 /* ── Section 7 · CTA ────────────────────────────────────────────── */
 function CTA() {
   return (
-    <section style={{ position: 'relative', background: PAGE, padding: 'clamp(80px,10vw,140px) 6%', overflow: 'hidden', textAlign: 'center' }}>
+    <section style={{ position: 'relative', background: '#ffffff', padding: 'clamp(80px,10vw,140px) 6%', overflow: 'hidden', textAlign: 'center' }}>
       <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 600, height: 360, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,128,72,0.22), rgba(235,47,91,0.12) 45%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
       <div style={{ position: 'relative', maxWidth: 980, margin: '0 auto' }}>
         <motion.p {...rise(0)} style={{ ...label, marginBottom: 22 }}>— Let's Build</motion.p>
@@ -456,7 +456,7 @@ const FAQS = [
 function FAQ() {
   const [open, setOpen] = useState(0);
   return (
-    <section style={{ background: PAGE, padding: 'clamp(70px,8vw,110px) 6%' }}>
+    <section style={{ background: '#ffffff', padding: 'clamp(70px,8vw,110px) 6%' }}>
       <div className="disc-grid" style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'clamp(32px,4vw,64px)', alignItems: 'start' }}>
         <motion.div {...rise(0)} style={{ position: 'sticky', top: 110 }}>
           <p style={{ ...label, marginBottom: 18 }}>— FAQs</p>
@@ -533,7 +533,7 @@ function OfficeCard({ o, last }) {
 
 function FollowTheSun() {
   return (
-    <section style={{ background: PAGE, padding: 'clamp(70px,8vw,110px) 6%' }}>
+    <section style={{ background: '#ffffff', padding: 'clamp(70px,8vw,110px) 6%' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div className="services-head" style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.9fr', gap: 48, alignItems: 'end', marginBottom: 'clamp(32px,4vw,48px)' }}>
           <motion.div {...rise(0)}>

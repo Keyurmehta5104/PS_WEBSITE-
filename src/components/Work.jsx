@@ -137,7 +137,7 @@ export default function Work() {
   const [featured, ...rest] = CASES;
 
   return (
-    <section id="work" className="py-24 md:py-32 bg-[#F7F4EC] border-b border-[#ece7da] relative overflow-hidden">
+    <section id="work" className="py-24 md:py-32 bg-[#FFFFFF] border-b border-[#ece7da] relative overflow-hidden">
 
       {/* subtle background grid */}
       <div className="pointer-events-none absolute inset-0"

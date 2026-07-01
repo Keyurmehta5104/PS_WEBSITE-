@@ -87,7 +87,7 @@ const cards = [
 
 export default function FeaturedScroll() {
   return (
-    <section className="py-20 bg-[#F7F4EC] border-b border-[#ececec] overflow-hidden">
+    <section className="py-20 bg-[#FFFFFF] border-b border-[#ececec] overflow-hidden">
 
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
